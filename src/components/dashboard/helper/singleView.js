@@ -32,14 +32,32 @@ class SingleView extends React.Component {
                 <View style={styles.imageContent}>
                     <Image style={{width: 320, height: 260}}  source={{uri:this.state.image.secure_url}}></Image>
                 </View>
-                <View  style={styles.hBox}>
-                    <TouchableHighlight>
-                        <Image source={require('../../images/home.png')}></Image>
+                <View  style={[styles.hBox, styles.contentPadding, styles.boxHeight]}>
+                    <TouchableHighlight onPress={()=> {console.log('I was clicked')}}>
+                        <Image style={{width: 20, height: 20}} source={require('../../../images/likee.png')}></Image>
                     </TouchableHighlight>
+                    <TouchableHighlight onPress={()=> {console.log('I was clicked too')}} style={styles.imageRight}>
+                        <Image style={{width: 20, height: 20}} source={require('../../../images/chat.png')}></Image>
+                    </TouchableHighlight>
+                </View>
+                <View style={ styles.boxBorder}>
 
                 </View>
-                <View>
-
+                <View style={[styles.hBox, styles.contentPadding]}>
+                    <TouchableHighlight style={styles.imageText}>
+                        <Image style={{width: 8, height: 8}} source={require('../../../images/likee.png')}></Image>
+                    </TouchableHighlight>
+                    <TouchableHighlight>
+                        <Text style={styles.textSize}>2000 Likes</Text>
+                    </TouchableHighlight>
+                </View>
+                <View style={[styles.hBox, styles.contentPadding]}>
+                    <TouchableHighlight >
+                        <Text style={styles.boldText}>Username</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight>
+                        <Text style={styles.textSize}>Commments</Text>
+                    </TouchableHighlight>
                 </View>
 
             </View>
@@ -53,11 +71,41 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row'
     },
+    boxBorder: {
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginRight: 10,
+        marginLeft: 10
+    },
+    boxHeight: {
+        marginBottom: 15
+    },
     headerContent: {
         marginBottom: 20
     },
     imageContent: {
         marginTop: 30
+    },
+
+    imageRight: {
+        marginLeft: 15
+    },
+
+    contentPadding: {
+        padding: 10
+    },
+    textSize: {
+        fontSize: 10,
+        marginLeft: 2
+    },
+    imageText: {
+        paddingTop: 2
+    },
+    boldText: {
+        fontWeight: 'bold',
+        fontSize: 20
     }
 
 });
