@@ -5,9 +5,9 @@ let  url = 'http://localhost:5151/';
 
 class UploadApi {
 
-    uploadCameraImage = (obj) => {
+    uploadCameraImage = (image) => {
         return new Promise((resolve, reject)=> {
-            resolve(Object.assign(obj.upload, obj.image));
+            resolve(Object.assign({}, image));
         });
     };
 

@@ -34,7 +34,16 @@ class Home extends React.Component {
     };
 
     _onClick = (e) => {
-        console.log(e);
+        let that = this;
+        let files = that.props.files;
+        let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
+
+        this.props.action.fetchSingleFileView(singleViewImage).then( response => {
+
+            const { navigate } = that.props.navigation;
+            navigate('SingleView', { image: that.props.image })
+        });
+
     };
 
     render() {
@@ -59,7 +68,9 @@ class Home extends React.Component {
     componentDidMount () {
         let that = this;
         this.props.action.fetchAllFiles().then( response => {
+
             let files = that.props.files;
+
             let gridImages = _.chunk(files.recent.message.data, 3);
             this.setState({files: gridImages});
         });

@@ -17,11 +17,25 @@ export function fetchuserFile(userId) {
 
 }
 
+export function fetchSingleFileViewSuccess(viewFile) {
+    return {type: Types.FETCH_SINGLE_FILE_VIEW, viewFile}
+}
+
 export function fetchAllFiles() {
     return dispatch => {
         return FileApi.recentFile().then(data => {
             dispatch(fetchRecentFileSuccess(data))
         }).catch( err => {
+            throw(err);
+        })
+    }
+}
+
+export function fetchSingleFileView (file) {
+    return dispatch => {
+        return FileApi.singleFileView(file).then(data => {
+            dispatch(fetchSingleFileViewSuccess(data));
+        }).catch(err=> {
             throw(err);
         })
     }

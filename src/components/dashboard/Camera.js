@@ -21,7 +21,7 @@ class Camera extends React.Component {
 
 
 
-    getSelectedImages =(images, current) =>{
+    getSelectedImages =(images, current) => {
         let num = images.length;
 
         this.setState({
@@ -29,14 +29,12 @@ class Camera extends React.Component {
             selected: images,
         });
 
-        console.log(this.props.image);
-        this.props.action.uploadCameraImage({'upload': this.props.image,  'image': current}).then(response => {
+        this.props.action.uploadCameraImage(current).then(response => {
             const { navigate } = this.props.navigation;
             navigate('Upload', { image: this.props.image })
         }).catch(err=> {
            console.log(err);
         });
-
 
     };
 

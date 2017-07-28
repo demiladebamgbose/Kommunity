@@ -30,6 +30,12 @@ class FileAPi {
         })
     };
 
+    singleFileView = (file) => {
+        return new Promise((resolve, reject) => {
+            resolve(Object.assign({}, file));
+        })
+    };
+
 }
 
 export default new FileAPi();
