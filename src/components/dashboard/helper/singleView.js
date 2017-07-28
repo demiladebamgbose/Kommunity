@@ -56,10 +56,13 @@ class SingleView extends React.Component {
                         <Text style={styles.boldText}>Username</Text>
                     </TouchableHighlight>
                     <TouchableHighlight>
-                        <Text style={styles.textSize}>Commments</Text>
+                        <Text>Commments</Text>
                     </TouchableHighlight>
                 </View>
-
+                <View style={styles.contentPadding}>
+                    <Text style={styles.commentText}>View all comments </Text>
+                    <Text style={styles.commentText}>2 hours ago</Text>
+                </View>
             </View>
         )
     }
@@ -105,7 +108,12 @@ const styles = StyleSheet.create({
     },
     boldText: {
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 10
+    },
+    commentText:{
+        color: 'grey',
+        marginTop: 10,
+        fontSize: 10
     }
 
 });
