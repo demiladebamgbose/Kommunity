@@ -35,7 +35,6 @@ class Home extends React.Component {
 
     _onClick = (e) => {
         console.log(e);
-        debugger;
     };
 
     render() {
