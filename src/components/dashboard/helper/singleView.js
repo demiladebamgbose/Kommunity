@@ -11,10 +11,11 @@ class SingleView extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             'image': this.props.files.viewFile.content
         };
-        console.log(this.state.image)
+
     }
 
     render () {

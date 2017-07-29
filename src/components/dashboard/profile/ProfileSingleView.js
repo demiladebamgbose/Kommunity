@@ -30,7 +30,16 @@ class ProfileSingleView extends React.Component {
 
     _onClick = (e) => {
 
-        console.log('hello');
+        let that = this;
+        let files = that.props.files;
+        let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
+
+        this.props.action.fetchSingleFileView(singleViewImage).then( response => {
+
+            const { navigate } = that.props.navigation;
+            navigate('SingleView', { image: '' })
+        });
+
     };
 
     render () {
@@ -45,7 +54,7 @@ class ProfileSingleView extends React.Component {
     }
 
     componentDidMount () {
-        console.log('send request');
+
         let that = this;
         let userId = this.props.user.message.user._id;
         console.log('disptached at ', userId);

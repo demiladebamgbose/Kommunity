@@ -7,21 +7,7 @@ import {View, Image, Text, TouchableHighlight} from 'react-native';
 const VerticalGrid = ({obj, click}) => {
     let data1 = obj['0'].content.secure_url.split('upload/');
     data1  = data1.join('upload/c_scale,h_300,w_300/');
-    let data2, data3 = '';
 
-    /*if(!obj['1']) {
-        obj['1'] = {'content': {'secure_url': ''}}
-    } else{
-        data2 = obj['1'].content.secure_url.split('upload/');
-        data2 = data2.join('upload/c_scale,h_100,w_100/');
-    }
-
-    if(!obj['2']) {
-        obj['2'] = {'content': {'secure_url': ''}};
-    } else{
-        data3 = obj['2'].content.secure_url.split('upload/');
-        data3 = data3.join('upload/c_scale,h_100,w_100/');
-    } */
 
     return (
         <View key={obj['0'].content} style={{flex: 1, flexDirection: 'row', margin: 1}}>
@@ -40,6 +26,11 @@ const VerticalGrid = ({obj, click}) => {
                         <Image  style={{width: 300, height: 300}} source={{ uri: data1} }  />
                     </View>
                 </TouchableHighlight>
+                <View style={{flex: 1, flexDirection: 'row', borderBottomWidth: 1}}>
+                    <Image style={{width: 20, height: 20}} source={require('../../../images/likee.png')}/>
+                    <Image style={{width: 20, height: 20}} source={require('../../../images/chat.png')}/>
+
+                </View>
             </View>
         </View>
     )

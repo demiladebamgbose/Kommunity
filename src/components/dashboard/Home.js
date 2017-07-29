@@ -41,7 +41,7 @@ class Home extends React.Component {
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
 
             const { navigate } = that.props.navigation;
-            navigate('SingleView', { image: that.props.image })
+            navigate('SingleView', { image: '' })
         });
 
     };
