@@ -12,11 +12,11 @@ class ProfileTag extends React.Component {
     }
 
     static navigationOptions = {
-        tabBarLabel: 'Home',
+        tabBarLabel: '',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
             <Image
-                source={require('../../../images/home.png')}
+                source={require('../../../images/users.png')}
             />
         ),
     };

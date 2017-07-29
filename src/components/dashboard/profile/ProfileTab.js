@@ -26,6 +26,7 @@ const ProfileTab = TabNavigator({
 }, {
     tabBarOptions: {
         activeTintColor: '#000000',
+        showLabel: false
     },
     tabBarPosition: 'top'
 });
