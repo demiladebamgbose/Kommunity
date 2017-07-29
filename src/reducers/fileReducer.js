@@ -7,7 +7,8 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
     recent: {},
-    viewFile: {}
+    viewFile: {},
+    userFile: {}
 };
 
 export default function fileReducer(state = initialState, action) {
@@ -17,6 +18,12 @@ export default function fileReducer(state = initialState, action) {
             return {
                 ...state,
                 recent: action.files
+            };
+
+        case types.FETCH_USER_FILES:
+            return {
+                ...state,
+                userFile: action.files
             };
 
         case types.FETCH_SINGLE_FILE_VIEW:

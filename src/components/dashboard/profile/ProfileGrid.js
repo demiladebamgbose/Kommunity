@@ -7,14 +7,14 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../actions/fileActions';
 import Grid from '../../dashboard/helper/grid';
+import _ from 'lodash'
 
 class ProfileGrid extends React.Component {
 
     constructor(props){
         super(props);
-        console.log(props);
         this.state = {
-            files: props.files
+            files: []
         }
     }
 
@@ -36,9 +36,8 @@ class ProfileGrid extends React.Component {
     render () {
         return (
             <View>
-                <Text>Profile Grid</Text>
                 <FlatList
-                    data={[]}
+                    data={this.state.files}
                     renderItem={({item}) => <Grid obj={item} click={this._onClick} />}
                 />
             </View>
@@ -47,12 +46,13 @@ class ProfileGrid extends React.Component {
 
     componentDidMount () {
         let that = this;
-        this.props.action.fetchAllFiles().then( response => {
+        let userId = this.props.user.message.user._id;
+        this.props.action.fetchUserFiles(userId).then( response => {
 
-            let files = that.props.files;
-
-            let gridImages = _.chunk(files.recent.message.data, 3);
-            this.setState({files: gridImages});
+             let files = that.props.files;
+             console.log('returned files', files);
+              let gridImages = _.chunk(files.userFile.message.data, 3);
+              this.setState({files: gridImages});
         });
     }
 

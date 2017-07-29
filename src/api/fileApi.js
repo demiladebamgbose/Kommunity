@@ -7,7 +7,7 @@ class FileAPi {
 
     userFile = (userId) => {
         return new Promise((resolve, reject)=> {
-            return fetch(url ,{
+            return fetch(url + 'api/v1/upload/user/' + userId,{
                 method: 'GET'
             })
                 .then((response) => response.json())
@@ -15,7 +15,6 @@ class FileAPi {
                     resolve(Object.assign({}, responseJson));
                 });
         })
-
     };
 
     recentFile = () => {
