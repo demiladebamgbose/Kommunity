@@ -20,6 +20,7 @@ class SingleView extends React.Component {
 
     render () {
         return (
+
             <View>
                 <View style={styles.hBox}>
                     <TouchableHighlight style={styles.headerContent}>

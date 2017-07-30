@@ -7,7 +7,7 @@ import SingleView from '../dashboard/helper/singleView';
 
 const SingleViewTab = StackNavigator(
     {
-        Main: {
+        SingleView: {
             screen: SingleView,
         },
     },
