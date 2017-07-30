@@ -1,4 +1,4 @@
-/*import React from 'react'
+import React from 'react'
 import {Image, Button, Alert} from 'react-native';
 
 class Activity extends React.Component {
@@ -27,8 +27,8 @@ class Activity extends React.Component {
     }
 }
 
-export default Activity; */
-'use strict';
+export default Activity;
+/*
 import React, { Component } from 'react';
 import {
     Dimensions,
@@ -85,3 +85,4 @@ const styles = StyleSheet.create({
 });
 
 export default Activity;
+    */

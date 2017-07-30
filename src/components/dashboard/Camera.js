@@ -83,7 +83,7 @@ class Camera extends React.Component {
     }
 
     componentDidMount () {
-        this._onCamera();
+       this._onCamera();
     }
 }
 
