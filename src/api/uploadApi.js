@@ -5,9 +5,9 @@ let  url = 'https://kommunity-2-2-2.herokuapp.com/';
 
 class UploadApi {
 
-    uploadCameraImage = (obj) => {
+    uploadCameraImage = (image) => {
         return new Promise((resolve, reject)=> {
-            resolve(Object.assign(obj.upload, obj.image));
+            resolve(Object.assign({}, image));
         });
     };
 

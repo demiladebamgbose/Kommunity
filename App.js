@@ -3,6 +3,7 @@ import Login from './src/components/user/Login';
 import SignUp from './src/components/user/SignUp';
 import Dashboard from './src/components/dashboard/landingPage';
 import Upload from './src/components/upload/index';
+import SingleView from './src/components/tabs/SingleViewTab';
 import {Provider} from 'react-redux';
 import configureStore from './src/store/ConfigureStore';
 
@@ -16,7 +17,8 @@ const Route = StackNavigator({
     Home: { screen: Login },
     SignUp: { screen: SignUp },
     Landing: {screen: Dashboard},
-    Upload: {screen: Upload}
+    Upload: {screen: Upload},
+    SingleView: {screen: SingleView}
 });
 
 const App = () => (
