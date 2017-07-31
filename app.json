@@ -1,5 +1,13 @@
 {
   "expo": {
-    "sdkVersion": "18.0.0"
+    "name": "Kommunity",
+    "sdkVersion": "18.0.0",
+    "slug":"Kommunity",
+    "privacy": "public",
+    "slug": "expo.o/@joliphizzle/slug",
+    "facebookScheme" : "fb810700055775747",
+    "infoPlist": {
+      "facebookScheme":  "fb810700055775747"
+    }
   }
 }

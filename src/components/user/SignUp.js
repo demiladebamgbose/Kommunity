@@ -8,8 +8,21 @@ import { StyleSheet,
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
+let {height, width} = Dimensions.get('window');
 
 class SignUp extends React.Component {
+
+    static navigationOptions = {
+        title: 'KOMMUNITY',
+        headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3)},
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontFamily: 'Noteworthy-Bold',
+            fontSize: 31
+        },
+        headerBackTitle: null,
+        headerBackTitleStyle: {display: 'none'}
+    };
 
     constructor(props) {
         super(props);
@@ -55,7 +68,7 @@ class SignUp extends React.Component {
 
     };
 
-    render() {
+   /* render() {
 
         return (
 
@@ -136,7 +149,42 @@ class SignUp extends React.Component {
             </ScrollView>
 
         );
-    }
+    } */
+
+   render () {
+       return (
+           <ScrollView style={styles.container}>
+               <View style={styles.center}>
+                   <View style={styles.buttonContainer}>
+                       <TextInput
+                           style={{ paddingLeft: 10, fontSize: 14, height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, backgroundColor: '#D3D3D3'}}
+                           placeholder='Enter Email'
+                           onChangeText={(text) => this.setState({'email': text})}
+                           value={this.state.email}
+                       />
+                   </View>
+
+                   <View style={styles.buttonContainer}>
+                       <TextInput
+                           style={{ paddingLeft: 10, fontSize: 14, height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, backgroundColor: '#D3D3D3'}}
+                           placeholder='Enter Username'
+                           onChangeText={(text) => this.setState({'username': text})}
+                           value={this.state.username}
+                       />
+                   </View>
+
+                   <View style={styles.buttonContainer}>
+                       <TextInput
+                           style={{ paddingLeft: 10, fontSize: 14, height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, backgroundColor: '#D3D3D3'}}
+                           placeholder='Enter Last Name'
+                           onChangeText={(text) => this.setState({'lastName': text})}
+                           value={this.state.lastName}
+                       />
+                   </View>
+               </View>
+           </ScrollView>
+       )
+   }
 }
 
 const styles = StyleSheet.create({

@@ -66,6 +66,7 @@ class Home extends React.Component {
     }
 
     componentDidMount () {
+        console.log('Called a couple of times');
         let that = this;
         this.props.action.fetchAllFiles().then( response => {
 

@@ -1,6 +1,7 @@
 /**
  * Created by jolaadeadewale on 27/07/2017.
  */
+//let  url = 'http://localhost:5151/';
 let url = 'https://kommunity-2-2-2.herokuapp.com/';
 
 class FileAPi {
