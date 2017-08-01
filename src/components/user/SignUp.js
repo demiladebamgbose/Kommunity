@@ -179,6 +179,11 @@ let {height, width} = Dimensions.get('window');
          this.props.navigation.dispatch(resetAction)
      };
 
+     _onTabSignUp = ()=> {
+         const { navigate } = this.props.navigation;
+         navigate('LoginTab', { name: 'LogIn' });
+     };
+
     render() {
         return (
             <View style={styles.container}>
@@ -195,7 +200,7 @@ let {height, width} = Dimensions.get('window');
                     <Text style={styles.text}>    </Text>
                 </View>
                 <View style={styles.buttonContainerText}>
-                    <Text style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold', textAlign: 'center'}}>
+                    <Text onPress={this._onTabSignUp} style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold', textAlign: 'center'}}>
                         Sign Up with Phone or Email
                     </Text>
                 </View>

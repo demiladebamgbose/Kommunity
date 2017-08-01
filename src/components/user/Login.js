@@ -55,7 +55,7 @@ class Login extends React.Component {
         }
     };
 
-    _onLogin = () =>{
+    _onLogin = () => {
         const username = this.state.username;
         const password = this.state.password;
         let that = this;
