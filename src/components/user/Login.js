@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
 let {height, width} = Dimensions.get('window');
 
+
 class Login extends React.Component {
 
 
@@ -15,8 +16,10 @@ class Login extends React.Component {
         headerTitleStyle: {
             fontFamily: 'Noteworthy-Bold',
             fontSize: 31
-        }
+        },
+        left:null
     };
+
 
     constructor(props) {
 
@@ -77,7 +80,6 @@ class Login extends React.Component {
     _onLinkToSignUp = () =>{
         const { navigate } = this.props.navigation;
         navigate('SignUp', { name: 'Jane' })
-
     };
 
     _onForgotPassword = () =>{
