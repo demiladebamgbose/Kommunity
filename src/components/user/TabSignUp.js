@@ -14,7 +14,7 @@ import {
 const TabSignUp = TabNavigator({
 
     EmailTab: {
-        screen: EmailTab,
+        screen: EmailTab
     },
     NumberTab: {
         screen: NumberTab,
@@ -22,9 +22,15 @@ const TabSignUp = TabNavigator({
 }, {
     tabBarOptions: {
         activeTintColor: '#000000',
-        showLabel: true
+        showLabel: true,
+        labelStyle: {fontSize: 16, fontFamily: 'Arial-BoldMT'},
+        indicatorStyle: {
+            borderBottomColor: '#000000',
+            borderBottomWidth: 2,
+        }
     },
-    tabBarPosition: 'top'
+    tabBarPosition: 'top',
+    animationEnabled: true
 });
 
 export default TabSignUp;
