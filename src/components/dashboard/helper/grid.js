@@ -12,6 +12,7 @@ const Grid = ({obj, click}) => {
     if(!obj['1']) {
         obj['1'] = {'content': {'secure_url': ''}}
     } else{
+        console.log('obj 1', obj['1']);
         data2 = obj['1'].content.secure_url.split('upload/');
         data2 = data2.join('upload/c_scale,h_100,w_100/');
     }
@@ -19,6 +20,7 @@ const Grid = ({obj, click}) => {
     if(!obj['2']) {
         obj['2'] = {'content': {'secure_url': ''}};
     } else{
+        console.log('obj 2', obj['2']);
         data3 = obj['2'].content.secure_url.split('upload/');
         data3 = data3.join('upload/c_scale,h_100,w_100/');
     }

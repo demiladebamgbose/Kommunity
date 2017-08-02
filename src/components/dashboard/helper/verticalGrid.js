@@ -5,8 +5,13 @@ import React from 'react';
 import {View, Image, Text, TouchableHighlight} from 'react-native';
 
 const VerticalGrid = ({obj, click}) => {
-    let data1 = obj['0'].content.secure_url.split('upload/');
-    data1  = data1.join('upload/c_scale,h_300,w_300/');
+    let data1 = {};
+    if(obj['0'].content.secure_url) {
+        data1 = obj['0'].content.secure_url.split('upload/');
+        data1 = data1.join('upload/c_scale,h_300,w_300/');
+    }else{
+        data1 = '';
+    }
 
 
     return (

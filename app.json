@@ -1,5 +1,11 @@
 {
   "expo": {
-    "sdkVersion": "18.0.0"
+    "name": "Kommunity",
+    "sdkVersion": "18.0.0",
+    "privacy": "public",
+    "facebookScheme" : "810700055775747",
+    "infoPlist": {
+      "facebookScheme":  "810700055775747"
+    }
   }
 }

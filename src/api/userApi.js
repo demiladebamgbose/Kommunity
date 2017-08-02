@@ -1,7 +1,8 @@
 /**
  * Created by jolaadeadewale on 23/07/2017.
  */
-let  url = 'http://localhost:5151/';
+//let  url = 'http://localhost:5151/';
+let  url = 'https://kommunity-2-2-2.herokuapp.com/';
 
 class UserApi {
 

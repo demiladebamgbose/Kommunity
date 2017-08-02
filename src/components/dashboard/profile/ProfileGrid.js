@@ -36,6 +36,8 @@ class ProfileGrid extends React.Component {
 
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
 
+            console.log('Got back Def');
+            console.log(that.props.navigation);
             const { navigate } = that.props.navigation;
             navigate('SingleView', { image: '' })
         });
