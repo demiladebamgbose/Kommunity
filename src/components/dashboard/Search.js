@@ -1,6 +1,9 @@
 import React from 'react'
 import {Image, Button, StyleSheet, View, TextInput, Text} from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as userActions from '../../actions/userActions';
 
 class Search extends React.Component {
 
@@ -14,6 +17,18 @@ class Search extends React.Component {
         tabBarIcon: ({ tintColor }) => (
             <EvilIcons name="search" size={20}  />
         ),
+    };
+
+    _onSearch = (text) => {
+        let that = this;
+
+        this.props.action.searchUser(text).then( response => {
+
+            let userResponse = that.props.user;
+            console.log(userResponse);
+
+        });
+
     };
 
     render() {
@@ -33,7 +48,7 @@ class Search extends React.Component {
                                     fontSize: 14, height: 30,  fontFamily: 'Arial',
                                     width: 250, backgroundColor: '#E5E5E5', paddingBottom: 1, marginLeft: 4
                                 }}
-
+                                onChangeText={this._onSearch}
                                 placeholder='Search'
                             />
                         </View>
@@ -105,4 +120,16 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Search;
+function mapDispatchToProps(dispatch) {
+    return {
+        action: bindActionCreators(userActions, dispatch)
+    }
+}
+
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
