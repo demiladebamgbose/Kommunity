@@ -1,11 +1,17 @@
 import React from 'react'
-import {Image, Button, Alert,  CameraRoll, StyleSheet, View, FlatList, Text, ScrollView} from 'react-native';
+import {Image, Button, Alert,  CameraRoll, StyleSheet, View, FlatList, Text, ScrollView, Dimensions} from 'react-native';
 import Grid from './helper/grid';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../actions/fileActions';
 import _ from 'lodash'
 import Circle from '../dashboard/helper/Circle';
+let {height, width} = Dimensions.get('window');
+import { Foundation } from '@expo/vector-icons';
+
+let pictureSize = ((width/ 3) - 6);
+
+
 
 
 class Home extends React.Component {
@@ -24,9 +30,7 @@ class Home extends React.Component {
         tabBarLabel: 'Home',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <Image
-                source={require('../../images/home.png')}
-            />
+            <Foundation name="home" size={20} color="white" />
         ),
     };
 
@@ -51,7 +55,7 @@ class Home extends React.Component {
 
         return (
             <View style={{flex: 1, flexDirection: 'column',  justifyContent: 'space-between',}}>
-                <ScrollView style={styles.scrollViewStyle} horizontal={true} >
+                <ScrollView showsHorizontalScrollIndicator={false} style={styles.scrollViewStyle} horizontal={true} >
                 <View style={styles.categoryHeight}>
                     <Circle label="Fashion"/>
                     <Circle label="Restaurant"/>
@@ -61,10 +65,12 @@ class Home extends React.Component {
                     <Circle label="Arts"/>
                 </View>
                 </ScrollView>
-                <FlatList
-                    data={this.state.files}
-                    renderItem={({item}) => <Grid obj={item} click={this._onClick} />}
-                />
+                <View style={styles.pictureContainer}>
+                    <FlatList
+                        data={this.state.files}
+                        renderItem={({item}) => <Grid obj={item} click={this._onClick} width={pictureSize} />}
+                    />
+                </View>
 
             </View>
 
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     categoryHeight: {
-        height: 80,
+        height: (height/ 8),
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -109,6 +115,11 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey',
         borderBottomWidth: 1,
         margin: 15
+    },
+    pictureContainer: {
+        marginRight: 15,
+        marginLeft: 15,
+        marginBottom: 15
     }
 });
 

@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cad7d17-a83e-4a67-8481-14a3380505ff" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/dashboard/Notification.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/Home.js" afterPath="$PROJECT_DIR$/src/components/dashboard/Home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/Message.js" afterPath="$PROJECT_DIR$/src/components/dashboard/Message.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" afterPath="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/helper/grid.js" afterPath="$PROJECT_DIR$/src/components/dashboard/helper/grid.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/landingPage.js" afterPath="$PROJECT_DIR$/src/components/dashboard/landingPage.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="Login.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/user/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="162" column="6" lean-forward="true" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="39" />
+            <state relative-caret-position="90">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="47" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -37,21 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fileApi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/fileApi.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="landingPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/landingPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="20" />
+            <state relative-caret-position="313">
+              <caret line="45" column="13" lean-forward="false" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -74,8 +63,8 @@
       <file leaf-file-name="Message.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/Message.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="23" />
+            <state relative-caret-position="135">
+              <caret line="11" column="56" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="56" />
               <folding>
                 <element signature="e#52#78#0" expanded="true" />
               </folding>
@@ -83,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Home.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
+            <state relative-caret-position="465">
+              <caret line="32" column="62" lean-forward="true" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="62" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -95,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Circle.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Circle.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
-              <caret line="31" column="20" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+              <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
               <folding>
                 <element signature="e#52#78#0" expanded="true" />
               </folding>
@@ -110,10 +99,14 @@
       <file leaf-file-name="grid.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/grid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+            <state relative-caret-position="345">
+              <caret line="28" column="74" lean-forward="false" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
               <folding>
                 <element signature="e#52#78#0" expanded="true" />
+                <marker date="1501850646000" expanded="false" signature="920:927" ph="..." />
+                <marker date="1501850646000" expanded="false" signature="1132:1140" ph="..." />
+                <marker date="1501850646000" expanded="false" signature="1429:1437" ph="..." />
+                <marker date="1501850646000" expanded="false" signature="1726:1734" ph="..." />
               </folding>
             </state>
           </provider>
@@ -125,6 +118,19 @@
             <state relative-caret-position="45">
               <caret line="3" column="36" lean-forward="false" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PhoneNumberTab.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/user/PhoneNumberTab.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="598">
+              <caret line="100" column="21" lean-forward="false" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
+              <folding>
+                <element signature="e#52#103#0" expanded="false" />
+                <element signature="e#105#131#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,7 +166,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/components/dashboard/helper/grid.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/helper/verticalGrid.js" />
         <option value="$PROJECT_DIR$/.expo/packager-info.json" />
         <option value="$PROJECT_DIR$/app.json" />
@@ -174,10 +179,11 @@
         <option value="$PROJECT_DIR$/src/api/uploadApi.js" />
         <option value="$PROJECT_DIR$/src/api/userApi.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/Message.js" />
-        <option value="$PROJECT_DIR$/src/components/dashboard/landingPage.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/Notification.js" />
-        <option value="$PROJECT_DIR$/src/components/dashboard/Home.js" />
+        <option value="$PROJECT_DIR$/src/components/dashboard/landingPage.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" />
+        <option value="$PROJECT_DIR$/src/components/dashboard/helper/grid.js" />
+        <option value="$PROJECT_DIR$/src/components/dashboard/Home.js" />
       </list>
     </option>
   </component>
@@ -566,12 +572,12 @@
       <workItem from="1501417003548" duration="13873000" />
       <workItem from="1501582245387" duration="371000" />
       <workItem from="1501590696978" duration="15380000" />
-      <workItem from="1501749429123" duration="8867000" />
+      <workItem from="1501749429123" duration="10354000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38491000" />
+    <option name="totallyTimeSpent" value="39978000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="748" extended-state="0" />
@@ -911,17 +917,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/user/PhoneNumberTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="100" column="21" lean-forward="false" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
-          <folding>
-            <element signature="e#52#103#0" expanded="false" />
-            <element signature="e#105#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/Camera.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -947,7 +942,7 @@
         <state relative-caret-position="253">
           <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="52" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -976,16 +971,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/grid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
-          <folding>
-            <element signature="e#52#78#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/Notification.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -996,20 +981,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/user/PhoneNumberTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="100" column="21" lean-forward="false" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
+          <folding>
+            <element signature="e#52#103#0" expanded="false" />
+            <element signature="e#105#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/user/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="162" column="6" lean-forward="true" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="39" />
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="47" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Message.js">
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="23" />
+        <state relative-caret-position="435">
+          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
           <folding>
             <element signature="e#52#78#0" expanded="true" />
           </folding>
@@ -1018,30 +1014,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/landingPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="20" />
+        <state relative-caret-position="313">
+          <caret line="45" column="13" lean-forward="false" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/grid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
+        <state relative-caret-position="345">
+          <caret line="28" column="74" lean-forward="false" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#52#78#0" expanded="true" />
+            <marker date="1501850646000" expanded="false" signature="920:927" ph="..." />
+            <marker date="1501850646000" expanded="false" signature="1132:1140" ph="..." />
+            <marker date="1501850646000" expanded="false" signature="1429:1437" ph="..." />
+            <marker date="1501850646000" expanded="false" signature="1726:1734" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Message.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="31" column="20" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+        <state relative-caret-position="135">
+          <caret line="11" column="56" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="56" />
           <folding>
             <element signature="e#52#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="32" column="62" lean-forward="true" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

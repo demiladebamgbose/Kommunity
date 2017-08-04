@@ -11,9 +11,6 @@ import {
     TabNavigator,
 } from 'react-navigation';
 
-import {TouchableHighlight} from 'react-native';
-
-
 
 const LandingPage = TabNavigator({
 

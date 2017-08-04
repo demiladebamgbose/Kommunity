@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderRadius: 70/2,
-        backgroundColor: 'red',
+        backgroundColor: '#D3D3D3',
         marginRight: 6
     },
     center: {
