@@ -4,10 +4,15 @@ import Search from './Search';
 import Camera from './Camera';
 import Activity from './Activity';
 import Profile from './Profile';
+import MessageIcon from './Message';
 
 import {
     TabNavigator,
 } from 'react-navigation';
+
+import {TouchableHighlight} from 'react-native';
+
+
 
 const LandingPage = TabNavigator({
 
@@ -33,4 +38,19 @@ const LandingPage = TabNavigator({
     },
 });
 
-export default LandingPage;
+class Land extends React.Component {
+    static navigationOptions = ({ navigation }) => ({
+        title: 'Kommunity',
+        headerRight: (
+            <MessageIcon/>
+        ),
+    });
+
+    render () {
+        return (
+            <LandingPage/>
+        )
+    }
+}
+
+export default Land;
