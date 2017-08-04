@@ -7,7 +7,8 @@ import * as fileActions from '../../actions/fileActions';
 import _ from 'lodash'
 import Circle from '../dashboard/helper/Circle';
 let {height, width} = Dimensions.get('window');
-import { Foundation } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import PostTab from './postTab/PostTab';
 
 let pictureSize = ((width/ 3) - 6);
 
@@ -30,7 +31,7 @@ class Home extends React.Component {
         tabBarLabel: 'Home',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <Foundation name="home" size={20} color="white" />
+            <Ionicons name="ios-home-outline" size={20}  />
         ),
     };
 
@@ -54,27 +55,24 @@ class Home extends React.Component {
     render() {
 
         return (
-            <View style={{flex: 1, flexDirection: 'column',  justifyContent: 'space-between',}}>
-                <ScrollView showsHorizontalScrollIndicator={false} style={styles.scrollViewStyle} horizontal={true} >
-                <View style={styles.categoryHeight}>
-                    <Circle label="Fashion"/>
-                    <Circle label="Restaurant"/>
-                    <Circle label="hangout"/>
-                    <Circle label="Events"/>
-                    <Circle label="Travels"/>
-                    <Circle label="Arts"/>
-                </View>
-                </ScrollView>
-                <View style={styles.pictureContainer}>
-                    <FlatList
-                        data={this.state.files}
-                        renderItem={({item}) => <Grid obj={item} click={this._onClick} width={pictureSize} />}
-                    />
-                </View>
+             <View style={{flex: 1, flexDirection: 'column',  justifyContent: 'space-between'}}>
+                 <View style={{height: (height / 5)}}>
+                    <ScrollView showsHorizontalScrollIndicator={false} style={styles.scrollViewStyle} horizontal={true} >
+                    <View style={styles.categoryHeight}>
+                        <Circle label="Fashion"/>
+                        <Circle label="Restaurant"/>
+                        <Circle label="hangout"/>
+                        <Circle label="Events"/>
+                        <Circle label="Travels"/>
+                        <Circle label="Arts"/>
+                    </View>
+                    </ScrollView>
+                 </View>
 
+                 <View style={styles.pictureContainer}>
+                    <PostTab screenProps={{data: this.state.files, width: pictureSize, click: this._onClick}} data={this.state.files} width={pictureSize} click={this._onClick} />
+                </View>
             </View>
-
-
         );
     }
 
@@ -109,17 +107,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        flex: 0
+        flex: 1
     },
     scrollViewStyle:{
         borderBottomColor: 'grey',
         borderBottomWidth: 1,
-        margin: 15
+        margin: 15,
+        flex: 1
     },
     pictureContainer: {
         marginRight: 15,
         marginLeft: 15,
-        marginBottom: 15
+        marginBottom: 15,
+        flex: 1,
     }
 });
 
