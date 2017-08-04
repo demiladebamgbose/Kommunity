@@ -5,6 +5,7 @@ import Camera from './Camera';
 import Activity from './Activity';
 import Profile from './Profile';
 import MessageIcon from './Message';
+import Notification from './Notification';
 
 import {
     TabNavigator,
@@ -41,8 +42,15 @@ const LandingPage = TabNavigator({
 class Land extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Kommunity',
+        headerTitleStyle: {
+            fontFamily: 'Noteworthy-Bold',
+            fontSize: 31
+        },
         headerRight: (
             <MessageIcon/>
+        ),
+        headerLeft: (
+            <Notification/>
         ),
     });
 

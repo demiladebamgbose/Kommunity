@@ -1,10 +1,11 @@
 import React from 'react'
-import {Image, Button, Alert,  CameraRoll, StyleSheet, View, FlatList, Text} from 'react-native';
+import {Image, Button, Alert,  CameraRoll, StyleSheet, View, FlatList, Text, ScrollView} from 'react-native';
 import Grid from './helper/grid';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../actions/fileActions';
 import _ from 'lodash'
+import Circle from '../dashboard/helper/Circle';
 
 
 class Home extends React.Component {
@@ -50,10 +51,16 @@ class Home extends React.Component {
 
         return (
             <View style={{flex: 1, flexDirection: 'column',  justifyContent: 'space-between',}}>
-                <Button
-                    onPress={() => this.props.navigation.navigate('Screen')}
-                    title="Go to Home Here"
-                />
+                <ScrollView style={styles.scrollViewStyle} horizontal={true} >
+                <View style={styles.categoryHeight}>
+                    <Circle label="Fashion"/>
+                    <Circle label="Restaurant"/>
+                    <Circle label="hangout"/>
+                    <Circle label="Events"/>
+                    <Circle label="Travels"/>
+                    <Circle label="Arts"/>
+                </View>
+                </ScrollView>
                 <FlatList
                     data={this.state.files}
                     renderItem={({item}) => <Grid obj={item} click={this._onClick} />}
@@ -66,7 +73,6 @@ class Home extends React.Component {
     }
 
     componentDidMount () {
-        console.log('Called a couple of times');
         let that = this;
         this.props.action.fetchAllFiles().then( response => {
 
@@ -91,6 +97,19 @@ const styles = StyleSheet.create({
         top: 5,
         backgroundColor: 'transparent',
     },
+    categoryHeight: {
+        height: 80,
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        flex: 0
+    },
+    scrollViewStyle:{
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        margin: 15
+    }
 });
 
 function mapDispatchToProps(dispatch) {

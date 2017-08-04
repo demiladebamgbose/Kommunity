@@ -3,13 +3,13 @@
  */
 import React from 'react';
 import {Image, TouchableHighlight, StyleSheet} from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
-const Message = ()=> {
+const Notification = ()=> {
 
     return (
         <TouchableHighlight style={styles.message}>
-            <FontAwesome name="envelope-o" size={18}  />
+            <Ionicons name="ios-notifications-outline" size={23}  />
         </TouchableHighlight>
     )
 };
@@ -17,8 +17,8 @@ const Message = ()=> {
 const styles = StyleSheet.create({
 
     message:{
-        marginRight: 15
+        marginLeft: 15
     }
 });
 
-export default Message;
+export default Notification;
