@@ -1,14 +1,19 @@
 import React from 'react'
-import {Image, Button, StyleSheet, View, TextInput, Text, FlatList} from 'react-native';
+import {Image, Button, StyleSheet, View, TextInput, Text, FlatList, ActivityIndicator} from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
+import SearchDisplay from './helper/SearchDisplay';
 
 class Search extends React.Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            searchResult: [],
+            animating: false
+        }
     }
 
     static navigationOptions = {
@@ -21,12 +26,14 @@ class Search extends React.Component {
 
     _onSearch = (text) => {
         let that = this;
+        this.setState({animating: true});
 
         this.props.action.searchUser(text).then( response => {
             let userResponse = that.props.user;
-            console.log(userResponse);
+            let users = userResponse.searchUsers.user;
+            this.setState({searchResult: users});
+            this.setState({animating: false});
         });
-
     };
 
     render() {
@@ -51,21 +58,20 @@ class Search extends React.Component {
                             />
                         </View>
                     </View>
+                    <ActivityIndicator
+                        animating = {this.state.animating}
+                        size = "large"
+                        style = {styles.activityIndicator}
+                    />
                 </View>
                 <View style={styles.containerDropDown}>
-                    <FlatList
-                        data={[
-                            {key: 'Devin'},
-                            {key: 'Jackson'},
-                            {key: 'James'},
-                            {key: 'Joel'},
-                            {key: 'John'},
-                            {key: 'Jillian'},
-                            {key: 'Jimmy'},
-                            {key: 'Julie'},
-                          ]}
-                        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-                    />
+                    {
+                        (this.state.searchResult.length) ?
+                        <FlatList
+                        data={this.state.searchResult}
+                        renderItem={({item}) => <SearchDisplay img="" other={item.name} name={item.username}/> }
+                        /> : <Text style={{margin: 20, fontSize: 12}}>No Result found</Text>
+                    }
 
                 </View>
 
@@ -140,6 +146,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         height: 44,
     },
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 20
+    }
 });
 
 function mapDispatchToProps(dispatch) {

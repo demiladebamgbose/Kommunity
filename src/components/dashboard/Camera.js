@@ -31,7 +31,14 @@ class Camera extends React.Component {
 
         this.props.action.uploadCameraImage(current).then(response => {
             const { navigate } = this.props.navigation;
-            navigate('Upload', { image: this.props.image })
+
+            console.log(this.props.navigation);
+
+           // navigate('UploadView', { image: '' });
+           // this.props.navigation.goBack();
+           //  setTimeout(this.props.navigation.navigate.bind(null, 'UploadView'), 500);
+
+            console.log('changed route')
         }).catch(err=> {
            console.log(err);
         });

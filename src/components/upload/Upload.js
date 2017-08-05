@@ -10,6 +10,7 @@ class Upload extends React.Component {
 
     constructor(props, context){
         super(props);
+        console.log('Was I called');
         this.state = {
             'image': this.props.upload.image,
             'private': false,

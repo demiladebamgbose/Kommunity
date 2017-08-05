@@ -18,7 +18,7 @@ const Route = StackNavigator({
     Home: { screen: Login },
     SignUp: { screen: SignUp },
     Landing: {screen: Dashboard},
-    Upload: {screen: Upload},
+    UploadView: {screen: Upload},
     SingleView: {screen: SingleView},
     LoginTab: {screen: LoginTab}
 });
