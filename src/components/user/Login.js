@@ -65,12 +65,9 @@ class Login extends React.Component {
         let userData = {username, password};
         this.setState({animating: true});
         this.props.action.logUserIn(userData).then((response)=> {
-            that.setState({animating: false});
+            this.setState({animating: false});
 
-            if(that.props.user.message.response) {
-                console.log(that.props.user);
-              //  const {navigate} = this.props.navigation;
-              //  navigate('Landing', {name: response});
+            if(this.props.user.presentUser.message.user) {
 
                 const resetAction = NavigationActions.reset({
                     index: 0,
@@ -81,7 +78,7 @@ class Login extends React.Component {
                 this.props.navigation.dispatch(resetAction)
 
             } else {
-                that.setState({information: that.props.user.message});
+                this.setState({information: this.props.user.presentUser.message.response});
             }
 
         }).catch(err=> {

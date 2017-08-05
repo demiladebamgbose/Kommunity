@@ -1,6 +1,5 @@
 import React from 'react'
 import {Image, Button, Alert,  CameraRoll, StyleSheet, View, FlatList, Text, ScrollView, Dimensions} from 'react-native';
-import Grid from './helper/grid';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../actions/fileActions';
@@ -11,8 +10,6 @@ import { Ionicons } from '@expo/vector-icons';
 import PostTab from './postTab/PostTab';
 
 let pictureSize = ((width/ 3) - 6);
-
-
 
 
 class Home extends React.Component {
@@ -77,9 +74,9 @@ class Home extends React.Component {
     }
 
     componentDidMount () {
+
         let that = this;
         this.props.action.fetchAllFiles().then( response => {
-
             let files = that.props.files;
 
             let gridImages = _.chunk(files.recent.message.data, 3);

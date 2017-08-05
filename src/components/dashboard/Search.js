@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image, Button, StyleSheet, View, TextInput, Text} from 'react-native';
+import {Image, Button, StyleSheet, View, TextInput, Text, FlatList} from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -23,10 +23,8 @@ class Search extends React.Component {
         let that = this;
 
         this.props.action.searchUser(text).then( response => {
-
             let userResponse = that.props.user;
             console.log(userResponse);
-
         });
 
     };
@@ -53,6 +51,22 @@ class Search extends React.Component {
                             />
                         </View>
                     </View>
+                </View>
+                <View style={styles.containerDropDown}>
+                    <FlatList
+                        data={[
+                            {key: 'Devin'},
+                            {key: 'Jackson'},
+                            {key: 'James'},
+                            {key: 'Joel'},
+                            {key: 'John'},
+                            {key: 'Jillian'},
+                            {key: 'Jimmy'},
+                            {key: 'Julie'},
+                          ]}
+                        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+                    />
+
                 </View>
 
             </View>
@@ -117,7 +131,15 @@ const styles = StyleSheet.create({
         borderRightWidth: 1,
         borderRightColor: '#D3D3D3',
         marginLeft: 5
-    }
+    },containerDropDown: {
+        flex: 1,
+        paddingTop: 22
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
 });
 
 function mapDispatchToProps(dispatch) {

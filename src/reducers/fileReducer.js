@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export default function fileReducer(state = initialState, action) {
-
     switch (action.type) {
         case types.FETCH_RECENT_FILES:
             return {
