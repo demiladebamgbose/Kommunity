@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View , Button, Alert, TextInput, TouchableOpacity, Dimensions} from 'react-native';
+import { StyleSheet, Text, View , Button, Alert, TextInput, TouchableOpacity, Dimensions, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
+import { NavigationActions } from 'react-navigation'
 let {height, width} = Dimensions.get('window');
 
 
@@ -30,7 +31,8 @@ class Login extends React.Component {
             'information': '',
             'screnHeight': height,
             'screenWidth': width,
-            'complete': false
+            'complete': false,
+            'animating': false
         };
     }
 
@@ -61,14 +63,22 @@ class Login extends React.Component {
         let that = this;
 
         let userData = {username, password};
+        this.setState({animating: true});
         this.props.action.logUserIn(userData).then((response)=> {
+            this.setState({animating: false});
 
-            if(that.props.user.message.response.indexOf('user') !== -1) {
-                console.log(that.props.user);
-                const { navigate } = this.props.navigation;
-                navigate('Landing', { name: response });
-            } else{
-                that.setState({information: that.props.user.message.response});
+            if(this.props.user.presentUser.message.user) {
+
+                const resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({ routeName: 'Landing'})
+                    ]
+                });
+                this.props.navigation.dispatch(resetAction)
+
+            } else {
+                this.setState({information: this.props.user.presentUser.message.response});
             }
 
         }).catch(err=> {
@@ -117,6 +127,12 @@ class Login extends React.Component {
                         <Text style={styles.logInText} >Login</Text>
                     </TouchableOpacity>
                     <Text style={styles.centerText}>{this.state.information}</Text>
+                    <ActivityIndicator
+                        animating = {this.state.animating}
+
+                        size = "large"
+                        style = {styles.activityIndicator}
+                    />
                 </View>
                 <View style={styles.alternativeLayoutButtonContainer}>
                     <Text style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold'}} onPress={this._onLinkToSignUp}>Sign Up</Text>
@@ -169,6 +185,12 @@ const styles = StyleSheet.create({
         paddingBottom: 12,
         backgroundColor: '#3B5998',
         borderRadius: 5
+    },
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 80
     }
 });
 

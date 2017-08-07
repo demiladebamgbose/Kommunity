@@ -56,7 +56,7 @@ class ProfileSingleView extends React.Component {
     componentDidMount () {
 
         let that = this;
-        let userId = this.props.user.message.user._id;
+        let userId = this.props.user.presentUser.message.user._id;
         console.log('disptached at ', userId);
         this.props.action.fetchUserFiles(userId).then( response => {
 

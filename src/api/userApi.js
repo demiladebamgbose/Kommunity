@@ -1,8 +1,8 @@
 /**
  * Created by jolaadeadewale on 23/07/2017.
  */
-//let  url = 'http://localhost:5151/';
-let  url = 'https://kommunity-2-2-2.herokuapp.com/';
+let  url = 'http://localhost:5151/';
+// let  url = 'https://kommunity-2-2-2.herokuapp.com/';
 
 class UserApi {
 
@@ -39,6 +39,30 @@ class UserApi {
                     resolve(Object.assign({}, responseJson));
                 });
         });
+    };
+
+    findAll = () => {
+        return new Promise((resolve, reject)=> {
+
+            return fetch(url + 'api/v1/users', {
+                method: 'GET'
+              }).then((response) => response.json())
+                .then((responseJson) => {
+                    resolve(Object.assign({}, responseJson));
+                });
+        })
+    };
+
+    findUser = (user) => {
+        return new Promise((resolve, reject)=> {
+
+            return fetch(url + `api/v1/users/${user}`, {
+                method: 'GET'
+            }).then((response) => response.json())
+                .then((responseJson) => {
+                    resolve(Object.assign({}, responseJson));
+                });
+        })
     }
 }
 

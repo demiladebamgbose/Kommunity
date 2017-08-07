@@ -4,10 +4,13 @@ import Search from './Search';
 import Camera from './Camera';
 import Activity from './Activity';
 import Profile from './Profile';
+import MessageIcon from './Message';
+import Notification from './Notification';
 
 import {
-    TabNavigator,
+    TabNavigator
 } from 'react-navigation';
+
 
 const LandingPage = TabNavigator({
 
@@ -33,4 +36,26 @@ const LandingPage = TabNavigator({
     },
 });
 
-export default LandingPage;
+class Land extends React.Component {
+    static navigationOptions = ({ navigation }) => ({
+        title: 'Kommunity',
+        headerTitleStyle: {
+            fontFamily: 'Noteworthy-Bold',
+            fontSize: 31
+        },
+        headerRight: (
+            <MessageIcon/>
+        ),
+        headerLeft: (
+            <Notification/>
+        ),
+    });
+
+    render () {
+        return (
+            <LandingPage screenProps={{ rootNavigation: this.props.navigation }} />
+        )
+    }
+}
+
+export default Land;

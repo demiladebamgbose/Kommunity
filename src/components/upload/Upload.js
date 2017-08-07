@@ -10,6 +10,7 @@ class Upload extends React.Component {
 
     constructor(props, context){
         super(props);
+        console.log('Was I called');
         this.state = {
             'image': this.props.upload.image,
             'private': false,
@@ -65,18 +66,40 @@ class Upload extends React.Component {
 
     render () {
         return (
-            <View>
+            <View style={styles.topContainer}>
                 <View>
                     <Image style={{width: 320, height: 290}}  source={{uri:this.state.image.uri}} />
                 </View>
                 <View style={styles.buttonContainer}>
                     <TextInput style={{ paddingLeft: 10, fontSize: 14, height: 70, borderColor:
-                        'gray', borderWidth: 1, borderRadius: 5, backgroundColor: 'white', 'paddingBottom': 5}}
+                        'gray', borderWidth: 1, borderRadius: 5, backgroundColor: 'white', 'paddingBottom': 5, width: 320}}
                          placeholder='Enter Comment'
                          onChangeText={(text) => this.setState({'caption': text})}
                           value={this.state.caption}
                     />
                 </View>
+                <View>
+                    <Text>Please select a category</Text>
+                </View>
+                <View style={styles.category}>
+                    <Text>
+                        Fashion
+                    </Text>
+                    <Switch value={this.state.private}
+                            onValueChange={(text) =>
+                            this.setState({'private': !this.state.private})}
+                    />
+                </View>
+                <View style={styles.category}>
+                    <Text>
+                        Events
+                    </Text>
+                    <Switch value={this.state.private}
+                            onValueChange={(text) =>
+                            this.setState({'private': !this.state.private})}
+                    />
+                </View>
+
                 <View style={styles.alternativeLayoutButtonContainer}>
                     <Text>Private</Text>
                     <Switch value={this.state.private} onValueChange={(text) => this.setState({'private': !this.state.private})}/>
@@ -91,16 +114,26 @@ class Upload extends React.Component {
                 <View>
 
                 </View>
-
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    topContainer: {
+        flex: 1,
+        margin: 20,
+        flexDirection: 'column',
+        alignItems: 'center',
+        alignContent: 'center'
+    },
     column: {
         flex: 1,
         flexDirection: 'column',
+    },
+    category: {
+        flex: 1,
+        flexDirection: 'row'
     },
     container: {
         flex: 1,
@@ -126,7 +159,6 @@ const styles = StyleSheet.create({
         fontSize: 14
     }
 });
-
 
 function mapDispatchToProps(dispatch) {
     return {
