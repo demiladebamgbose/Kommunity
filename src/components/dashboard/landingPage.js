@@ -8,7 +8,7 @@ import MessageIcon from './Message';
 import Notification from './Notification';
 
 import {
-    TabNavigator,
+    TabNavigator
 } from 'react-navigation';
 
 
@@ -53,7 +53,7 @@ class Land extends React.Component {
 
     render () {
         return (
-            <LandingPage/>
+            <LandingPage screenProps={{ rootNavigation: this.props.navigation }} />
         )
     }
 }
