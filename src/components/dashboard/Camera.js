@@ -34,8 +34,7 @@ class Camera extends React.Component {
                     title="Take a picture"
                     onPress={this._cameraRoll}
                 />
-                {image &&
-                <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
             </View>
         );
 
@@ -47,10 +46,10 @@ class Camera extends React.Component {
             aspect: [4, 3],
         });
 
-        console.log(result);
+
 
         if (!result.cancelled) {
-            this.setState({ image: result.uri });
+            //this.setState({ image: result.uri });
             this.props.action.uploadCameraImage(result).then(response => {
                 this.props.screenProps.rootNavigation.navigate('UploadView');
             }).catch(err => {

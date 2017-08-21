@@ -10,7 +10,6 @@ class Upload extends React.Component {
 
     constructor(props, context){
         super(props);
-        console.log('Was I called');
         this.state = {
             'image': this.props.upload.image,
             'private': false,
@@ -70,50 +69,7 @@ class Upload extends React.Component {
                 <View>
                     <Image style={{width: 320, height: 290}}  source={{uri:this.state.image.uri}} />
                 </View>
-                <View style={styles.buttonContainer}>
-                    <TextInput style={{ paddingLeft: 10, fontSize: 14, height: 70, borderColor:
-                        'gray', borderWidth: 1, borderRadius: 5, backgroundColor: 'white', 'paddingBottom': 5, width: 320}}
-                         placeholder='Enter Comment'
-                         onChangeText={(text) => this.setState({'caption': text})}
-                          value={this.state.caption}
-                    />
-                </View>
-                <View>
-                    <Text>Please select a category</Text>
-                </View>
-                <View style={styles.category}>
-                    <Text>
-                        Fashion
-                    </Text>
-                    <Switch value={this.state.private}
-                            onValueChange={(text) =>
-                            this.setState({'private': !this.state.private})}
-                    />
-                </View>
-                <View style={styles.category}>
-                    <Text>
-                        Events
-                    </Text>
-                    <Switch value={this.state.private}
-                            onValueChange={(text) =>
-                            this.setState({'private': !this.state.private})}
-                    />
-                </View>
 
-                <View style={styles.alternativeLayoutButtonContainer}>
-                    <Text>Private</Text>
-                    <Switch value={this.state.private} onValueChange={(text) => this.setState({'private': !this.state.private})}/>
-                    <TouchableOpacity
-                        style={{borderRadius: 5, height: 40, width:50,  backgroundColor: '#0066CC',  borderWidth: 1}}
-                        onPress={this._onUpload}
-
-                    >
-                        <Text style={styles.logInText} >Upload</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-
-                </View>
             </View>
         )
     }
