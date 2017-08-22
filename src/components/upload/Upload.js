@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View, Image, Switch, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, Image, Switch, TextInput, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import Category from '../dashboard/helper/Category';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as uploadActions from '../../actions/uploadActions';
@@ -8,12 +9,31 @@ import * as uploadActions from '../../actions/uploadActions';
 
 class Upload extends React.Component {
 
+    static navigationOptions = {
+        title: 'KOMMUNITY',
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontFamily: 'Noteworthy-Bold',
+            fontSize: 31
+        },
+        left:null
+    };
+
     constructor(props, context){
         super(props);
         this.state = {
             'image': this.props.upload.image,
             'private': false,
-            'caption' : ''
+            'caption' : '',
+            'category': [{'key': 'Fashion'},{'key': 'Restaurant'},
+                {'key': 'hangouts'},{'key': 'Events'},
+                {'key': 'Travels'},{'key': 'Arts'}],
+            'Fashion': false,
+            'Restaurant': false,
+            'hangouts': false,
+            'Events': false,
+            'Travels': false,
+            'Arts': false
         }
     }
 
@@ -63,13 +83,32 @@ class Upload extends React.Component {
         });
     };
 
+    _onSwitchSelected =(e, value) => {
+
+       let data =  {
+       };
+       data[value] = e;
+       this.setState(data);
+    };
+
     render () {
         return (
             <View style={styles.topContainer}>
                 <View>
                     <Image style={{width: 320, height: 290}}  source={{uri:this.state.image.uri}} />
                 </View>
-
+                <View style={styles.category}>
+                    <FlatList
+                        data={this.state.category}
+                        extraData={this.state}
+                        renderItem={
+                            ({item})=>
+                            <Category text={item.key}
+                            status={this.state[item.key]}
+                            valueSet={this._onSwitchSelected} />
+                        }
+                    />
+                </View>
             </View>
         )
     }
@@ -83,13 +122,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center'
     },
+    category:{
+        flex: 1,
+        flexDirection: 'column',
+        width: 320,
+        borderTopColor: 'grey',
+        borderTopWidth: 1,
+        borderStyle: 'solid'
+    },
     column: {
         flex: 1,
         flexDirection: 'column',
-    },
-    category: {
-        flex: 1,
-        flexDirection: 'row'
     },
     container: {
         flex: 1,
