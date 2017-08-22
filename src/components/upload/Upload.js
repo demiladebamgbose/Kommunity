@@ -9,16 +9,6 @@ import * as uploadActions from '../../actions/uploadActions';
 
 class Upload extends React.Component {
 
-    static navigationOptions = {
-        title: 'KOMMUNITY',
-        headerTintColor: 'white',
-        headerTitleStyle: {
-            fontFamily: 'Noteworthy-Bold',
-            fontSize: 31
-        },
-        left:null
-    };
-
     constructor(props, context){
         super(props);
         this.state = {
@@ -33,9 +23,27 @@ class Upload extends React.Component {
             'hangouts': false,
             'Events': false,
             'Travels': false,
-            'Arts': false
+            'Arts': false,
+            'text': 'Next'
         }
     }
+
+    static navigationOptions = ({navigation})=> {
+        const {params = {}} = navigation.state;
+
+        return {
+            headerRight: <Text onPress={
+            ()=> {
+                console.log(params);
+                const { navigate } = navigation;
+                navigate('Category', { name: 'Kommunity' })
+            }
+            } style={{ color: 'blue',
+            marginRight: 20}}>Next</Text>
+        }
+
+
+    };
 
     _onUpload = () => {
         let caption = this.state.caption;
@@ -156,6 +164,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingTop: 8,
         fontSize: 14
+    },
+    nextButton:{
+        color: 'blue',
+        marginRight: 20
     }
 });
 

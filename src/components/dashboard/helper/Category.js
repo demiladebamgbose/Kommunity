@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
     switchStyle: {
         borderStyle: 'solid',
-        borderColor: '#f5f5f5',
+        borderColor: '#ECECEC',
         borderWidth: 1,
         borderRadius: 13
     }
