@@ -4,6 +4,7 @@ import Category from '../dashboard/helper/Category';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as uploadActions from '../../actions/uploadActions';
+let that = '';
 
 
 
@@ -24,8 +25,10 @@ class Upload extends React.Component {
             'Events': false,
             'Travels': false,
             'Arts': false,
-            'text': 'Next'
+            'text': 'Next',
+            'component': {}
         }
+        that = this;
     }
 
     static navigationOptions = ({navigation})=> {
@@ -34,8 +37,10 @@ class Upload extends React.Component {
         return {
             headerRight: <Text onPress={
             ()=> {
-                console.log(params);
+
                 const { navigate } = navigation;
+                console.log('That is', that);s
+
                 navigate('Category', { name: 'Kommunity' })
             }
             } style={{ color: 'blue',
@@ -92,11 +97,12 @@ class Upload extends React.Component {
     };
 
     _onSwitchSelected =(e, value) => {
-
-       let data =  {
-       };
-       data[value] = e;
-       this.setState(data);
+        let component = this.state.component;
+        component[value] = e;
+        let data =  {
+        };
+        data[value] = e;
+        this.setState(data);
     };
 
     render () {

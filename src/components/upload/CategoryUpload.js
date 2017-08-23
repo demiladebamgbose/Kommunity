@@ -2,7 +2,7 @@
  * Created by jolaadeadewale on 22/08/2017.
  */
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, Image, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image, Dimensions, Switch} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as uploadActions from '../../actions/uploadActions';
@@ -16,9 +16,44 @@ class CategoryUpload extends React.Component {
         this.state = {
             'caption': '',
             'image': this.props.upload.image,
-        }
-        console.log('here it is '+ width)
+            kommunity: true,
+            kin: false
+        };
+
     }
+
+    static navigationOptions = ({navigation})=> {
+        const {params = {}} = navigation.state;
+
+        return {
+            headerRight: <Text onPress={
+            ()=> {
+                console.log(params);
+                const { navigate } = navigation;
+                navigate('Category', { name: 'Kommunity' })
+            }
+            } style={{ color: 'blue',
+            marginRight: 20}}>Post</Text>
+        }
+    };
+
+    _onKommunity = (e) => {
+        let obj = {
+            kommunity: e,
+            kin: !this.state.kin
+        };
+
+        this.setState(obj)
+    };
+
+    _onKin = (e) => {
+        let obj = {
+            kommunity: !this.state.kommunity,
+            kin: e
+        };
+
+        this.setState(obj);
+    };
 
     render() {
         return (
@@ -41,18 +76,27 @@ class CategoryUpload extends React.Component {
 
             </View>
             <View style={styles.privateSection}>
-
-                <View>
-                    <Text>
+                <View style={styles.kinSelection}>
+                    <Text style={{ textAlign: 'center', fontSize: 10}}>
                         Kommunity
                     </Text>
+                    <Switch
+                        value={this.state.kommunity}
+                        onValueChange={this._onKommunity}
+                    />
 
                 </View>
-                <View>
-                    <Text>
+                <View style={styles.kinSelection}>
+                    <Text style={{ textAlign: 'center',  fontSize: 10}}>
                         Kin
                     </Text>
+                    <Switch
+                        value={this.state.kin}
+                        onValueChange={this._onKin}
+                    />
                 </View>
+            </View>
+            <View style={{height: 300, flex: 1}}>
             </View>
         </View>
         )
@@ -78,9 +122,16 @@ const styles = StyleSheet.create({
         height: (height/ 7)
     },
     privateSection: {
-        flex: 1,
+        marginTop: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10
+    },
+    kinSelection: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: 5
     }
 });
 
