@@ -36,7 +36,20 @@ class Home extends React.Component {
     };
 
     _onCategory = (e) => {
-        console.log('Clicked', e);
+        let files = this.props.files;
+
+        let privateFiles =  _.filter(files.recent.message.data, (obj)=>{
+            if(obj.category[e])
+                return obj.category[e] === true && obj.status == 'false';
+        });
+        privateFiles = _.chunk(privateFiles, 3);
+        this.setState({private: privateFiles});
+
+        let gridImages =  _.filter(files.recent.message.data, (obj)=>{
+            return obj.category[e] === true && obj.status == 'true';
+        });
+        gridImages = _.chunk(gridImages, 3);
+        this.setState({files: gridImages});
     };
 
     _onClick = (e) => {

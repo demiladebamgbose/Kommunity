@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cad7d17-a83e-4a67-8481-14a3380505ff" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.json" afterPath="$PROJECT_DIR$/app.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/fileApi.js" afterPath="$PROJECT_DIR$/src/api/fileApi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/uploadApi.js" afterPath="$PROJECT_DIR$/src/api/uploadApi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/Camera.js" afterPath="$PROJECT_DIR$/src/components/dashboard/Camera.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/Home.js" afterPath="$PROJECT_DIR$/src/components/dashboard/Home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" afterPath="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/postTab/PrivatePost.js" afterPath="$PROJECT_DIR$/src/components/dashboard/postTab/PrivatePost.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/upload/CategoryUpload.js" afterPath="$PROJECT_DIR$/src/components/upload/CategoryUpload.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js" afterPath="$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,11 +21,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Home.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
+            <state relative-caret-position="156">
+              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
                 <element signature="e#405#451#0" expanded="true" />
@@ -54,9 +47,21 @@
       <file leaf-file-name="Allpost.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="24" column="28" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+            <state relative-caret-position="285">
+              <caret line="23" column="51" lean-forward="false" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Upload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/upload/Upload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,7 +78,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Circle.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Circle.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
@@ -116,18 +121,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="525">
               <caret line="35" column="17" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="35" selection-end-column="17" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fileApi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/fileApi.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="37" lean-forward="true" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -180,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/components/dashboard/Message.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/Notification.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/postTab/PostTab.js" />
-        <option value="$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js" />
         <option value="$PROJECT_DIR$/src/actions/userActions.js" />
         <option value="$PROJECT_DIR$/src/reducers/fileReducer.js" />
         <option value="$PROJECT_DIR$/src/actions/fileActions.js" />
@@ -209,8 +201,9 @@
         <option value="$PROJECT_DIR$/src/api/fileApi.js" />
         <option value="$PROJECT_DIR$/src/api/uploadApi.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/postTab/PrivatePost.js" />
-        <option value="$PROJECT_DIR$/src/components/dashboard/Home.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" />
+        <option value="$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js" />
+        <option value="$PROJECT_DIR$/src/components/dashboard/Home.js" />
       </list>
     </option>
   </component>
@@ -578,12 +571,12 @@
       <workItem from="1501928008974" duration="10773000" />
       <workItem from="1502912465154" duration="2579000" />
       <workItem from="1503271734684" duration="19247000" />
-      <workItem from="1503748055375" duration="17510000" />
+      <workItem from="1503748055375" duration="20088000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105746000" />
+    <option name="totallyTimeSpent" value="108324000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="756" extended-state="6" />
@@ -905,16 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/upload/Upload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/upload/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1001,22 +984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/PostTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="24" column="28" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/grid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -1027,17 +994,6 @@
             <marker date="1502912528000" expanded="true" signature="1052:1060" ph="..." />
             <marker date="1502912528000" expanded="false" signature="1349:1357" ph="..." />
             <marker date="1502912528000" expanded="false" signature="1646:1654" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#405#451#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1057,6 +1013,43 @@
         <state relative-caret-position="30">
           <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/PostTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="23" column="51" lean-forward="false" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/upload/Upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#405#451#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
