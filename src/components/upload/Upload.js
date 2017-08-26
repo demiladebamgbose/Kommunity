@@ -1,8 +1,10 @@
 import React from 'react';
-import {Text, View, Image, Switch, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, Image, Switch, TextInput, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import Category from '../dashboard/helper/Category';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as uploadActions from '../../actions/uploadActions';
+let that = '';
 
 
 
@@ -10,13 +12,43 @@ class Upload extends React.Component {
 
     constructor(props, context){
         super(props);
-        console.log('Was I called');
         this.state = {
             'image': this.props.upload.image,
             'private': false,
-            'caption' : ''
+            'caption' : '',
+            'category': [{'key': 'Fashion'},{'key': 'Restaurant'},
+                {'key': 'hangouts'},{'key': 'Events'},
+                {'key': 'Travels'},{'key': 'Arts'}],
+            'Fashion': false,
+            'Restaurant': false,
+            'hangouts': false,
+            'Events': false,
+            'Travels': false,
+            'Arts': false,
+            'text': 'Next',
+            'component': {}
         }
+        that = this;
     }
+
+    static navigationOptions = ({navigation})=> {
+        const {params = {}} = navigation.state;
+
+        return {
+            headerRight: <Text onPress={
+            ()=> {
+
+                const { navigate } = navigation;
+                console.log('That is', that);s
+
+                navigate('Category', { name: 'Kommunity' })
+            }
+            } style={{ color: 'blue',
+            marginRight: 20}}>Next</Text>
+        }
+
+
+    };
 
     _onUpload = () => {
         let caption = this.state.caption;
@@ -64,55 +96,32 @@ class Upload extends React.Component {
         });
     };
 
+    _onSwitchSelected =(e, value) => {
+        let component = this.state.component;
+        component[value] = e;
+        let data =  {
+        };
+        data[value] = e;
+        this.setState(data);
+    };
+
     render () {
         return (
             <View style={styles.topContainer}>
                 <View>
                     <Image style={{width: 320, height: 290}}  source={{uri:this.state.image.uri}} />
                 </View>
-                <View style={styles.buttonContainer}>
-                    <TextInput style={{ paddingLeft: 10, fontSize: 14, height: 70, borderColor:
-                        'gray', borderWidth: 1, borderRadius: 5, backgroundColor: 'white', 'paddingBottom': 5, width: 320}}
-                         placeholder='Enter Comment'
-                         onChangeText={(text) => this.setState({'caption': text})}
-                          value={this.state.caption}
-                    />
-                </View>
-                <View>
-                    <Text>Please select a category</Text>
-                </View>
                 <View style={styles.category}>
-                    <Text>
-                        Fashion
-                    </Text>
-                    <Switch value={this.state.private}
-                            onValueChange={(text) =>
-                            this.setState({'private': !this.state.private})}
+                    <FlatList
+                        data={this.state.category}
+                        extraData={this.state}
+                        renderItem={
+                            ({item})=>
+                            <Category text={item.key}
+                            status={this.state[item.key]}
+                            valueSet={this._onSwitchSelected} />
+                        }
                     />
-                </View>
-                <View style={styles.category}>
-                    <Text>
-                        Events
-                    </Text>
-                    <Switch value={this.state.private}
-                            onValueChange={(text) =>
-                            this.setState({'private': !this.state.private})}
-                    />
-                </View>
-
-                <View style={styles.alternativeLayoutButtonContainer}>
-                    <Text>Private</Text>
-                    <Switch value={this.state.private} onValueChange={(text) => this.setState({'private': !this.state.private})}/>
-                    <TouchableOpacity
-                        style={{borderRadius: 5, height: 40, width:50,  backgroundColor: '#0066CC',  borderWidth: 1}}
-                        onPress={this._onUpload}
-
-                    >
-                        <Text style={styles.logInText} >Upload</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-
                 </View>
             </View>
         )
@@ -127,13 +136,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center'
     },
+    category:{
+        flex: 1,
+        flexDirection: 'column',
+        width: 320,
+        borderTopColor: 'grey',
+        borderTopWidth: 1,
+        borderStyle: 'solid'
+    },
     column: {
         flex: 1,
         flexDirection: 'column',
-    },
-    category: {
-        flex: 1,
-        flexDirection: 'row'
     },
     container: {
         flex: 1,
@@ -157,6 +170,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingTop: 8,
         fontSize: 14
+    },
+    nextButton:{
+        color: 'blue',
+        marginRight: 20
     }
 });
 
