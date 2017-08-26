@@ -7,7 +7,8 @@ import * as types from '../actions/actionTypes';
 const initialState = {
     image: {},
     cloudResponse: {},
-    serverResponse: false
+    serverResponse: false,
+    category: {}
 };
 
 export default function uploadReducer(state = initialState, action) {
@@ -21,6 +22,9 @@ export default function uploadReducer(state = initialState, action) {
 
         case types.SAVE_UPLOAD_SERVER:
             return {...state, serverResponse: action.data};
+
+        case types.ADD_UPLOAD_CATEGORY:
+            return {...state, category: action.data};
 
         default:
             return state;
