@@ -22,8 +22,9 @@ class PrivatePost extends React.Component {
         return (
             <View style={{flex: 1}}>
             <FlatList
-                data={this.props.screenProps.data}
-                renderItem={({item}) => <Grid obj={item} click={this.props.screenProps.click} width={this.props.screenProps.width} />}
+                data={this.props.screenProps.privateData}
+                renderItem={({item}) => <Grid obj={item}
+                click={this.props.screenProps.click} width={this.props.screenProps.width} />}
             />
             </View>
         )

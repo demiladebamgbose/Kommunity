@@ -8,9 +8,7 @@ import Circle from '../dashboard/helper/Circle';
 let {height, width} = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
 import PostTab from './postTab/PostTab';
-
 let pictureSize = ((width/ 3) - 6);
-
 
 class Home extends React.Component {
 
@@ -18,7 +16,8 @@ class Home extends React.Component {
         super(props);
         this.state = {
             'photos': {},
-            'files': []
+            'files': [],
+            'private': []
         };
 
         this._onCamera = this._onCamera.bind(this);
@@ -34,6 +33,10 @@ class Home extends React.Component {
 
     _onCamera =() => {
 
+    };
+
+    _onCategory = (e) => {
+        console.log('Clicked', e);
     };
 
     _onClick = (e) => {
@@ -56,28 +59,57 @@ class Home extends React.Component {
                  <View style={{height: (height / 5)}}>
                     <ScrollView showsHorizontalScrollIndicator={false} style={styles.scrollViewStyle} horizontal={true} >
                     <View style={styles.categoryHeight}>
-                        <Circle label="Fashion"/>
-                        <Circle label="Restaurant"/>
-                        <Circle label="hangout"/>
-                        <Circle label="Events"/>
-                        <Circle label="Travels"/>
-                        <Circle label="Arts"/>
+                        <Circle
+                            click={this._onCategory}
+                            url="http://res.cloudinary.com/dd58mfinr/image/upload/v1503765729/4633036-fashion-image_yl3aot.jpg"
+                            label="Fashion"
+                        />
+                        <Circle
+                            click={this._onCategory}
+                            url="http://res.cloudinary.com/dd58mfinr/image/upload/v1503768615/restaurant-939435_960_720_obutlg.jpg"
+                            label="Restaurant"
+                        />
+                        <Circle
+                            click={this._onCategory}
+                            url="http://res.cloudinary.com/dd58mfinr/image/upload/v1503768788/download_1_p3rfhz.jpg"
+                            label="hangout"
+                        />
+                        <Circle
+                            click={this._onCategory}
+                            url="http://res.cloudinary.com/dd58mfinr/image/upload/v1503768715/download_kf8kfc.jpg"
+                            label="Events"
+                        />
+                        <Circle
+                            click={this._onCategory}
+                            url="http://res.cloudinary.com/dd58mfinr/image/upload/v1503768912/Wonder-Paris-Eiffel-Tower-Travel-Images_shwxpp.jpg"
+                            label="Travels"/>
+                        <Circle
+                            click={this._onCategory}
+                            url="http://res.cloudinary.com/dd58mfinr/image/upload/v1503768995/images_ru3web.jpg"
+                            label="Arts"
+                        />
                     </View>
                     </ScrollView>
                  </View>
 
                  <View style={styles.pictureContainer}>
-                    <PostTab screenProps={{data: this.state.files, width: pictureSize, click: this._onClick}} data={this.state.files} width={pictureSize} click={this._onClick} />
+                    <PostTab
+                        screenProps={{data: this.state.files, width: pictureSize, click: this._onClick,
+                        privateData: this.state.private}}
+                        data={this.state.files} width={pictureSize} click={this._onClick} />
                 </View>
             </View>
         );
     }
 
     componentDidMount () {
-
         let that = this;
-        this.props.action.fetchAllFiles().then( response => {
+        this.props.action.fetchAllFiles().then( data => {
             let files = that.props.files;
+
+            let privateFiles = _.filter(files.recent.message.data, ['status', 'false']);
+            privateFiles = _.chunk(privateFiles, 3);
+            this.setState({private: privateFiles});
 
             let gridImages = _.chunk(files.recent.message.data, 3);
             this.setState({files: gridImages});

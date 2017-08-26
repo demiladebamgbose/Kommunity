@@ -21,7 +21,8 @@ class UploadApi {
 
     uploadFileCloud = (obj) => {
         let data = new FormData();
-        data.append("file", {uri: obj.uri.uri, name: obj.uri.filename});
+        let fileName = obj.uri.uri.substring(obj.uri.uri.lastIndexOf('/'), obj.uri.uri.length);
+        data.append("file", {uri: obj.uri.uri, name: obj.uri.filename || fileName});
         data.append("upload_preset", obj.preset );
 
         return new Promise((resolve, reject)=> {

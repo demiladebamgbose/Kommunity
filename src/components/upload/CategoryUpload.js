@@ -20,9 +20,11 @@ class CategoryUpload extends React.Component {
             'image': this.props.upload.image,
             kommunity: true,
             kin: false,
-            animating: true
+            animating: false
         };
         uploader = this;
+        const { navigate } = this.props.navigation;
+
     }
 
     static navigationOptions = ({navigation})=> {
@@ -50,11 +52,9 @@ class CategoryUpload extends React.Component {
 
         this.props.action.uploadFileCloud(obj).then( data=> {
             const fileUplod = this.props.upload.cloudResponse;
-            const userId = this.props.user.message.user._id;
+            const userId = this.props.user.presentUser.message.user._id;
             const status = this.state.kommunity;
             const caption = this.state.caption;
-
-            console.log('content is ', fileUplod);
 
             let dataObj = {
                 owner: userId,
@@ -68,11 +68,9 @@ class CategoryUpload extends React.Component {
 
             this.props.action.uploadFileToServer(dataObj).then( data => {
                 this.setState({animating: false});
-                console.log('returned success');
-                console.log(this.props.upload.serverResponse);
                 if(this.props.upload.serverResponse) {
                     const { navigate } = this.props.navigation;
-                    navigate('HomeTab', { user: userId })
+                    navigate('Landing', { user: userId })
                 }
 
             }).catch(err => {

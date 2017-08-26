@@ -49,7 +49,6 @@ class Camera extends React.Component {
 
 
         if (!result.cancelled) {
-            //this.setState({ image: result.uri });
             this.props.action.uploadCameraImage(result).then(response => {
                 this.props.screenProps.rootNavigation.navigate('UploadView');
             }).catch(err => {
@@ -62,11 +61,12 @@ class Camera extends React.Component {
         let result = await ImagePicker.launchCameraAsync({  allowsEditing: true,
             aspect: [4, 3]});
 
-        console.log(result);
-
         if (!result.cancelled) {
-
-            this.setState({ image: result.uri });
+            this.props.action.uploadCameraImage(result).then(response => {
+                this.props.screenProps.rootNavigation.navigate('UploadView');
+            }).catch(err => {
+                console.log(err);
+            });
         }
     }
 }
