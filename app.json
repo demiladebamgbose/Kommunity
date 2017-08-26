@@ -5,7 +5,10 @@
     "privacy": "public",
     "facebookScheme" : "810700055775747",
     "infoPlist": {
-      "facebookScheme":  "810700055775747"
+      "facebookScheme":  "810700055775747",
+      "preset": "sw64gmsy",
+      "cloudinaryUrl": "https://api.cloudinary.com/v1_1/dd58mfinr/upload",
+      "url": "http://localhost:5151/"
     }
   }
 }
