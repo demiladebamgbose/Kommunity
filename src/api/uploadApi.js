@@ -1,7 +1,8 @@
 /**
  * Created by jolaadeadewale on 24/07/2017.
  */
-let  url = 'http://localhost:5151/';
+import {Constants} from 'expo';
+let  url = Constants.manifest.infoPlist.url
 //let  url = 'https://kommunity-2-2-2.herokuapp.com/';
 
 class UploadApi {
@@ -10,6 +11,12 @@ class UploadApi {
         return new Promise((resolve, reject)=> {
             resolve(Object.assign({}, image));
         });
+    };
+
+    uploadAddCategory = (obj, old) => {
+        return new Promise((resolve, reject)=> {
+            resolve(Object.assign({}, old, obj))
+        })
     };
 
     uploadFileCloud = (obj) => {
@@ -27,7 +34,6 @@ class UploadApi {
                     resolve(Object.assign({}, responseJson));
                 });
         });
-
     };
 
     uploadFileToServer = (obj) => {
