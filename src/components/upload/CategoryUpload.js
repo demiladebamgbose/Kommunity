@@ -1,12 +1,14 @@
 /**
  * Created by jolaadeadewale on 22/08/2017.
  */
+import { Constants} from 'expo';
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, Image, Dimensions, Switch} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image, Dimensions, Switch, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as uploadActions from '../../actions/uploadActions';
 let {height, width} = Dimensions.get('window');
+let uploader = {};
 
 
 class CategoryUpload extends React.Component {
@@ -17,8 +19,11 @@ class CategoryUpload extends React.Component {
             'caption': '',
             'image': this.props.upload.image,
             kommunity: true,
-            kin: false
+            kin: false,
+            animating: false
         };
+        uploader = this;
+        const { navigate } = this.props.navigation;
 
     }
 
@@ -28,13 +33,53 @@ class CategoryUpload extends React.Component {
         return {
             headerRight: <Text onPress={
             ()=> {
-                console.log(params);
-                const { navigate } = navigation;
-                navigate('Category', { name: 'Kommunity' })
+                uploader._onUpload();
             }
             } style={{ color: 'blue',
             marginRight: 20}}>Post</Text>
         }
+    };
+
+    _onUpload = () => {
+        this.setState({animating: true});
+        let image = this.state.image;
+        const url = Constants.manifest.infoPlist.cloudinaryUrl;
+        const uri = image;
+
+        const obj = {
+            url, uri, preset: Constants.manifest.infoPlist.preset
+        };
+
+        this.props.action.uploadFileCloud(obj).then( data=> {
+            const fileUplod = this.props.upload.cloudResponse;
+            const userId = this.props.user.presentUser.message.user._id;
+            const status = this.state.kommunity;
+            const caption = this.state.caption;
+
+            let dataObj = {
+                owner: userId,
+                content: fileUplod,
+                status: status,
+                caption: caption,
+                tags : [],
+                hashtags: [],
+                category:  this.props.upload.category
+            };
+
+            this.props.action.uploadFileToServer(dataObj).then( data => {
+                this.setState({animating: false});
+                if(this.props.upload.serverResponse) {
+                    const { navigate } = this.props.navigation;
+                    navigate('Landing', { user: userId })
+                }
+
+            }).catch(err => {
+                console.log(err);
+            });
+
+        }).catch(err => {
+            console.log(err);
+        });
     };
 
     _onKommunity = (e) => {
@@ -58,6 +103,12 @@ class CategoryUpload extends React.Component {
     render() {
         return (
         <View style={styles.topContainer}>
+            <ActivityIndicator
+                animating = {this.state.animating}
+
+                size = "large"
+                style = {styles.activityIndicator}
+            />
             <View style={styles.commentSection}>
                 <TextInput
                     style={{ paddingLeft: 10, fontSize: 9,

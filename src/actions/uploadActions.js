@@ -16,10 +16,24 @@ export function saveUploadToServerSuccess(data) {
     return {type: types.SAVE_UPLOAD_SERVER, data};
 }
 
+export function uploadCategorySuccess(data){
+    return {type: types.ADD_UPLOAD_CATEGORY, data}
+}
+
 export function uploadCameraImage(image) {
     return dispatch => {
         return UploadApi.uploadCameraImage(image).then( file => {
             dispatch(uploadCameraImageSuccess(file));
+        }).catch(err=> {
+            throw(err);
+        })
+    }
+}
+
+export function addCategory(obj, old){
+    return dispatch => {
+        return UploadApi.uploadAddCategory(obj, old).then( data=> {
+            dispatch(uploadCategorySuccess(data))
         }).catch(err=> {
             throw(err);
         })

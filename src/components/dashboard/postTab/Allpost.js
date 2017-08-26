@@ -22,7 +22,9 @@ class AllPost extends React.Component {
             <View style={{flex: 1}}>
                 <FlatList
                  data={this.props.screenProps.data}
-                 renderItem={({item}) => <Grid obj={item} click={this.props.screenProps.click} width={this.props.screenProps.width} />}
+                 renderItem={({item}) =>
+                 <Grid obj={item} click={this.props.screenProps.click} width={this.props.screenProps.width} />
+                 }
                  />
             </View>
         )

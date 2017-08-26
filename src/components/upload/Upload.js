@@ -4,9 +4,6 @@ import Category from '../dashboard/helper/Category';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as uploadActions from '../../actions/uploadActions';
-let that = '';
-
-
 
 class Upload extends React.Component {
 
@@ -27,8 +24,7 @@ class Upload extends React.Component {
             'Arts': false,
             'text': 'Next',
             'component': {}
-        }
-        that = this;
+        };
     }
 
     static navigationOptions = ({navigation})=> {
@@ -37,10 +33,7 @@ class Upload extends React.Component {
         return {
             headerRight: <Text onPress={
             ()=> {
-
                 const { navigate } = navigation;
-                console.log('That is', that);s
-
                 navigate('Category', { name: 'Kommunity' })
             }
             } style={{ color: 'blue',
@@ -50,59 +43,18 @@ class Upload extends React.Component {
 
     };
 
-    _onUpload = () => {
-        let caption = this.state.caption;
-        let image = this.state.image;
-
-        const API_SECRET = 'TM3fIlzxg0QtEculwXfXolRyE8E';
-        const PRESET_NAME = 'sw64gmsy';
-        const url = 'https://api.cloudinary.com/v1_1/dd58mfinr/upload';
-        const uri = image;
-
-        const obj = {
-            url, uri, preset: PRESET_NAME
-        };
-
-        let that = this;
-
-        this.props.action.uploadFileCloud(obj).then( data=> {
-            const fileUplod = that.props.upload.cloudResponse;
-            const userId = that.props.user.message.user._id;
-            const status = that.state.private;
-            const caption = that.state.caption;
-
-            let dataObj = {
-                owner: userId,
-                content: fileUplod,
-                status: status,
-                caption: caption,
-                tags : [],
-                hashtags: []
-            };
-
-            that.props.action.uploadFileToServer(dataObj).then( data => {
-
-                if(that.props.upload.serverResponse) {
-                    const { navigate } = that.props.navigation;
-                    navigate('HomeTab', { user: userId })
-                }
-
-            }).catch(err => {
-                console.log(err);
-            });
-
-        }).catch(err => {
-           console.log(err);
-        });
-    };
-
     _onSwitchSelected =(e, value) => {
         let component = this.state.component;
         component[value] = e;
         let data =  {
         };
         data[value] = e;
-        this.setState(data);
+
+        this.props.action.addCategory(data, this.props.upload.category).then( obj => {
+            this.setState(data);
+        }).catch(err=> {
+            console.log(err);
+        });
     };
 
     render () {

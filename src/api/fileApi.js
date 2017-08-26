@@ -1,8 +1,10 @@
 /**
  * Created by jolaadeadewale on 27/07/2017.
  */
-let  url = 'http://localhost:5151/';
+import {Constants} from 'expo';
+let  url = Constants.manifest.infoPlist.url;
 //let url = 'https://kommunity-2-2-2.herokuapp.com/';
+// // "url": "http://localhost:5151/"
 
 class FileAPi {
 
