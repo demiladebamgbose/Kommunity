@@ -8,8 +8,7 @@ import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../actions/fileActions';
 let {height, width} = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
-
-
+import Moment from 'react-moment';
 
 class SingleView extends React.Component {
 
@@ -18,8 +17,12 @@ class SingleView extends React.Component {
         super(props);
 
         this.state = {
-            'image': this.props.files.viewFile.content
+            'image': this.props.files.viewFile.content,
+            'caption': this.props.files.viewFile.caption,
+            'time': this.props.files.viewFile.timestamp
         };
+        console.log(this.state.time, 'in here-->')
+
 
     }
 
@@ -48,9 +51,7 @@ class SingleView extends React.Component {
                     <TouchableHighlight onPress={()=> {console.log('I was clicked')}}>
                         <Ionicons name="ios-heart-outline" size={20}  />
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={()=> {console.log('I was clicked too')}} style={styles.imageRight}>
-                        <Image style={{width: 20, height: 20}} source={require('../../../images/chat.png')}></Image>
-                    </TouchableHighlight>
+
                 </View>
                 <View style={ styles.boxBorder}>
 
@@ -62,11 +63,11 @@ class SingleView extends React.Component {
                 </View>
                 <View style={[styles.hBox, styles.contentPadding]}>
                     <TouchableHighlight >
-                        <Text style={styles.boldText}>Username</Text>
+                        <Text style={styles.commentText}>{this.state.caption}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight>
-                        <Text>Commments</Text>
-                    </TouchableHighlight>
+                    <View style={[styles.hBox, styles.contentPadding]}>
+                        <Moment style={styles.commentText} element={Text} fromNow>{this.state.time}</Moment>
+                    </View>
                 </View>
             </View>
         )
