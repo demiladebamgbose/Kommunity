@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cad7d17-a83e-4a67-8481-14a3380505ff" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/Home.js" afterPath="$PROJECT_DIR$/src/components/dashboard/Home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js" afterPath="$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/dashboard/helper/singleView.js" afterPath="$PROJECT_DIR$/src/components/dashboard/helper/singleView.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/tabs/SingleViewTab.js" afterPath="$PROJECT_DIR$/src/components/tabs/SingleViewTab.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,11 +23,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Home.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="435">
+              <caret line="29" column="59" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="59" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
                 <element signature="e#405#451#0" expanded="true" />
@@ -34,55 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostTab.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/PostTab.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Allpost.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="23" column="51" lean-forward="false" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Upload.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/upload/Upload.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrivatePost.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/PrivatePost.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="24" column="57" lean-forward="true" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
-              <folding>
-                <element signature="e#52#78#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Circle.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
+      <file leaf-file-name="Profile.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/dashboard/Profile.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
+              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -91,8 +49,8 @@
       <file leaf-file-name="grid.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/grid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="27" column="68" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="68" />
+            <state relative-caret-position="195">
+              <caret line="15" column="68" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="68" />
               <folding>
                 <element signature="e#52#78#0" expanded="true" />
                 <marker date="1502912528000" expanded="false" signature="840:847" ph="..." />
@@ -104,35 +62,81 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CategoryUpload.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/upload/CategoryUpload.js">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="68" column="48" lean-forward="false" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
+            <state relative-caret-position="315">
+              <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="14" />
               <folding>
-                <element signature="e#52#84#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="uploadApi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/uploadApi.js">
+      <file leaf-file-name="SingleViewTab.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/tabs/SingleViewTab.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="17" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="35" selection-end-column="17" />
+            <state relative-caret-position="255">
+              <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#52#77#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="landingPage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/dashboard/landingPage.js">
+      <file leaf-file-name="singleView.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/singleView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-99">
-              <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="20" />
+            <state relative-caret-position="201">
+              <caret line="57" column="67" lean-forward="false" selection-start-line="57" selection-start-column="67" selection-end-line="57" selection-end-column="67" />
+              <folding>
+                <element signature="e#52#78#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Circle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="36" column="3" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="36" selection-end-column="3" />
+              <folding>
+                <element signature="e#52#78#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/upload/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/user/Login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Upload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/upload/Upload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="690">
+              <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -204,6 +208,8 @@
         <option value="$PROJECT_DIR$/src/components/dashboard/helper/Circle.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/postTab/Allpost.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/Home.js" />
+        <option value="$PROJECT_DIR$/src/components/tabs/SingleViewTab.js" />
+        <option value="$PROJECT_DIR$/src/components/dashboard/helper/singleView.js" />
       </list>
     </option>
   </component>
@@ -347,6 +353,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -571,12 +581,12 @@
       <workItem from="1501928008974" duration="10773000" />
       <workItem from="1502912465154" duration="2579000" />
       <workItem from="1503271734684" duration="19247000" />
-      <workItem from="1503748055375" duration="20088000" />
+      <workItem from="1503748055375" duration="26961000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108324000" />
+    <option name="totallyTimeSpent" value="115197000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="756" extended-state="6" />
@@ -687,25 +697,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/singleView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/fileReducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="27" column="42" lean-forward="false" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/tabs/SingleViewTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -735,6 +730,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="33" column="5" lean-forward="false" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding>
+            <element signature="e#52#78#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -816,14 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/Search.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="960">
@@ -888,41 +878,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/user/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="69" column="42" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/upload/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/user/EmailTab.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="606">
           <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="35" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -949,7 +909,7 @@
         <state relative-caret-position="90">
           <caret line="6" column="37" lean-forward="true" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -964,40 +924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/landingPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-99">
-          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/upload/CategoryUpload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="68" column="48" lean-forward="false" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
-          <folding>
-            <element signature="e#52#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/grid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="27" column="68" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="68" />
-          <folding>
-            <element signature="e#52#78#0" expanded="true" />
-            <marker date="1502912528000" expanded="false" signature="840:847" ph="..." />
-            <marker date="1502912528000" expanded="true" signature="1052:1060" ph="..." />
-            <marker date="1502912528000" expanded="false" signature="1349:1357" ph="..." />
-            <marker date="1502912528000" expanded="false" signature="1646:1654" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/postTab/PrivatePost.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1005,14 +931,6 @@
           <folding>
             <element signature="e#52#78#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1032,9 +950,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/upload/CategoryUpload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="68" column="48" lean-forward="false" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
+          <folding>
+            <element signature="e#52#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/landingPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="68" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="68" />
+          <folding>
+            <element signature="e#52#78#0" expanded="true" />
+            <marker date="1502912528000" expanded="false" signature="840:847" ph="..." />
+            <marker date="1502912528000" expanded="true" signature="1052:1060" ph="..." />
+            <marker date="1502912528000" expanded="false" signature="1349:1357" ph="..." />
+            <marker date="1502912528000" expanded="false" signature="1646:1654" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/upload/Upload.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
+        <state relative-caret-position="690">
           <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -1042,13 +1004,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/upload/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/user/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/Circle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="3" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="36" selection-end-column="3" />
+          <folding>
+            <element signature="e#52#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/Profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/tabs/SingleViewTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding>
+            <element signature="e#52#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="435">
+          <caret line="29" column="59" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="59" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
             <element signature="e#405#451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/helper/singleView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="57" column="67" lean-forward="false" selection-start-line="57" selection-start-column="67" selection-end-line="57" selection-end-column="67" />
+          <folding>
+            <element signature="e#52#78#0" expanded="true" />
           </folding>
         </state>
       </provider>
