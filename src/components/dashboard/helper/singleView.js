@@ -12,22 +12,44 @@ import Moment from 'react-moment';
 
 class SingleView extends React.Component {
 
-
     constructor(props) {
         super(props);
 
+       let liked = this.props.files.viewFile.likes.filter((data) => {
+            return data == this.props.user.message.user._id
+        });
+
+       let likeState = false;
+       if(liked.length){
+           likeState = true;
+       }
         this.state = {
             'image': this.props.files.viewFile.content,
             'caption': this.props.files.viewFile.caption,
-            'time': this.props.files.viewFile.timestamp
+            'time': this.props.files.viewFile.timestamp,
+            'id': this.props.files.viewFile._id,
+            'likes': this.props.files.viewFile.likes.length,
+            'liked': likeState
         };
-        console.log(this.state.time, 'in here-->')
-
-
     }
 
     _onUser = (e) => {
-        console.log('I was clicked, you cut me wide iopen like land', e);
+        console.log('I was clicked, you cut me wide', e);
+
+    };
+
+    _onLike = (e) => {
+        if(this.state.liked) {
+
+        }else {
+            this.props.action.likeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
+                console.log(this.props.likedFiles);
+            })
+        }
+    };
+
+    _onMessage =(e)=> {
+        console.log('The message icon');
     };
 
     render () {
@@ -42,33 +64,38 @@ class SingleView extends React.Component {
                             </View>
                         </TouchableHighlight>
                     </View>
-
                 </View>
                 <View style={styles.imageContent}>
                     <Image style={{width: width, height: 260}}  source={{uri:this.state.image.secure_url}}></Image>
                 </View>
                 <View  style={[styles.hBox, styles.contentPadding, styles.boxHeight]}>
-                    <TouchableHighlight onPress={()=> {console.log('I was clicked')}}>
-                        <Ionicons name="ios-heart-outline" size={20}  />
-                    </TouchableHighlight>
-
+                    <View>
+                        <TouchableHighlight onPress={this._onLike}>
+                            <Ionicons name="ios-heart-outline"  size={20} color={(this.state.liked) ? 'red': 'black'} />
+                        </TouchableHighlight>
+                    </View>
+                    <View style={{marginLeft: 15}}>
+                        <TouchableHighlight onPress={this._onMessage}>
+                            <Ionicons name="ios-arrow-round-forward-outline" size={20}  />
+                        </TouchableHighlight>
+                    </View>
                 </View>
-                <View style={ styles.boxBorder}>
-
+                <View style={styles.boxBorder}>
                 </View>
                 <View style={[styles.hBox, styles.contentPadding]}>
                     <TouchableHighlight>
-                        <Text style={styles.textSize}>2000 Likes</Text>
+                        <Text style={styles.textSize}>{this.state.likes} Likes</Text>
                     </TouchableHighlight>
                 </View>
                 <View style={[styles.hBox, styles.contentPadding]}>
                     <TouchableHighlight >
-                        <Text style={styles.commentText}>{this.state.caption}</Text>
+                        <View>
+                            <Text style={styles.commentText}>{this.state.caption}</Text>
+                            <Moment style={styles.commentText} element={Text} fromNow>{this.state.time}</Moment>
+                        </View>
                     </TouchableHighlight>
-                    <View style={[styles.hBox, styles.contentPadding]}>
-                        <Moment style={styles.commentText} element={Text} fromNow>{this.state.time}</Moment>
-                    </View>
                 </View>
+
             </View>
         )
     }
@@ -172,7 +199,9 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, ownProps) {
     return {
         upload: state.upload,
-        files: state.files
+        files: state.files,
+        user: state.user.presentUser,
+        likedFiles: state.user.likedFiles
     }
 }
 

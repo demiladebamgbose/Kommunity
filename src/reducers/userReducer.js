@@ -6,7 +6,8 @@ import * as types from '../actions/actionTypes';
 const initialState = {
     presentUser: {},
     allUsers: {},
-    searchUsers: []
+    searchUsers: [],
+    likedFiles: []
 };
 
 export default function userReducer(state = initialState, action) {
@@ -26,6 +27,16 @@ export default function userReducer(state = initialState, action) {
         case types.SEARCH_USER:
             return {
                 ...state, searchUsers: action
+            };
+
+        case types.LIKE_USER_FILE:
+            return {
+                ...state, likedFiles: action.data
+            };
+
+        case types.UNLIKE_USER_FILE:
+            return {
+                ...state, likedFiles: action.data
             };
 
         default:

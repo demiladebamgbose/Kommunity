@@ -38,6 +38,46 @@ class FileAPi {
         })
     };
 
+    likeUserFile = (user, fileId, old) => {
+        return new Promise((resolve, reject)=> {
+            return fetch(url + 'api/v1/like/' + fileId, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            }).then((response)=> response.json()).then((responseJson) => {
+
+                if(responseJson.message.data === 'success') {
+                    resolve(Object.assign({}, old, [fileId]));
+                }else{
+
+                }
+            })
+        })
+    };
+
+    unLikeUserFile = (user, fileId, old) => {
+        return new Promise((resolve, reject)=> {
+            return fetch(url + 'api/v1/like/' + fileId, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            }).then((response)=> response.json()).then((responseJson) => {
+
+                if(responseJson.message.data === 'success') {
+                    resolve(Object.assign({}, old, [fileId]));
+                }else{
+
+                }
+            })
+        })
+    }
+
 }
 
 export default new FileAPi();
