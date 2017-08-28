@@ -21,6 +21,10 @@ export function fetchLikesSuccess(data) {
     return {type: Types.LIKE_USER_FILE, data}
 }
 
+export function fetchunLikeSuccess(data) {
+    return {type: Types.UNLIKE_USER_FILE, data};
+}
+
 export function fetchAllFiles() {
     return dispatch => {
         return FileApi.recentFile().then(data => {
@@ -62,5 +66,11 @@ export function likeFile(user, fileId, old) {
 }
 
 export function unLikeFile(user, fileId, old) {
-
+    return dispatch => {
+        return FileApi.unLikeUserFile(user, fileId, old).then( data => {
+            dispatch(fetchunLikeSuccess(data));
+        }).catch(err => {
+            throw(err);
+        })
+    }
 }

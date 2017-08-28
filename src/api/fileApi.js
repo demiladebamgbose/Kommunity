@@ -70,7 +70,10 @@ class FileAPi {
             }).then((response)=> response.json()).then((responseJson) => {
 
                 if(responseJson.message.data === 'success') {
-                    resolve(Object.assign({}, old, [fileId]));
+                     let array = old;
+                     let index = array.indexOf(fileId);
+                     array = array.splice(index, 1);
+                     resolve(Object.assign({}, old, array));
                 }else{
 
                 }

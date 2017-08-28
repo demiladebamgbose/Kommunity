@@ -40,10 +40,17 @@ class SingleView extends React.Component {
 
     _onLike = (e) => {
         if(this.state.liked) {
-
+            console.log(this.props.likedFiles , 'herre again');
+            this.props.action.unLikeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
+                console.log(this.props.likedFiles);
+                console.log('got back from unlike');
+                this.setState({liked: false});
+                this.setState({likes: (--this.state.likes)})
+            })
         }else {
             this.props.action.likeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
-                console.log(this.props.likedFiles);
+                this.setState({liked: true});
+                this.setState({likes: (++ this.state.likes)})
             })
         }
     };
@@ -54,7 +61,6 @@ class SingleView extends React.Component {
 
     render () {
         return (
-
             <View>
                 <View style={[styles.hBox, styles.contentPadding]}>
                     <View>
