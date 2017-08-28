@@ -6,6 +6,10 @@ import Activity from './Activity';
 import Profile from './Profile';
 import MessageIcon from './Message';
 import Notification from './Notification';
+import Pusher from 'pusher-js/react-native';
+import {Alert} from 'react-native';
+
+Pusher.logToConsole = true;
 
 import {
     TabNavigator
@@ -50,6 +54,19 @@ class Land extends React.Component {
             <Notification/>
         ),
     });
+
+    componentDidMount(){
+        var pusher = new Pusher('1dbaf5cd35a87b7793b5', {
+            cluster: 'eu',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            Alert.alert(
+                data.message
+        )});
+    }
 
     render () {
         return (
