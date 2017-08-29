@@ -31,12 +31,17 @@ export default function userReducer(state = initialState, action) {
 
         case types.LIKE_USER_FILE:
             return {
-                ...state, likedFiles: [action.data]
+                ...state, likedFiles: action.data
             };
 
         case types.UNLIKE_USER_FILE:
             return {
-                ...state, likedFiles: [action.data]
+                ...state, likedFiles: action.data
+            };
+
+        case types.PREVIOUSLY_LIKED_FILE:
+            return {
+                ...state, likedFiles: action.data
             };
 
         default:

@@ -22,7 +22,13 @@ class SingleView extends React.Component {
        let likeState = false;
        if(liked.length){
            likeState = true;
+           this.props.action.previouslyLiked(this.props.files.viewFile._id, this.props.likedFiles).then(
+               response => {
+                   console.log('returned from liker')
+               }
+           );
        }
+
         this.state = {
             'image': this.props.files.viewFile.content,
             'caption': this.props.files.viewFile.caption,
@@ -31,16 +37,15 @@ class SingleView extends React.Component {
             'likes': this.props.files.viewFile.likes.length,
             'liked': likeState
         };
+
     }
 
     _onUser = (e) => {
-        console.log('I was clicked, you cut me wide', e);
-
+        console.log('I was clicked, you cut ', e);
     };
 
     _onLike = (e) => {
         if(this.state.liked) {
-            console.log(this.props.likedFiles , 'herre again');
             this.props.action.unLikeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
                 console.log(this.props.likedFiles);
                 console.log('got back from unlike');
