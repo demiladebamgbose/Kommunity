@@ -8,7 +8,7 @@
       "facebookScheme":  "810700055775747",
       "preset": "sw64gmsy",
       "cloudinaryUrl": "https://api.cloudinary.com/v1_1/dd58mfinr/upload",
-      "url": "http://localhost:5151/"
+      "url": "https://kommunity-2-2-2.herokuapp.com/"
     }
   }
 }

@@ -12,32 +12,32 @@ const Grid = ({obj, click, width}) => {
     if(!obj['1']) {
         obj['1'] = {'content': {'secure_url': ''}}
     } else{
-        data2 = obj['1'].content.secure_url.split('upload/');
-        data2 = data2.join(`upload/c_scale,h_100,w_${(width - 1)}/`);
+     //   data2 = obj['1'].content.secure_url.split('upload/');
+      //  data2 = data2.join(`upload/c_scale,h_100,w_${(width - 1)}/`);
     }
 
     if(!obj['2']) {
         obj['2'] = {'content': {'secure_url': ''}};
     } else{
-        data3 = obj['2'].content.secure_url.split('upload/');
-        data3 = data3.join(`upload/c_scale,h_100,w_${(width - 1)}/`);
+      //  data3 = obj['2'].content.secure_url.split('upload/');
+        // data3 = data3.join(`upload/c_scale,h_100,w_${(width - 1)}/`);
     }
 
     return (
         <View key={obj['0'].content} style={{flex: 1, flexDirection: 'row'}}>
             <TouchableHighlight onPress={() => click(obj['0']._id)}>
                 <View style={{ width: width, height: 100,   margin: 1}} >
-                    <Image  style={{width: (width - 1), height: 99}} source={{ uri: data1} }  />
+                    <Image  style={{width: (width - 1), height: 99}} source={{ uri: obj['0'].content.secure_url} }  />
                 </View>
             </TouchableHighlight>
             <TouchableHighlight onPress={() => click(obj['1']._id)}>
                 <View style={{ width: width, height: 100,  margin: 1}} >
-                    <Image  style={{width: (width - 1), height: 99}}  source={{ uri: data2} } />
+                    <Image  style={{width: (width - 1), height: 99}}  source={{ uri: obj['1'].content.secure_url} } />
                 </View>
             </TouchableHighlight>
             <TouchableHighlight onPress={() => click(obj['2']._id)}>
                 <View style={{ width: width, height: 100,   margin: 1}} >
-                    <Image style={{width: (width - 1), height: 99}}  source={{ uri: data3} } />
+                    <Image style={{width: (width - 1), height: 99}}  source={{ uri: obj['2'].content.secure_url } } />
                 </View>
             </TouchableHighlight>
         </View>

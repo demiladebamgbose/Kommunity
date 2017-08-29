@@ -17,6 +17,18 @@ export function fetchSingleFileViewSuccess(viewFile) {
     return {type: Types.FETCH_SINGLE_FILE_VIEW, viewFile}
 }
 
+export function fetchLikesSuccess(data) {
+    return {type: Types.LIKE_USER_FILE, data}
+}
+
+export function fetchunLikeSuccess(data) {
+    return {type: Types.UNLIKE_USER_FILE, data};
+}
+
+export function fetchPrevLikedSuccess(data) {
+    return {type: Types.PREVIOUSLY_LIKED_FILE, data};
+}
+
 export function fetchAllFiles() {
     return dispatch => {
         return FileApi.recentFile().then(data => {
@@ -43,6 +55,36 @@ export function fetchUserFiles(userId) {
             dispatch(fetchUserFileSuccess(data));
         }).catch( err => {
             throw(err)
+        })
+    }
+}
+
+export function likeFile(user, fileId, old) {
+    return dispatch => {
+        return FileApi.likeUserFile(user, fileId, old).then( data => {
+            dispatch(fetchLikesSuccess(data));
+        }).catch(err => {
+            throw (err);
+        })
+    }
+}
+
+export function unLikeFile(user, fileId, old) {
+    return dispatch => {
+        return FileApi.unLikeUserFile(user, fileId, old).then( data => {
+            dispatch(fetchunLikeSuccess(data));
+        }).catch(err => {
+            throw(err);
+        })
+    }
+}
+
+export function previouslyLiked(fileId, old) {
+    return dispatch => {
+        return FileApi.previouslyLiked(fileId, old).then( data => {
+            dispatch(fetchPrevLikedSuccess(data));
+        }).catch(err=> {
+            throw(err);
         })
     }
 }

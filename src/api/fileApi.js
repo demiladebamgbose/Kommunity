@@ -38,6 +38,66 @@ class FileAPi {
         })
     };
 
+    previouslyLiked = (fileId, old) => {
+        return new Promise((resolve, reject)=> {
+
+            let index = old.indexOf(fileId);
+            if(index === -1){
+                const array = [...old, fileId];
+                resolve(Object.assign([], array));
+            }else{
+                resolve(Object.assign([], old));
+            }
+        });
+    };
+
+    likeUserFile = (user, fileId, old) => {
+        return new Promise((resolve, reject)=> {
+            return fetch(url + 'api/v1/like/' + fileId, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            }).then((response)=> response.json()).then((responseJson) => {
+
+                if(responseJson.message.data === 'success') {
+                    resolve(Object.assign([], old, [fileId]));
+                }else{
+
+                }
+            })
+        })
+    };
+
+    unLikeUserFile = (user, fileId, old) => {
+        return new Promise((resolve, reject)=> {
+            return fetch(url + 'api/v1/like/' + fileId, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            }).then((response)=> response.json()).then((responseJson) => {
+
+                if(responseJson.message.data === 'success') {
+                     let array = [];
+                     let index = old.indexOf(fileId);
+                     if(old.length === 1)
+                        array = old.splice(index, 0);
+                     else{
+                         array = old.splice(index, 1);
+                     }
+                     resolve(Object.assign([], array));
+                }else{
+
+                }
+            })
+        })
+    }
+
 }
 
 export default new FileAPi();

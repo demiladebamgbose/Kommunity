@@ -56,10 +56,9 @@ class Home extends React.Component {
         let that = this;
         let files = that.props.files;
         let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
-
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
 
-            const { navigate } = that.props.navigation;
+            const { navigate } =  this.props.screenProps.rootNavigation;
             navigate('SingleView', { image: '' })
         });
 

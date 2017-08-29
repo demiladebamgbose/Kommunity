@@ -2,7 +2,7 @@
  * Created by jolaadeadewale on 23/07/2017.
  */
 import {Constants} from 'expo';
-let  url = Constants.manifest.infoPlist.url
+let  url = Constants.manifest.infoPlist.url;
 // let  url = 'https://kommunity-2-2-2.herokuapp.com/';
 
 class UserApi {

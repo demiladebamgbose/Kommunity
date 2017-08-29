@@ -13,6 +13,7 @@ const SingleViewTab = StackNavigator(
     },
     {
         mode: 'modal',
+        headerMode: 'none'
     }
 );
 

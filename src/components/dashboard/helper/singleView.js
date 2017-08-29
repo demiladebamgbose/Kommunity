@@ -2,74 +2,137 @@
  * Created by jolaadeadewale on 28/07/2017.
  */
 import React from 'react';
-import {View, Image, StyleSheet, Text, TouchableHighlight} from 'react-native';
+import {View, Image, StyleSheet, Text, TouchableHighlight, Dimensions} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../actions/fileActions';
+let {height, width} = Dimensions.get('window');
+import { Ionicons } from '@expo/vector-icons';
+import Moment from 'react-moment';
 
 class SingleView extends React.Component {
 
     constructor(props) {
         super(props);
 
+       let liked = this.props.files.viewFile.likes.filter((data) => {
+            return data == this.props.user.message.user._id
+        });
+
+       let likeState = false;
+       if(liked.length){
+           likeState = true;
+           this.props.action.previouslyLiked(this.props.files.viewFile._id, this.props.likedFiles).then(
+               response => {
+                   console.log('returned from liker')
+               }
+           );
+       }
+
         this.state = {
-            'image': this.props.files.viewFile.content
+            'image': this.props.files.viewFile.content,
+            'caption': this.props.files.viewFile.caption,
+            'time': this.props.files.viewFile.timestamp,
+            'id': this.props.files.viewFile._id,
+            'likes': this.props.files.viewFile.likes.length,
+            'liked': likeState
         };
 
     }
 
+    _onUser = (e) => {
+        console.log('I was clicked, you cut ', e);
+    };
+
+    _onLike = (e) => {
+        if(this.state.liked) {
+            this.props.action.unLikeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
+                console.log(this.props.likedFiles);
+                console.log('got back from unlike');
+                this.setState({liked: false});
+                this.setState({likes: (--this.state.likes)})
+            })
+        }else {
+            this.props.action.likeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
+                this.setState({liked: true});
+                this.setState({likes: (++ this.state.likes)})
+            })
+        }
+    };
+
+    _onMessage =(e)=> {
+        console.log('The message icon');
+    };
+
     render () {
         return (
-
             <View>
-                <View style={styles.hBox}>
-                    <TouchableHighlight style={styles.headerContent}>
-                        <View>
-                            <Image></Image>
-                            <Text>Username</Text>
-                        </View>
-                    </TouchableHighlight>
-
+                <View style={[styles.hBox, styles.contentPadding]}>
+                    <View>
+                        <TouchableHighlight style={styles.headerContent}>
+                            <View>
+                                <Circle url="" label="username" click={this._onUser} />
+                            </View>
+                        </TouchableHighlight>
+                    </View>
                 </View>
                 <View style={styles.imageContent}>
-                    <Image style={{width: 320, height: 260}}  source={{uri:this.state.image.secure_url}}></Image>
+                    <Image style={{width: width, height: 260}}  source={{uri:this.state.image.secure_url}}></Image>
                 </View>
                 <View  style={[styles.hBox, styles.contentPadding, styles.boxHeight]}>
-                    <TouchableHighlight onPress={()=> {console.log('I was clicked')}}>
-                        <Image style={{width: 20, height: 20}} source={require('../../../images/likee.png')}></Image>
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={()=> {console.log('I was clicked too')}} style={styles.imageRight}>
-                        <Image style={{width: 20, height: 20}} source={require('../../../images/chat.png')}></Image>
-                    </TouchableHighlight>
+                    <View>
+                        <TouchableHighlight onPress={this._onLike}>
+                            <Ionicons name="ios-heart-outline"  size={20} color={(this.state.liked) ? 'red': 'black'} />
+                        </TouchableHighlight>
+                    </View>
+                    <View style={{marginLeft: 15}}>
+                        <TouchableHighlight onPress={this._onMessage}>
+                            <Ionicons name="ios-arrow-round-forward-outline" size={20}  />
+                        </TouchableHighlight>
+                    </View>
                 </View>
-                <View style={ styles.boxBorder}>
-
+                <View style={styles.boxBorder}>
                 </View>
                 <View style={[styles.hBox, styles.contentPadding]}>
-                    <TouchableHighlight style={styles.imageText}>
-                        <Image style={{width: 8, height: 8}} source={require('../../../images/likee.png')}></Image>
-                    </TouchableHighlight>
                     <TouchableHighlight>
-                        <Text style={styles.textSize}>2000 Likes</Text>
+                        <Text style={styles.textSize}>{this.state.likes} Likes</Text>
                     </TouchableHighlight>
                 </View>
                 <View style={[styles.hBox, styles.contentPadding]}>
                     <TouchableHighlight >
-                        <Text style={styles.boldText}>Username</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight>
-                        <Text>Commments</Text>
+                        <View>
+                            <Text style={styles.commentText}>{this.state.caption}</Text>
+                            <Moment style={styles.commentText} element={Text} fromNow>{this.state.time}</Moment>
+                        </View>
                     </TouchableHighlight>
                 </View>
-                <View style={styles.contentPadding}>
-                    <Text style={styles.commentText}>View all comments </Text>
-                    <Text style={styles.commentText}>2 hours ago</Text>
-                </View>
+
             </View>
         )
     }
-
 }
+
+const Circle = ({label, url, click}) => {
+    return (
+        <View style={styles.center}>
+            <TouchableHighlight onPress={() => click(label)}>
+                <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center'}}>
+                    <View style={styles.circle}>
+                        <Image  style={{width: 36, height: 36, borderRadius: 36/2,}}
+                            source={{ uri:
+                            'http://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png' || url} } />
+                    </View>
+                    <View>
+                        <Text onPress={()=> click(label)} style={styles.text}>{label}</Text>
+                        <Text style={{justifyContent: 'flex-end', fontSize: 8}}>Follow</Text>
+                    </View>
+                </View>
+
+            </TouchableHighlight>
+        </View>
+    )
+};
+
 
 const styles = StyleSheet.create({
     hBox: {
@@ -91,7 +154,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     imageContent: {
-        marginTop: 30
+        marginTop: 70
     },
 
     imageRight: {
@@ -116,6 +179,23 @@ const styles = StyleSheet.create({
         color: 'grey',
         marginTop: 10,
         fontSize: 10
+    },
+    circle: {
+        width: 36,
+        height: 36,
+        borderRadius: 36/2,
+        backgroundColor: '#D3D3D3',
+        marginRight: 6
+    },
+    center: {
+        marginTop: 10,
+        alignContent: 'center',
+        alignItems: 'center'
+    },
+    text: {
+        marginTop: 9,
+        fontSize: 8,
+        textAlign: 'center'
     }
 
 });
@@ -130,7 +210,9 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, ownProps) {
     return {
         upload: state.upload,
-        files: state.files
+        files: state.files,
+        user: state.user.presentUser,
+        likedFiles: state.user.likedFiles
     }
 }
 
