@@ -20,13 +20,19 @@ class SingleView extends React.Component {
         });
 
        let likeState = false;
+       let userLiked = 0;
        if(liked.length){
            likeState = true;
            this.props.action.previouslyLiked(this.props.files.viewFile._id, this.props.likedFiles).then(
                response => {
-                   console.log('returned from liker')
+                   console.log('returned from liker');
                }
            );
+       }else{
+          if(this.props.likedFiles.indexOf(this.props.files.viewFile._id) !== -1){
+              likeState = true;
+              userLiked = this.props.files.viewFile.likes.length + 1;
+          }
        }
 
         this.state = {
@@ -34,7 +40,7 @@ class SingleView extends React.Component {
             'caption': this.props.files.viewFile.caption,
             'time': this.props.files.viewFile.timestamp,
             'id': this.props.files.viewFile._id,
-            'likes': this.props.files.viewFile.likes.length,
+            'likes': userLiked || this.props.files.viewFile.likes.length,
             'liked': likeState
         };
 
