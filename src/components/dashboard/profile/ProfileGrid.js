@@ -2,12 +2,15 @@
  * Created by jolaadeadewale on 29/07/2017.
  */
 import React from 'react';
-import {View, Text, Image, FlatList} from 'react-native';
+import {View, Text, Image, FlatList, Dimensions} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../actions/fileActions';
+import { Ionicons } from '@expo/vector-icons';
 import Grid from '../../dashboard/helper/grid';
 import _ from 'lodash'
+let {height, width} = Dimensions.get('window');
+let pictureSize = ((33 / 100) * width)
 
 class ProfileGrid extends React.Component {
 
@@ -22,23 +25,24 @@ class ProfileGrid extends React.Component {
         tabBarLabel: '',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <Image
-                source={require('../../../images/grid.png')}
+            <Ionicons
+                name="ios-keypad-outline"
+                size={18}
             />
+
         ),
     };
 
     _onClick = (e) => {
-
-        let that = this;
         let files = that.props.files;
         let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
 
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
 
             console.log('Got back Def');
-            console.log(that.props.navigation);
-            const { navigate } = that.props.navigation;
+            console.log(this.props);
+            console.log(this.props.navigation);
+            const { navigate } = this.props.navigation;
             navigate('SingleView', { image: '' })
         });
 
@@ -46,22 +50,27 @@ class ProfileGrid extends React.Component {
 
     render () {
         return (
-            <View>
+            <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.files}
-                    renderItem={({item}) => <Grid obj={item} click={this._onClick} />}
+                    extraData={this.state}
+                    renderItem={({item}) => <Grid
+                    obj={item} click={this._onClick}
+                    width={pictureSize}
+                    />
+
+                    }
                 />
             </View>
         )
     }
 
     componentDidMount () {
+
         let that = this;
         let userId = this.props.user.presentUser.message.user._id;
         this.props.action.fetchUserFiles(userId).then( response => {
-
-             let files = that.props.files;
-             console.log('returned files', files);
+              let files = that.props.files;
               let gridImages = _.chunk(files.userFile.message.data, 3);
               this.setState({files: gridImages});
         });

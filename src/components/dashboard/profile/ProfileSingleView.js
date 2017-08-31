@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {View, Text, Image, FlatList} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../actions/fileActions';
@@ -22,8 +23,9 @@ class ProfileSingleView extends React.Component {
         tabBarLabel: '',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <Image
-                source={require('../../../images/lines.png')}
+            <Ionicons
+                name="ios-list"
+                size={22}
             />
         ),
     };
@@ -44,7 +46,7 @@ class ProfileSingleView extends React.Component {
 
     render () {
         return (
-            <View>
+            <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.files}
                     renderItem={({item}) => <VerticalGrid obj={item} click={this._onClick} />}

@@ -14,7 +14,7 @@ class Profile extends React.Component {
         tabBarLabel: 'Profile',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <SimpleLineIcons name="user" size={14} />
+            <Ionicons name="ios-person-outline" size={20} />
         ),
     };
 
