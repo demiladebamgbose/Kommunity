@@ -5,7 +5,7 @@
 import React from 'react';
 import ProfileGrid from './ProfileGrid';
 import ProfileSingleView from './ProfileSingleView';
-import ProfileTag from './ProfileTag';
+import ProfileTag from './ProfileTag'; // we want to remove this
 
 import {
     TabNavigator,
@@ -18,10 +18,6 @@ const ProfileTab = TabNavigator({
     },
     ProfileSingleVew: {
         screen: ProfileSingleView,
-    },
-
-    ProfileTag: {
-        screen: ProfileTag,
     }
 }, {
     tabBarOptions: {

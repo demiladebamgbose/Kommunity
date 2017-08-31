@@ -226,7 +226,40 @@ let {height, width} = Dimensions.get('window');
         if (type === 'success') {
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,first_name,last_name,gender,picture,email`);
             const json = await response.json();
-            console.log(json);
+            if (json) {
+                console.log(json);
+                let obj = {name: {}};
+                obj.email = json.email;
+                obj.name.firstName = json.first_name;
+                obj.name.lastName = json.last_name;
+                obj.username = json.email;
+                obj.password = json.id;
+                if (json.picture) {
+                    obj.image = json.picture.data.url;
+                }
+                obj.fb = true;
+                this.props.action.createUser(obj).then(response => {
+                    if(this.props.user.presentUser.message.user) {
+
+                        const resetAction = NavigationActions.reset({
+                            index: 0,
+                            actions: [
+                                NavigationActions.navigate({ routeName: 'Landing'})
+                            ]
+                        });
+                        this.props.navigation.dispatch(resetAction)
+
+                    } else {
+                        const resetAction = NavigationActions.reset({
+                            index: 0,
+                            actions: [
+                                NavigationActions.navigate({ routeName: 'Landing'})
+                            ]
+                        });
+                        this.props.navigation.dispatch(resetAction)
+                    }
+                });
+            }
         }
     };
 
@@ -297,4 +330,10 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(SignUp);
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

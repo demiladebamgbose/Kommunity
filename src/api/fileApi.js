@@ -83,14 +83,8 @@ class FileAPi {
             }).then((response)=> response.json()).then((responseJson) => {
 
                 if(responseJson.message.data === 'success') {
-                     let array = [];
-                     let index = old.indexOf(fileId);
-                     if(old.length === 1)
-                        array = old.splice(index, 0);
-                     else{
-                         array = old.splice(index, 1);
-                     }
-                     resolve(Object.assign([], array));
+                    const array = old.filter((data) =>  data != fileId)
+                    resolve(Object.assign([], array))
                 }else{
 
                 }

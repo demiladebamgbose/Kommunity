@@ -1,6 +1,8 @@
 import React from 'react'
-import {Image, Button, Alert, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, Button, Alert, View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import ProfileTab from './profile/ProfileTab';
+import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
+let {height, width} = Dimensions.get('window');
 
 class Profile extends React.Component {
 
@@ -12,65 +14,67 @@ class Profile extends React.Component {
         tabBarLabel: 'Profile',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <Image
-                source={require('../../images/avatar.png')}
-            />
+            <SimpleLineIcons name="user" size={14} />
         ),
+    };
+
+    _onProfileClick = () => {
+
     };
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.content}>
-                    <View style={[styles.topProfile, styles.imageTop]}>
-                        <View style={{height: 70}}>
-
+                <View style={styles.topProfile}>
+                    <View style={{width: ((25 / 100) * width)}}>
+                        <Circle url="https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"
+                                label="jols"
+                                click={this._onProfileClick}
+                        />
+                    </View>
+                    <View style={{flex: 0, flexDirection: 'column',  marginLeft: 5, marginRight: 5,
+                        marginTop:8}}
+                    >
+                        <View style={{flex: 1, flexDirection: 'row',
+                                alignContent: 'center',
+                                justifyContent: 'space-between',
+                                marginBottom: 4, marginTop: 4
+                               }}
+                        >
+                                <View style={{width: ((20 / 100) * width)}}>
+                                    <Text style={{textAlign: 'center', fontSize: 10}}>14</Text>
+                                    <Text style={{textAlign: 'center', fontSize: 11}}>Post</Text>
+                                </View>
+                                <View style={{width: ((30 / 100) * width)}}>
+                                    <Text style={{textAlign: 'center', fontSize: 10}}>14</Text>
+                                    <Text style={{textAlign: 'center',  fontSize: 11}}>followers</Text>
+                                </View>
+                                <View style={{width: ((20 / 100) * width)}}>
+                                    <Text style={{textAlign: 'center', fontSize: 10}}>14</Text>
+                                    <Text style={{textAlign: 'center',  fontSize: 11}}>Kin</Text>
+                                </View>
                         </View>
-                        <View style={{width: 70, height: 70,  margin: 1, padding: 10}} >
-                            <Image style={{width: 40, height: 40}}
-                                   source={{ uri: 'https://res.cloudinary.com/dd58mfinr/image/upload/c_scale,r_30,w_50/v1481734664/default.png'} }
-                            />
-                        </View>
-                        <View >
-                            <View style={styles.containerBox}>
-                                <View>
-                                    <Text>14</Text>
-                                    <Text>posts</Text>
-                                </View>
-                                <View>
-                                    <Text>614</Text>
-                                    <Text>followers</Text>
-                                </View>
-                                <View>
-                                    <Text>458</Text>
-                                    <Text>following</Text>
-                                </View>
-
-
-                            </View>
-                            <View style={styles.containerBox}>
-                                <TouchableOpacity
-                                    style={{borderRadius: 5, height: 25, width: 90,  backgroundColor: 'white',  borderColor: 'grey'}}
-                                >
-                                    <Text>Edit Profile</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity
-                                    style={{borderRadius: 5, height: 25, width: 35 , backgroundColor: 'white',   borderColor: 'grey'}}
-                                >
-                                    <Text>
-                                        <Image style={{width: 20, height: 20}} source={require('../../images/settings.png')} />
+                        <View style={{flex: 1, flexDirection: 'row',
+                                alignContent: 'center',
+                                justifyContent: 'space-between', marginTop: 4, marginBottom: 4}}
+                        >
+                            <View style={{width: ((50 / 100) * width)}}>
+                                <TouchableOpacity style={styles.button}>
+                                    <Text style={{fontSize: 11, textAlign: 'center'}}>
+                                        Edit Profile
                                     </Text>
                                 </TouchableOpacity>
                             </View>
+
+                            <View style={{width: ((20 / 100) * width), marginLeft: 2}}>
+                                <TouchableOpacity style={styles.button2}>
+                                    <Ionicons style={{textAlign: 'center'}} name="ios-settings-outline" size={11} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
+
                     </View>
-
                 </View>
-                <View>
-                    <Text>Jols</Text>
-                </View>
-
                 <View style={styles.container}>
                     <ProfileTab/>
                 </View>
@@ -79,32 +83,73 @@ class Profile extends React.Component {
     }
 }
 
+const Circle = ({label, url, click}) => {
+    return (
+        <View style={styles.center}>
+            <TouchableOpacity onPress={() => click(label)}>
+                <View style={styles.circle}>
+                    <Image  style={{width: 50, height: 50, borderRadius: 50/2,}}
+                            source={{ uri: url} } />
+                </View>
+            </TouchableOpacity>
+            <Text style={styles.text}>{label}</Text>
+        </View>
+     )
+};
+
+
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        flexDirection: 'column'
     },
-    content: {
-        marginTop: 15,
-        height: 100,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap'
-    },
-    containerBox: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap'
-    },
-
-    topProfile:{
+    userProfile: {
         flex: 1,
         flexDirection: 'row'
     },
-    imageTop: {
-       marginTop: 20
-    }
+    topProfile: {
+        flex: 0,
+        flexDirection: 'row',
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop:8,
+        height: (height/ 8)
+    },
+    circle: {
+        width: 50,
+        height: 50,
+        borderRadius: 50/2,
+        marginRight: 6
+    },
+    center: {
+
+    },
+    text: {
+        marginTop: 2,
+        fontSize: 8,
+    },
+    button2: {
+        width: (((10 / 100) * width)),
+        marginTop: 2,
+        paddingTop: 4,
+        paddingBottom: 4,
+        backgroundColor: 'white',
+        borderRadius: 5,
+        borderColor: '#D3D3D3',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        alignContent: 'center'
+    },
+    button: {
+        marginTop: 2,
+        paddingTop: 3,
+        paddingBottom: 3,
+        backgroundColor: 'white',
+        borderRadius: 5,
+        borderColor: '#D3D3D3',
+        borderWidth: 1,
+        borderStyle: 'solid',
+    },
 });
 
 export default Profile;
