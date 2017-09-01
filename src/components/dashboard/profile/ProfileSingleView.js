@@ -15,7 +15,8 @@ class ProfileSingleView extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            files: []
+            files: [],
+            id: this.props.user.presentUser.message.user._id
         }
     }
 
@@ -44,12 +45,25 @@ class ProfileSingleView extends React.Component {
 
     };
 
+    _onLike =(id, status) => {
+        if(status){
+            console.log('This Image has been liked');
+            this.props.action.unLikeFile(this.props.user, id, this.props.likedFiles).then(response => {
+                console.log(this.props.likedFiles);
+                console.log('got back from unlike');
+            })
+        }else{
+            console.log('This Image has not been liked');
+        }
+
+    };
+
     render () {
         return (
             <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.files}
-                    renderItem={({item}) => <VerticalGrid obj={item} click={this._onClick} />}
+                    renderItem={({item}) => <VerticalGrid obj={item} like={this._onLike} uid={this.state.id} click={this._onClick} />}
                 />
             </View>
         )
@@ -59,7 +73,6 @@ class ProfileSingleView extends React.Component {
 
         let that = this;
         let userId = this.props.user.presentUser.message.user._id;
-        console.log('disptached at ', userId);
         this.props.action.fetchUserFiles(userId).then( response => {
 
             let files = that.props.files;

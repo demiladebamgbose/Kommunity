@@ -1,5 +1,6 @@
 import React from 'react'
-import {Image, Button, Alert} from 'react-native';
+import {Image, Button, Alert, View, Text} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 class Activity extends React.Component {
 
@@ -11,18 +12,15 @@ class Activity extends React.Component {
         tabBarLabel: 'Activity',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <Image
-                source={require('../../images/heart.png')}
-            />
+            <Ionicons name="ios-eye-outline" size={20} />
         ),
     };
 
     render() {
         return (
-            <Button
-                onPress={() => this.props.navigation.navigate('Notification')}
-                title="Camera"
-            />
+            <View style={{flex: 1}}>
+                <Text>Work in Progress</Text>
+            </View>
         );
     }
 }
