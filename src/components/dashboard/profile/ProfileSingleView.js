@@ -2,7 +2,7 @@
  * Created by jolaadeadewale on 29/07/2017.
  */
 import React from 'react';
-import {View, Text, Image, FlatList} from 'react-native';
+import {View, Text, Image, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -69,6 +69,37 @@ class ProfileSingleView extends React.Component {
     }
 
 }
+
+const Circle = ({label, url, click}) => {
+    return (
+        <View style={styles.center}>
+            <TouchableOpacity onPress={() => click(label)}>
+                <View style={styles.circle}>
+                    <Image  style={{width: 50, height: 50, borderRadius: 50/2,}}
+                            source={{ uri: url} } />
+                </View>
+            </TouchableOpacity>
+            <Text style={styles.text}>{label}</Text>
+        </View>
+    )
+};
+
+
+const styles = StyleSheet.create({
+    circle: {
+        width: 50,
+        height: 50,
+        borderRadius: 50/2,
+        marginRight: 6
+    },
+    center: {
+
+    },
+    text: {
+        marginTop: 2,
+        fontSize: 8,
+    }
+});
 
 function mapDispatchToProps(dispatch) {
     return {

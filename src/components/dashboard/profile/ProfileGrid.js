@@ -34,15 +34,11 @@ class ProfileGrid extends React.Component {
     };
 
     _onClick = (e) => {
-        let files = that.props.files;
+        let files = this.props.files;
         let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
 
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
-
-            console.log('Got back Def');
-            console.log(this.props);
-            console.log(this.props.navigation);
-            const { navigate } = this.props.navigation;
+            const { navigate } = this.props.screenProps.rootNavigation;
             navigate('SingleView', { image: '' })
         });
 
@@ -58,7 +54,6 @@ class ProfileGrid extends React.Component {
                     obj={item} click={this._onClick}
                     width={pictureSize}
                     />
-
                     }
                 />
             </View>

@@ -8,6 +8,7 @@ class Profile extends React.Component {
 
     constructor(props){
         super(props);
+        console.log(this.props, 'here')
     }
 
     static navigationOptions = {
@@ -24,6 +25,7 @@ class Profile extends React.Component {
 
     render() {
         return (
+
             <View style={styles.container}>
                 <View style={styles.topProfile}>
                     <View style={{width: ((25 / 100) * width)}}>
@@ -76,7 +78,7 @@ class Profile extends React.Component {
                     </View>
                 </View>
                 <View style={styles.container}>
-                    <ProfileTab/>
+                    <ProfileTab screenProps={{ rootNavigation:  this.props.screenProps.rootNavigation }} />
                 </View>
             </View>
         );
