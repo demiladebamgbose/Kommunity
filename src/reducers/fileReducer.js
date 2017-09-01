@@ -8,7 +8,8 @@ import * as types from '../actions/actionTypes';
 const initialState = {
     recent: {},
     viewFile: {},
-    userFile: {}
+    userFile: {},
+    likers: []
 };
 
 export default function fileReducer(state = initialState, action) {
@@ -27,6 +28,9 @@ export default function fileReducer(state = initialState, action) {
 
         case types.FETCH_SINGLE_FILE_VIEW:
             return {...state, viewFile: action.viewFile};
+
+        case types.USER_LIKED_FILES:
+            return {...state, likers: action.users}
 
         default:
             return state;

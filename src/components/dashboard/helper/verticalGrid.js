@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 let {height, width} = Dimensions.get('window');
 import Moment from 'react-moment';
 
-const VerticalGrid = ({obj, click, like, uid}) => {
+const VerticalGrid = ({obj, click, like, uid, userLike}) => {
     let data1 = {};
     if(obj['0'].content.secure_url) {
       //  data1 = obj['0'].content.secure_url.split('upload/');
@@ -41,7 +41,7 @@ const VerticalGrid = ({obj, click, like, uid}) => {
                             (obj[0].likes.indexOf(uid) >= 0) ? 'red': 'black'
                         } />
                     </TouchableOpacity>
-                    <Text style={styles.commentText}>{obj[0].likes.length} Likes</Text>
+                    <Text onPress={()=> userLike(obj['0']._id)} style={styles.commentText}>{obj[0].likes.length} Likes</Text>
                     <Moment style={styles.commentText} element={Text} fromNow>{obj[0].timestamp}</Moment>
                 </View>
             </View>

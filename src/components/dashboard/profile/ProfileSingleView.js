@@ -38,24 +38,26 @@ class ProfileSingleView extends React.Component {
         let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
 
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
-
             const { navigate } = that.props.navigation;
             navigate('SingleView', { image: '' })
         });
+    };
 
+    _userLikes = (id) => {
+        const { navigate } = this.props.screenProps.rootNavigation;
+        navigate('UserLikes', { userLikes: id })
     };
 
     _onLike =(id, status) => {
         if(status){
-            console.log('This Image has been liked');
-            this.props.action.unLikeFile(this.props.user, id, this.props.likedFiles).then(response => {
-                console.log(this.props.likedFiles);
-                console.log('got back from unlike');
+            this.props.action.unLikeFile(this.props.user.presentUser, id, this.props.likedFiles).then(response => {
+                this._onRefresh();
             })
-        }else{
-            console.log('This Image has not been liked');
+        }else {
+            this.props.action.likeFile(this.props.user.presentUser, id, this.props.likedFiles).then(response => {
+                this._onRefresh();
+            })
         }
-
     };
 
     render () {
@@ -63,22 +65,25 @@ class ProfileSingleView extends React.Component {
             <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.files}
-                    renderItem={({item}) => <VerticalGrid obj={item} like={this._onLike} uid={this.state.id} click={this._onClick} />}
+                    renderItem={({item}) => <VerticalGrid obj={item} userLike={this._userLikes} like={this._onLike} uid={this.state.id} click={this._onClick} />
+                    }
                 />
             </View>
         )
     }
 
-    componentDidMount () {
-
-        let that = this;
+    _onRefresh = () => {
         let userId = this.props.user.presentUser.message.user._id;
         this.props.action.fetchUserFiles(userId).then( response => {
 
-            let files = that.props.files;
+            let files = this.props.files;
             let gridImages = _.chunk(files.userFile.message.data, 1);
             this.setState({files: gridImages});
         });
+    };
+
+    componentDidMount () {
+        this._onRefresh();
     }
 
 }
@@ -123,7 +128,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, ownProps) {
     return {
         files: state.files,
-        user: state.user
+        user: state.user,
+        likedFiles: state.user.likedFiles
     }
 }
 

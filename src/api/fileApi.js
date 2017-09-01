@@ -90,7 +90,24 @@ class FileAPi {
                 }
             })
         })
-    }
+    };
+
+    userLikedFiles = (fileId) => {
+        return new Promise((resolve, reject)=> {
+           return fetch(url + 'api/v1/likes?id=' + fileId, {
+               method: 'GET',
+               headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+               }
+           }).then((response)=> response.json()).then((responseJson) => {
+
+               if(responseJson.message.data === 'success') {
+                    resolve(Object.assign([], responseJson.message.file.likes))
+               }
+           })
+        })
+    };
 
 }
 
