@@ -53,8 +53,6 @@ class SingleView extends React.Component {
     _onLike = (e) => {
         if(this.state.liked) {
             this.props.action.unLikeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
-                console.log(this.props.likedFiles);
-                console.log('got back from unlike');
                 this.setState({liked: false});
                 this.setState({likes: (--this.state.likes)})
             })

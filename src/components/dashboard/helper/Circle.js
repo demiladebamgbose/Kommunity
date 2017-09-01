@@ -2,17 +2,17 @@
  * Created by jolaadeadewale on 04/08/2017.
  */
 import React from 'react';
-import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
 const Circle = ({label, url, click}) => {
     return (
         <View style={styles.center}>
-            <TouchableHighlight onPress={() => click(label)}>
+            <TouchableOpacity onPress={() => click(label)}>
                 <View style={styles.circle}>
                     <Image  style={{width: 70, height: 70, borderRadius: 70/2,}}
                             source={{ uri: url} } />
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
             <Text style={styles.text}>{label}</Text>
         </View>
     )

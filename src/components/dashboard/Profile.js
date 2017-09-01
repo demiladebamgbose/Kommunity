@@ -8,13 +8,14 @@ class Profile extends React.Component {
 
     constructor(props){
         super(props);
+        console.log(this.props, 'here')
     }
 
     static navigationOptions = {
         tabBarLabel: 'Profile',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
-            <SimpleLineIcons name="user" size={14} />
+            <Ionicons name="ios-person-outline" size={20} />
         ),
     };
 
@@ -24,6 +25,7 @@ class Profile extends React.Component {
 
     render() {
         return (
+
             <View style={styles.container}>
                 <View style={styles.topProfile}>
                     <View style={{width: ((25 / 100) * width)}}>
@@ -76,7 +78,7 @@ class Profile extends React.Component {
                     </View>
                 </View>
                 <View style={styles.container}>
-                    <ProfileTab/>
+                    <ProfileTab screenProps={{ rootNavigation:  this.props.screenProps.rootNavigation }} />
                 </View>
             </View>
         );

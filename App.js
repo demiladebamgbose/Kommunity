@@ -5,6 +5,7 @@ import Dashboard from './src/components/dashboard/landingPage';
 import Upload from './src/components/upload/index';
 import SingleView from './src/components/tabs/SingleViewTab';
 import LoginTab from './src/components/user/TabSignUp';
+import UserLikes from './src/components/dashboard/profile/likes/UserLikesIndex';
 import {Provider} from 'react-redux';
 import configureStore from './src/store/ConfigureStore';
 
@@ -20,7 +21,8 @@ const Route = StackNavigator({
     Landing: {screen: Dashboard},
     UploadView: {screen: Upload},
     SingleView: {screen: SingleView},
-    LoginTab: {screen: LoginTab}
+    LoginTab: {screen: LoginTab},
+    UserLikes: {screen: UserLikes}
 });
 
 const App = () => (

@@ -29,6 +29,10 @@ export function fetchPrevLikedSuccess(data) {
     return {type: Types.PREVIOUSLY_LIKED_FILE, data};
 }
 
+export function fetchUserLikedFilesSuccess(users) {
+    return {type: Types.USER_LIKED_FILES, users};
+}
+
 export function fetchAllFiles() {
     return dispatch => {
         return FileApi.recentFile().then(data => {
@@ -83,6 +87,16 @@ export function previouslyLiked(fileId, old) {
     return dispatch => {
         return FileApi.previouslyLiked(fileId, old).then( data => {
             dispatch(fetchPrevLikedSuccess(data));
+        }).catch(err=> {
+            throw(err);
+        })
+    }
+}
+
+export function userLikedFiles(fileId) {
+    return dispatch => {
+        return FileApi.userLikedFiles(fileId).then( users => {
+            dispatch(fetchUserLikedFilesSuccess(users));
         }).catch(err=> {
             throw(err);
         })
