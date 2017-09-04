@@ -2,7 +2,7 @@
  * Created by jolaadeadewale on 28/07/2017.
  */
 import React from 'react';
-import {View, Image, StyleSheet, Text, TouchableHighlight, Dimensions} from 'react-native';
+import {View, Image, StyleSheet, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../actions/fileActions';
@@ -64,6 +64,11 @@ class SingleView extends React.Component {
         }
     };
 
+    _onViewLikes =() => {
+        const { navigate } = this.props.navigation;
+        navigate('UserLikes', { userLikes: this.state.id })
+    };
+
     _onMessage =(e)=> {
         console.log('The message icon');
     };
@@ -73,11 +78,11 @@ class SingleView extends React.Component {
             <View>
                 <View style={[styles.hBox, styles.contentPadding]}>
                     <View>
-                        <TouchableHighlight style={styles.headerContent}>
+                        <TouchableOpacity style={styles.headerContent}>
                             <View>
                                 <Circle url="" label="username" click={this._onUser} />
                             </View>
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.imageContent}>
@@ -85,30 +90,30 @@ class SingleView extends React.Component {
                 </View>
                 <View  style={[styles.hBox, styles.contentPadding, styles.boxHeight]}>
                     <View>
-                        <TouchableHighlight onPress={this._onLike}>
+                        <TouchableOpacity onPress={this._onLike}>
                             <Ionicons name="ios-heart-outline"  size={20} color={(this.state.liked) ? 'red': 'black'} />
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                     <View style={{marginLeft: 15}}>
-                        <TouchableHighlight onPress={this._onMessage}>
+                        <TouchableOpacity onPress={this._onMessage}>
                             <Ionicons name="ios-arrow-round-forward-outline" size={20}  />
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.boxBorder}>
                 </View>
                 <View style={[styles.hBox, styles.contentPadding]}>
-                    <TouchableHighlight>
+                    <TouchableOpacity onPress={this._onViewLikes}>
                         <Text style={styles.textSize}>{this.state.likes} Likes</Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
                 <View style={[styles.hBox, styles.contentPadding]}>
-                    <TouchableHighlight >
+                    <TouchableOpacity>
                         <View>
                             <Text style={styles.commentText}>{this.state.caption}</Text>
                             <Moment style={styles.commentText} element={Text} fromNow>{this.state.time}</Moment>
                         </View>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -119,7 +124,7 @@ class SingleView extends React.Component {
 const Circle = ({label, url, click}) => {
     return (
         <View style={styles.center}>
-            <TouchableHighlight onPress={() => click(label)}>
+            <TouchableOpacity onPress={() => click(label)}>
                 <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center'}}>
                     <View style={styles.circle}>
                         <Image  style={{width: 36, height: 36, borderRadius: 36/2,}}
@@ -132,7 +137,7 @@ const Circle = ({label, url, click}) => {
                     </View>
                 </View>
 
-            </TouchableHighlight>
+            </TouchableOpacity>
         </View>
     )
 };

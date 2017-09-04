@@ -2,6 +2,8 @@ export const CREATE_USER = 'CREATE_USER';
 export const LOG_IN_USER = 'LOGIN_IN_USER';
 export const FETCH_ALL_USERS = 'FETCH_ALL_USERS';
 export const SEARCH_USER = 'SEARCH_USER';
+export const USER_FOLLOW = 'USER_FOLLOW';
+export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 
 
 export const UPLOAD_IMAGE_CAMERA = 'UPLOAD_IMAGE_CAMERA';

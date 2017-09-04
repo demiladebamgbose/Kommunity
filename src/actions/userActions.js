@@ -14,12 +14,19 @@ export function logUserInSuccess(user) {
 }
 
 export function getAllUsersSuccess(user) {
-    return {type: types.FETCH_ALL_USERS, user}
+    return {type: types.FETCH_ALL_USERS, user};
 }
 
 export function searchUserSuccess(user) {
-    console.log('Beast', user);
-    return {type: types.SEARCH_USER, user}
+    return {type: types.SEARCH_USER, user};
+}
+
+export function followUserSuccess(user) {
+    return {type: types.USER_FOLLOW, user};
+}
+
+export function unFollowUserSuccess(user) {
+    return {type: types.UNFOLLOW_USER, user};
 }
 
 export function createUser(user) {
@@ -35,7 +42,7 @@ export function createUser(user) {
 export function logUserIn(user) {
     return dispatch => {
         return UserApi.logUserIn(user).then(user => {
-            dispatch(logUserInSuccess(user))
+            dispatch(logUserInSuccess(user));
         }).catch(err=> {
             throw(err);
         })
@@ -45,7 +52,7 @@ export function logUserIn(user) {
 export function getAllUsers() {
     return dispatch => {
         return UserApi.findAll().then(user => {
-            dispatch(getAllUsersSuccess(user))
+            dispatch(getAllUsersSuccess(user));
         }).catch(err=> {
             throw(err);
         })
@@ -55,8 +62,28 @@ export function getAllUsers() {
 export function searchUser(user) {
     return dispatch => {
         return UserApi.findUser(user).then(user => {
-            dispatch(searchUserSuccess(user.data))
+            dispatch(searchUserSuccess(user.data));
         }).catch(err=> {
+            throw(err);
+        })
+    }
+}
+
+export function followUser(user){
+    return dispatch => {
+        return UserApi.followUser(user).then(user => {
+            dispatch(followUserSuccess(user));
+        }).catch(err=> {
+            throw(err);
+        })
+    }
+}
+
+export function unFollowUser(user) {
+    return dispatch => {
+        return UserApi.unFollowUser(user).then( user => {
+            dispatch(unFollowUserSuccess(user));
+        }).catch(err => {
             throw(err);
         })
     }

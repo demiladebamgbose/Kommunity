@@ -4,12 +4,16 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import UserLikes from './UserLikes';
+import Profile from '../../Profile';
 
 const UserLikesIndex = StackNavigator(
     {
         Main: {
             screen: UserLikes,
         },
+        UserProfile: {
+            screen: Profile
+        }
     },
     {
         mode: 'modal',
@@ -39,7 +43,8 @@ class UserLikeDisplay extends React.Component {
 
     render () {
         return (
-            <UserLikesIndex screenProps={{id: this.state.id}} />
+            <UserLikesIndex screenProps={{id: this.state.id, rootNavigation: this.props.navigation,
+            parent: this.props.screenProps}} />
         )
     }
 }

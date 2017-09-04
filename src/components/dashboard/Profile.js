@@ -8,7 +8,16 @@ class Profile extends React.Component {
 
     constructor(props){
         super(props);
-        console.log(this.props, 'here')
+        let id = '';
+        let rootNav = '';
+        if(this.props.navigation.state.params) {
+             id = this.props.navigation.state.params.user;
+             rootNav = this.props.navigation.state.params.navigation
+        }
+        this.state = {
+            user: id,
+            rootNav: rootNav
+        }
     }
 
     static navigationOptions = {
@@ -78,7 +87,8 @@ class Profile extends React.Component {
                     </View>
                 </View>
                 <View style={styles.container}>
-                    <ProfileTab screenProps={{ rootNavigation:  this.props.screenProps.rootNavigation }} />
+                    <ProfileTab screenProps={{ rootNavigation:  this.props.screenProps.rootNavigation,
+                    userId: this.state.user , nav: this.state.rootNav }} />
                 </View>
             </View>
         );
