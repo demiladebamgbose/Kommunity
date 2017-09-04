@@ -44,6 +44,16 @@ export default function userReducer(state = initialState, action) {
                 ...state, likedFiles: action.data
             };
 
+        case types.USER_FOLLOW:
+            return {
+                ...state, presentUser: action.user
+            };
+
+        case types.UNFOLLOW_USER:
+            return {
+                ...state, presentUser: action.user
+            };
+
         default:
             return state;
     }

@@ -71,7 +71,7 @@ class ProfileGrid extends React.Component {
 
     componentDidMount () {
 
-        let userId = this.state.userId || this.props.user.presentUser.message.user._id;
+        let userId = this.state.userId || this.props.user.presentUser._id;
         this.props.action.fetchUserFiles(userId).then( response => {
               let files = this.props.files;
               let gridImages = _.chunk(files.userFile.message.data, 3);

@@ -52,7 +52,7 @@ class CategoryUpload extends React.Component {
 
         this.props.action.uploadFileCloud(obj).then( data=> {
             const fileUplod = this.props.upload.cloudResponse;
-            const userId = this.props.user.presentUser.message.user._id;
+            const userId = this.props.user.presentUser._id;
             const status = this.state.kommunity;
             const caption = this.state.caption;
 

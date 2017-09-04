@@ -7,17 +7,21 @@ import {EvilIcons} from '@expo/vector-icons';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../../actions/fileActions';
+import * as userActions from '../../../../actions/userActions';
 import SearchDisplay from '../../helper/SearchDisplay';
+import _ from 'lodash';
 
 class UserLikes extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             id: this.props.screenProps.id,
             searchResult: [],
             animating: true,
-            userId: this.props.user.message.user._id
+            userId: this.props.user._id ,
+            kin: this.props.user.kin
         };
     }
 
@@ -48,11 +52,31 @@ class UserLikes extends React.Component {
     }
 
     _onFollow = (e) => {
-        console.log('Action to follow', e);
+        let user = _.find(this.state.searchResult, ['_id', e]);
+        const presentUser = this.props.user;
+        let userObj = {
+            follower: presentUser,
+            user
+        };
+
+        this.props.userAction.followUser(userObj).then( response => {
+            console.log('Got back successfully');
+        });
     };
 
     _onUnfollow = (e) => {
-        console.log('Action to unfollow', e);
+        console.log('Action to follow', e);
+        let user = _.find(this.state.searchResult, ['_id', e]);
+        const presentUser = this.props.user;
+        let userObj = {
+            unfollow: presentUser,
+            user
+        };
+
+        this.props.userAction.unFollowUser(userObj).then( response => {
+            console.log(this.props.user);
+            console.log('unfollowed Successfully');
+        });
     };
 
     _onUserView = (e) => {
@@ -95,7 +119,7 @@ class UserLikes extends React.Component {
                                 data={this.state.searchResult}
                                 extraData={this.state}
                                 renderItem={({item}) => <SearchDisplay id={item._id} userId={this.state.userId}  follow={this._onFollow} unfollow={this._onUnfollow}
-                                following={true} img="" viewClicked={this._onUserView} other={item.name} name={item.username}/> }
+                                following={(this.state.kin.indexOf(item._id) >= 0)} img="" viewClicked={this._onUserView} other={item.name} name={item.username}/> }
                             /> : <Text style={{margin: 20, fontSize: 12}}>No Result found</Text>
                     }
 
@@ -187,7 +211,8 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
     return {
-        action: bindActionCreators(fileActions, dispatch)
+        action: bindActionCreators(fileActions, dispatch),
+        userAction: bindActionCreators(userActions, dispatch)
     }
 }
 

@@ -19,7 +19,11 @@ class UserApi {
                 })
                 .then((response) => response.json())
                 .then((responseJson) => {
-                    resolve(Object.assign({}, responseJson));
+                    if(responseJson.message.response === 'user logged in')
+                    resolve(Object.assign({}, responseJson.message.user));
+                    else{
+                        resolve(Object.assign({}, { 'error': responseJson.message.response}));
+                    }
                 });
         });
     };
@@ -37,7 +41,12 @@ class UserApi {
             })
                 .then((response) => response.json())
                 .then((responseJson) => {
-                    resolve(Object.assign({}, responseJson));
+                    if(responseJson.message.response === 'user logged in') {
+                        resolve(Object.assign({}, responseJson.message.user));
+                    }
+                    else{
+                        resolve(Object.assign({}, { 'error': responseJson.message.response}));
+                    }
                 });
         });
     };
@@ -65,10 +74,9 @@ class UserApi {
         })
     };
 
-
     followUser = (user) => {
         return new Promise((resolve, reject) => {
-            return fetch(url + '/api/v1/users/friend', {
+            return fetch(url + 'api/v1/users/friend', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -76,22 +84,31 @@ class UserApi {
                 },
                 body: JSON.stringify(user)
             }).then((response)=> response.json()).then((responseJson)=> {
-                resolve(Object.assign({}, responseJson));
+                if(responseJson.message.data)
+                    resolve(Object.assign({}, responseJson.message.data));
+                else{
+                    reject(Object.assign({}, responseJson.message.error));
+                }
             })
         });
     };
 
-    unFollowUser = (path, user) => {
+    unFollowUser = (user) => {
+        console.log('In testing',user.unfollow._id);
         return new Promise((resolve, reject) => {
-            return fetch(url + `/api/v1/users/friend${path}`, {
-                method: 'POST',
+            return fetch(url + `api/v1/users/friend/${user.unfollow._id}`, {
+                method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(user)
             }).then((response)=> response.json()).then((responseJson)=> {
-                resolve(Object.assign({}, responseJson));
+                if(responseJson.message.data)
+                resolve(Object.assign({}, responseJson.message.data));
+                else{
+                    reject(Object.assign({}, responseJson.message.error));
+                }
             })
         });
     };
