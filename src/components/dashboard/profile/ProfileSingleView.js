@@ -14,9 +14,14 @@ class ProfileSingleView extends React.Component {
 
     constructor(props){
         super(props);
+        let userId = '';
+        if(this.props.screenProps.userId) {
+            userId = this.props.screenProps.userId;
+        }
         this.state = {
             files: [],
-            id: this.props.user.presentUser.message.user._id
+            id: this.props.user.presentUser.message.user._id,
+            userId: userId
         }
     }
 
@@ -73,7 +78,7 @@ class ProfileSingleView extends React.Component {
     }
 
     _onRefresh = () => {
-        let userId = this.props.user.presentUser.message.user._id;
+        let userId = this.state.userId || this.props.user.presentUser.message.user._id;
         this.props.action.fetchUserFiles(userId).then( response => {
 
             let files = this.props.files;

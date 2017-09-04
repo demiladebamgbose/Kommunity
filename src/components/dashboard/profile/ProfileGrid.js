@@ -16,9 +16,18 @@ class ProfileGrid extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            files: []
+        let userId = '';
+        let navigation = '';
+        if(this.props.screenProps.userId) {
+            userId = this.props.screenProps.userId;
+            navigation = this.props.screenProps.nav;
         }
+
+        this.state = {
+            files: [],
+            userId: userId,
+            navigation: navigation
+        };
     }
 
     static navigationOptions = {
@@ -38,10 +47,10 @@ class ProfileGrid extends React.Component {
         let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
 
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
-            const { navigate } = this.props.screenProps.rootNavigation;
+            console.log(this.state.navigation);
+            const { navigate } = this.state.navigation || this.props.navigation;
             navigate('SingleView', { image: '' })
         });
-
     };
 
     render () {
@@ -62,10 +71,9 @@ class ProfileGrid extends React.Component {
 
     componentDidMount () {
 
-        let that = this;
-        let userId = this.props.user.presentUser.message.user._id;
+        let userId = this.state.userId || this.props.user.presentUser.message.user._id;
         this.props.action.fetchUserFiles(userId).then( response => {
-              let files = that.props.files;
+              let files = this.props.files;
               let gridImages = _.chunk(files.userFile.message.data, 3);
               this.setState({files: gridImages});
         });

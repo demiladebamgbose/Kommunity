@@ -56,7 +56,6 @@ class UserApi {
 
     findUser = (user) => {
         return new Promise((resolve, reject)=> {
-
             return fetch(url + `api/v1/users/${user}`, {
                 method: 'GET'
             }).then((response) => response.json())
@@ -64,7 +63,39 @@ class UserApi {
                     resolve(Object.assign({}, responseJson));
                 });
         })
-    }
+    };
+
+
+    followUser = (user) => {
+        return new Promise((resolve, reject) => {
+            return fetch(url + '/api/v1/users/friend', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            }).then((response)=> response.json()).then((responseJson)=> {
+                resolve(Object.assign({}, responseJson));
+            })
+        });
+    };
+
+    unFollowUser = (path, user) => {
+        return new Promise((resolve, reject) => {
+            return fetch(url + `/api/v1/users/friend${path}`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            }).then((response)=> response.json()).then((responseJson)=> {
+                resolve(Object.assign({}, responseJson));
+            })
+        });
+    };
+
 }
 
 export default new UserApi();

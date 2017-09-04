@@ -2,12 +2,13 @@
  * Created by jolaadeadewale on 05/08/2017.
  */
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, Dimensions} from 'react-native';
+let {width, height} = Dimensions.get('window');
 
 
 const Circle = ({label}) => {
     return (
-        <View style={stylesCircle.center}>
+        <View style={[stylesCircle.center]}>
             <View style={stylesCircle.circle}>
 
             </View>
@@ -18,11 +19,11 @@ const Circle = ({label}) => {
 
 const stylesCircle = StyleSheet.create({
     circle: {
-        width: 40,
-        height: 40,
-        borderRadius: 40/2,
+        width:  ((10/ 100) * width),
+        height: ((10/ 100) * width),
+        borderRadius: ((10/ 100) * width),
         backgroundColor: '#D3D3D3',
-        marginRight: 6
+        marginRight: 2
     },
     center: {
         alignContent: 'center',
@@ -35,19 +36,35 @@ const stylesCircle = StyleSheet.create({
 });
 
 
-const SearchDisplay = ({img, name, other}) => {
+const SearchDisplay = ({img, name, other, follow, following, unfollow, userId, id, viewClicked}) => {
 
     return (
-        <View style={styles.container}>
-            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                <Circle/>
-                <View style={{height: 44}}>
-                    <Text style={{fontSize: 11, marginBottom: 1}}>{name}</Text>
-                    <Text style={{fontSize: 11}}>{other.firstName} {other.lastName}</Text>
-                </View>
+        <TouchableOpacity onPress={()=> viewClicked(id)}>
+            <View style={styles.container}>
+                    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                        <Circle/>
+                        <View style={{ width: ((35/ 100) * width), height: ((15/ 100) * width), paddingTop: 5,  alignContent: 'center',
+                                }}>
+                            <Text style={{fontSize: 11, marginBottom: 1}}>{name}</Text>
+                            <Text style={{fontSize: 11}}>{other.firstName} {other.lastName}</Text>
+                        </View>
+                        <View style={{width: ((40 / 100) * width) , marginRight: ((9 / 100) * width) , height: ((15/ 100) * width),
+
+                             }}
+                        >
+
+                            {(userId !== id) ? <TouchableOpacity style={[styles.button, { backgroundColor: (following) ? 'white' : 'steelblue'}]}>
+                                    <Text onPress={()=>{ (following) ? unfollow('user unfollowed') : follow('user followed') }} style={{fontSize: 11, textAlign: 'center'}}>
+                                        {(following) ? 'Following' : 'Follow'}
+                                    </Text>
+                                </TouchableOpacity>: null
+                            }
+
+                        </View>
+                    </View>
 
             </View>
-        </View>
+        </TouchableOpacity>
     )
 };
 
@@ -56,11 +73,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        margin: 20,
+        margin: 5,
         borderBottomWidth: 1,
         borderBottomColor: 'grey',
         padding: 10,
+        height: ((19/ 100) * width)
 
+    },
+    button: {
+        marginTop: 10,
+        paddingTop: 3,
+        paddingBottom: 3,
+        borderRadius: 5,
+        borderColor: '#D3D3D3',
+        borderWidth: 1,
+        borderStyle: 'solid',
     }
 });
 
