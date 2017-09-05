@@ -3,6 +3,10 @@ import {Image, Button, Alert, View, Text, StyleSheet, TouchableOpacity, Dimensio
 import ProfileTab from './profile/ProfileTab';
 import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 let {height, width} = Dimensions.get('window');
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as fileActions from '../../actions/fileActions';
+import * as userActions from '../../actions/userActions';
 
 class Profile extends React.Component {
 
@@ -10,19 +14,29 @@ class Profile extends React.Component {
         super(props);
         let id = '';
         let rootNav = '';
+        let followers = 0;
+        let kin = 0;
         if(this.props.navigation.state.params) {
              id = this.props.navigation.state.params.user;
              rootNav = this.props.navigation.state.params.navigation
+        }else{
+            id = this.props.user._id;
+            followers = this.props.user.followers.length;
+            kin = this.props.user.kin.length;
         }
+
         this.state = {
             user: id,
-            rootNav: rootNav
+            rootNav: rootNav,
+            post: 0,
+            followers: followers,
+            kin: kin
         }
     }
 
     static navigationOptions = {
         tabBarLabel: 'Profile',
-        // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+        // Note: By default the icon is only shown on iOS.
         tabBarIcon: ({ tintColor }) => (
             <Ionicons name="ios-person-outline" size={20} />
         ),
@@ -32,9 +46,37 @@ class Profile extends React.Component {
 
     };
 
+    _onRefresh =() => {
+
+    };
+
+    _onKin =()=> {
+        const {navigate} = this.props.screenProps.rootNavigation;
+        navigate('ViewFollowers', {type: 'kin', id: this.state.user || this.props.user._id})
+    };
+
+    _onFollowers =()=> {
+        const {navigate} = this.props.screenProps.rootNavigation;
+        navigate('ViewFollowers', {type: 'followers', id: this.state.user || this.props.user._id})
+    };
+
+    componentDidMount() {
+        let userId = this.state.user || this.props.user._id;
+        this.props.action.fetchUserFiles(userId).then( response => {
+            let files = this.props.files;
+            this.setState({post: (files.userFile.message.data.length)});
+        });
+
+        if(this.props.navigation.state.params) {
+            this.props.userAction.findUser(this.state.user).then( response => {
+                this.setState({followers: this.props.userProfile.followers.length,
+                    kin: this.props.userProfile.kin.length});
+            });
+        }
+    };
+
     render() {
         return (
-
             <View style={styles.container}>
                 <View style={styles.topProfile}>
                     <View style={{width: ((25 / 100) * width)}}>
@@ -53,16 +95,25 @@ class Profile extends React.Component {
                                }}
                         >
                                 <View style={{width: ((20 / 100) * width)}}>
-                                    <Text style={{textAlign: 'center', fontSize: 10}}>14</Text>
+                                    <Text style={{textAlign: 'center', fontSize: 10}}>{this.state.post}</Text>
                                     <Text style={{textAlign: 'center', fontSize: 11}}>Post</Text>
                                 </View>
+
                                 <View style={{width: ((30 / 100) * width)}}>
-                                    <Text style={{textAlign: 'center', fontSize: 10}}>14</Text>
-                                    <Text style={{textAlign: 'center',  fontSize: 11}}>followers</Text>
+                                    <TouchableOpacity onPress={this._onFollowers}>
+                                        <View>
+                                            <Text style={{textAlign: 'center', fontSize: 10}}>{this.state.followers}</Text>
+                                            <Text style={{textAlign: 'center',  fontSize: 11}}>followers</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={{width: ((20 / 100) * width)}}>
-                                    <Text style={{textAlign: 'center', fontSize: 10}}>14</Text>
-                                    <Text style={{textAlign: 'center',  fontSize: 11}}>Kin</Text>
+                                    <TouchableOpacity onPress={this._onKin}>
+                                        <View>
+                                            <Text style={{textAlign: 'center', fontSize: 10}}>{this.state.kin}</Text>
+                                            <Text style={{textAlign: 'center',  fontSize: 11}}>Kin</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
                         </View>
                         <View style={{flex: 1, flexDirection: 'row',
@@ -101,7 +152,8 @@ const Circle = ({label, url, click}) => {
             <TouchableOpacity onPress={() => click(label)}>
                 <View style={styles.circle}>
                     <Image  style={{width: 50, height: 50, borderRadius: 50/2,}}
-                            source={{ uri: url} } />
+                            source={{ uri: url} }
+                    />
                 </View>
             </TouchableOpacity>
             <Text style={styles.text}>{label}</Text>
@@ -164,4 +216,19 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Profile;
+function mapDispatchToProps(dispatch) {
+    return {
+        action: bindActionCreators(fileActions, dispatch),
+        userAction: bindActionCreators(userActions, dispatch)
+    }
+}
+
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user.presentUser,
+        files: state.files,
+        userProfile: state.user.userProfile
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

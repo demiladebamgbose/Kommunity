@@ -67,7 +67,7 @@ class Login extends React.Component {
         this.props.action.logUserIn(userData).then((response)=> {
             this.setState({animating: false});
 
-            if(this.props.user.presentUser.message.user) {
+            if(this.props.user.presentUser._id) {
 
                 const resetAction = NavigationActions.reset({
                     index: 0,
@@ -78,7 +78,7 @@ class Login extends React.Component {
                 this.props.navigation.dispatch(resetAction)
 
             } else {
-                this.setState({information: this.props.user.presentUser.message.response});
+                this.setState({information: this.props.user.presentUser.error});
             }
 
         }).catch(err=> {

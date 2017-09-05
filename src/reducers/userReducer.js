@@ -7,7 +7,8 @@ const initialState = {
     presentUser: {},
     allUsers: {},
     searchUsers: [],
-    likedFiles: []
+    likedFiles: [],
+    userProfile: {}
 };
 
 export default function userReducer(state = initialState, action) {
@@ -42,6 +43,21 @@ export default function userReducer(state = initialState, action) {
         case types.PREVIOUSLY_LIKED_FILE:
             return {
                 ...state, likedFiles: action.data
+            };
+
+        case types.USER_FOLLOW:
+            return {
+                ...state, presentUser: action.user
+            };
+
+        case types.UNFOLLOW_USER:
+            return {
+                ...state, presentUser: action.user
+            };
+
+        case types.FIND_ONE_SEARCH:
+            return {
+                ...state, userProfile: action.user
             };
 
         default:

@@ -16,7 +16,7 @@ class SingleView extends React.Component {
         super(props);
 
        let liked = this.props.files.viewFile.likes.filter((data) => {
-            return data == this.props.user.message.user._id
+            return data == this.props.user._id
         });
 
        let likeState = false;

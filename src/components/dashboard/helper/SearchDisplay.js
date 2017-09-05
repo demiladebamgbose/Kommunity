@@ -54,7 +54,7 @@ const SearchDisplay = ({img, name, other, follow, following, unfollow, userId, i
                         >
 
                             {(userId !== id) ? <TouchableOpacity style={[styles.button, { backgroundColor: (following) ? 'white' : 'steelblue'}]}>
-                                    <Text onPress={()=>{ (following) ? unfollow('user unfollowed') : follow('user followed') }} style={{fontSize: 11, textAlign: 'center'}}>
+                                    <Text onPress={()=>{ (following) ? unfollow(id) : follow(id) }} style={{fontSize: 11, textAlign: 'center'}}>
                                         {(following) ? 'Following' : 'Follow'}
                                     </Text>
                                 </TouchableOpacity>: null

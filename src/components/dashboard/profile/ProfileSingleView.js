@@ -20,7 +20,7 @@ class ProfileSingleView extends React.Component {
         }
         this.state = {
             files: [],
-            id: this.props.user.presentUser.message.user._id,
+            id: this.props.user.presentUser._id,
             userId: userId
         }
     }
@@ -55,11 +55,11 @@ class ProfileSingleView extends React.Component {
 
     _onLike =(id, status) => {
         if(status){
-            this.props.action.unLikeFile(this.props.user.presentUser, id, this.props.likedFiles).then(response => {
+            this.props.action.unLikeFile({user: this.props.user.presentUser}, id, this.props.likedFiles).then(response => {
                 this._onRefresh();
             })
         }else {
-            this.props.action.likeFile(this.props.user.presentUser, id, this.props.likedFiles).then(response => {
+            this.props.action.likeFile({user: this.props.user.presentUser}, id, this.props.likedFiles).then(response => {
                 this._onRefresh();
             })
         }
@@ -78,7 +78,7 @@ class ProfileSingleView extends React.Component {
     }
 
     _onRefresh = () => {
-        let userId = this.state.userId || this.props.user.presentUser.message.user._id;
+        let userId = this.state.userId || this.props.user.presentUser._id;
         this.props.action.fetchUserFiles(userId).then( response => {
 
             let files = this.props.files;

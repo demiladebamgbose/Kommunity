@@ -227,7 +227,6 @@ let {height, width} = Dimensions.get('window');
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,first_name,last_name,gender,picture,email`);
             const json = await response.json();
             if (json) {
-                console.log(json);
                 let obj = {name: {}};
                 obj.email = json.email;
                 obj.name.firstName = json.first_name;
@@ -239,7 +238,7 @@ let {height, width} = Dimensions.get('window');
                 }
                 obj.fb = true;
                 this.props.action.createUser(obj).then(response => {
-                    if(this.props.user.presentUser.message.user) {
+                    if(this.props.user.presentUser._id) {
 
                         const resetAction = NavigationActions.reset({
                             index: 0,
