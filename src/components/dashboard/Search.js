@@ -15,7 +15,7 @@ class Search extends React.Component {
             animating: false,
             userId: this.props.user.presentUser._id,
             kin: this.props.user.presentUser.kin
-        }
+        };
     }
 
     static navigationOptions = {
@@ -46,8 +46,9 @@ class Search extends React.Component {
 
     };
 
-    __onUserView = () => {
-
+    _onUserView = (e) => {
+        const {navigate} = this.props.screenProps.rootNavigation;
+        navigate('UserProfileView', { user: e, navigation: this.props.screenProps.rootNavigation});
     };
 
     render() {
@@ -59,9 +60,7 @@ class Search extends React.Component {
                             <Text style={[styles.textCenter, {color: '#3B5998'}]}>
                                 <EvilIcons name="search" size={15}  />
                             </Text>
-
                             <View style={styles.separator}></View>
-
                             <TextInput
                                 style={{
                                     fontSize: 14, height: 30,  fontFamily: 'Arial',
@@ -86,7 +85,11 @@ class Search extends React.Component {
                         renderItem={({item}) =>
                         <SearchDisplay img="" id={item._id} userId={this.state.userId}
                             follow={this._onFollow} unfollow={this._onUnfollow}
-                            following={(this.state.kin.indexOf(item._id) >= 0)}
+                            following={
+                               this.state.kin.filter((obj)=>{
+                                    return obj._id === item._id
+                                }).length
+                            }
                             viewClicked={this._onUserView}
                             other={item.name} name={item.username}
                          /> }

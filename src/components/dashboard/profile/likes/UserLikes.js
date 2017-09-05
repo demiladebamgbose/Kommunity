@@ -117,7 +117,11 @@ class UserLikes extends React.Component {
                                 data={this.state.searchResult}
                                 extraData={this.state}
                                 renderItem={({item}) => <SearchDisplay id={item._id} userId={this.state.userId}  follow={this._onFollow} unfollow={this._onUnfollow}
-                                following={(this.state.kin.indexOf(item._id) >= 0)} img="" viewClicked={this._onUserView} other={item.name} name={item.username}/> }
+                                following={
+                                   this.state.kin.filter((obj)=>{
+                                        return obj._id === item._id
+                                    }).length
+                                } img="" viewClicked={this._onUserView} other={item.name} name={item.username}/> }
                             /> : <Text style={{margin: 20, fontSize: 12}}>No Result found</Text>
                     }
 

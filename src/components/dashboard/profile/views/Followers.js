@@ -55,9 +55,6 @@ class Followers extends React.Component {
 
     _onUserView = (e) => {
         const { navigate } = this.props.screenProps.nav;
-        console.log(this.props.navigation);
-        console.log(this.props.screenProps.nav)
-        console.log('let us test', this.props);
         navigate('UserProfileView', { user: e,
             navigation: this.props.screenProps.rootNavigation ||
             this.props.screenProps.nav
@@ -95,16 +92,15 @@ class Followers extends React.Component {
         this.props.userAction.findUser(this.state.id).then(response => {
             console.log(this.props.userProfile);
              this.setState({searchResult:
-                this.props.userProfile.followers, animating: false
+                this.props.userProfile.followers, animating: false, kin: this.props.userProfile.followers
              });
          });
     };
 
     _userSearchKin = () => {
         this.props.userAction.findUser(this.state.id).then(response => {
-            console.log(this.props.userProfile);
              this.setState({searchResult:
-                this.props.userProfile.kin, animating: false
+                this.props.userProfile.kin, animating: false, kin: this.props.userProfile.followers
              });
          });
     };
@@ -183,7 +179,12 @@ class Followers extends React.Component {
                                 data={this.state.searchResult}
                                 extraData={this.state}
                                 renderItem={({item}) => <SearchDisplay id={item._id} userId={this.state.userId}  follow={this._onFollow} unfollow={this._onUnfollow}
-                                following={(this.state.kin.indexOf(item._id) >= 0)} img="" viewClicked={this._onUserView} other={item.name} name={item.username}/> }
+                                following={
+                                    this.state.kin.filter((obj)=>{
+                                        return obj._id === item._id
+                                    }).length
+                                }
+                            img="" viewClicked={this._onUserView} other={item.name} name={item.username}/> }
                             /> : <Text style={{margin: 20, fontSize: 12}}>No Result found</Text>
                     }
 
