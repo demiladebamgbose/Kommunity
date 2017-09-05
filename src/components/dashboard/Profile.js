@@ -16,6 +16,7 @@ class Profile extends React.Component {
         let rootNav = '';
         let followers = 0;
         let kin = 0;
+        let screenProps = '';
         if(this.props.navigation.state.params) {
              id = this.props.navigation.state.params.user;
              rootNav = this.props.navigation.state.params.navigation
@@ -25,12 +26,20 @@ class Profile extends React.Component {
             kin = this.props.user.kin.length;
         }
 
+        // This is gotten from when Profile.js is called when trnsition is from kins or followers
+        if(this.props.screenProps){
+            screenProps = this.props.screenProps.rootNavigation;
+        }else{
+            screenProps = this.props.navigation.state.params.navigation;
+        }
+
         this.state = {
             user: id,
             rootNav: rootNav,
             post: 0,
             followers: followers,
-            kin: kin
+            kin: kin,
+            screenProps: screenProps
         }
     }
 
@@ -52,12 +61,14 @@ class Profile extends React.Component {
 
     _onKin =()=> {
         const {navigate} = this.props.screenProps.rootNavigation;
-        navigate('ViewFollowers', {type: 'kin', id: this.state.user || this.props.user._id})
+        navigate('ViewFollowers', {type: 'kin', id: this.state.user || this.props.user._id,
+            nav: this.props.screenProps.rootNavigation})
     };
 
     _onFollowers =()=> {
         const {navigate} = this.props.screenProps.rootNavigation;
-        navigate('ViewFollowers', {type: 'followers', id: this.state.user || this.props.user._id})
+        navigate('ViewFollowers', {type: 'followers', id: this.state.user || this.props.user._id,
+            nav: this.props.screenProps.rootNavigation})
     };
 
     componentDidMount() {
@@ -138,7 +149,7 @@ class Profile extends React.Component {
                     </View>
                 </View>
                 <View style={styles.container}>
-                    <ProfileTab screenProps={{ rootNavigation:  this.props.screenProps.rootNavigation,
+                    <ProfileTab screenProps={{ rootNavigation:  this.state.screenProps ,
                     userId: this.state.user , nav: this.state.rootNav }} />
                 </View>
             </View>

@@ -12,7 +12,9 @@ class Search extends React.Component {
         super(props);
         this.state = {
             searchResult: [],
-            animating: false
+            animating: false,
+            userId: this.props.user.presentUser._id,
+            kin: this.props.user.presentUser.kin
         }
     }
 
@@ -34,6 +36,18 @@ class Search extends React.Component {
             this.setState({searchResult: users});
             this.setState({animating: false});
         });
+    };
+
+    _onFollow = () => {
+
+    };
+
+    _onUnfollow = () => {
+
+    };
+
+    __onUserView = () => {
+
     };
 
     render() {
@@ -69,7 +83,13 @@ class Search extends React.Component {
                         (this.state.searchResult.length) ?
                         <FlatList
                         data={this.state.searchResult}
-                        renderItem={({item}) => <SearchDisplay img="" other={item.name} name={item.username}/> }
+                        renderItem={({item}) =>
+                        <SearchDisplay img="" id={item._id} userId={this.state.userId}
+                            follow={this._onFollow} unfollow={this._onUnfollow}
+                            following={(this.state.kin.indexOf(item._id) >= 0)}
+                            viewClicked={this._onUserView}
+                            other={item.name} name={item.username}
+                         /> }
                         /> : <Text style={{margin: 20, fontSize: 12}}>No Result found</Text>
                     }
 
