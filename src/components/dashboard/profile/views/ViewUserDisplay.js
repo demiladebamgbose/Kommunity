@@ -19,7 +19,8 @@ class ViewUserDisplay extends React.Component {
         super(props);
         this.state = {
             id: this.props.navigation.state.params.id,
-            type: this.props.navigation.state.params.type
+            type: this.props.navigation.state.params.type,
+            nav:  this.props.navigation.state.params.nav
         };
     }
 
@@ -39,7 +40,7 @@ class ViewUserDisplay extends React.Component {
         return (
             <ViewDisplay screenProps={{id: this.state.id, type: this.state.type,
                 rootNavigation: this.props.navigation,
-                parent: this.props.screenProps}}
+                parent: this.props.screenProps, nav: this.state.nav}}
             />
         )
     }

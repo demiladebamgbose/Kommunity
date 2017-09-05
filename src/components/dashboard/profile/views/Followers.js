@@ -53,6 +53,17 @@ class Followers extends React.Component {
 
     }
 
+    _onUserView = (e) => {
+        const { navigate } = this.props.screenProps.nav;
+        console.log(this.props.navigation);
+        console.log(this.props.screenProps.nav)
+        console.log('let us test', this.props);
+        navigate('UserProfileView', { user: e,
+            navigation: this.props.screenProps.rootNavigation ||
+            this.props.screenProps.nav
+        })
+    };
+
     _onSearch = (text) => {
         if(!text){
             this.setState({searchResult: this.props.fileLikers});

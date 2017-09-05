@@ -7,6 +7,7 @@ import SingleView from './src/components/tabs/SingleViewTab';
 import LoginTab from './src/components/user/TabSignUp';
 import UserLikes from './src/components/dashboard/profile/likes/UserLikesIndex';
 import ViewUser from './src/components/dashboard/profile/views/ViewUserDisplay';
+import Profile from './src/components/dashboard/Profile';
 import {Provider} from 'react-redux';
 import configureStore from './src/store/ConfigureStore';
 
@@ -24,7 +25,8 @@ const Route = StackNavigator({
     SingleView: {screen: SingleView},
     LoginTab: {screen: LoginTab},
     UserLikes: {screen: UserLikes},
-    ViewFollowers: {screen: ViewUser}
+    ViewFollowers: {screen: ViewUser},
+    UserProfileView: {screen: Profile}
 });
 
 const App = () => (
