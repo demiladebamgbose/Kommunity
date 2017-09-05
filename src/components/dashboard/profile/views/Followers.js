@@ -1,28 +1,52 @@
 /**
- * Created by jolaadeadewale on 01/09/2017.
+ * Created by jolaadeadewale on 05/09/2017.
  */
 import React from 'react';
 import {View, Text, ActivityIndicator, StyleSheet, TextInput, FlatList} from 'react-native';
 import {EvilIcons} from '@expo/vector-icons';
 import {connect} from 'react-redux';
+import SearchDisplay from '../../helper/SearchDisplay';
+import _ from 'lodash';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../../../actions/fileActions';
 import * as userActions from '../../../../actions/userActions';
-import SearchDisplay from '../../helper/SearchDisplay';
-import _ from 'lodash';
 
-class UserLikes extends React.Component {
+class Followers extends React.Component {
 
-    constructor(props) {
+    constructor(props){
         super(props);
+        let type = '';
+        let followers = '';
+        let kin = '';
+        let searchResult = [];
+        // The logged in User
+        if(this.props.screenProps.id === this.props.user._id) {
+            if (this.props.screenProps.type === 'followers') {
+                type= 'USER_FOLLOWER';
+                followers = this.props.user.followers;
+                searchResult  = this.props.user.followers;
+                kin = this.props.user.kin;
+            }else{
+                type= 'USER_KIN';
+                followers = this.props.user.followers;
+                console.log(this.props.user.kin);
+                searchResult  = this.props.user.kin;
+                kin = this.props.user.kin;
+            }
+        } else{
+            // We need to fetch the user
+        }
 
         this.state = {
             id: this.props.screenProps.id,
-            searchResult: [],
+            searchResult: searchResult,
             animating: true,
             userId: this.props.user._id ,
-            kin: this.props.user.kin
+            kin: kin,
+            followers: followers,
+            type: type
         };
+
     }
 
     _onSearch = (text) => {
@@ -35,20 +59,37 @@ class UserLikes extends React.Component {
         let foundElements = this.props.fileLikers.filter(obj => {
 
             return  userInput.test(obj.username) ||
-                    userInput.test(obj.name.firstName) ||
-                    userInput.test(obj.name.lastName) ||
-                    userInput.test(obj.name.firstName + ' '+ obj.name.lastName) ||
+                userInput.test(obj.name.firstName) ||
+                userInput.test(obj.name.lastName) ||
+                userInput.test(obj.name.firstName + ' '+ obj.name.lastName) ||
                 userInput.test(obj.name.lastName + ' '+ obj.name.firstName)
         });
 
         this.setState({searchResult: foundElements});
     };
 
-    componentWillMount () {
-        this.props.action.userLikedFiles(this.state.id).then(response => {
+    _userProfileFollowers = () => {
+       this.setState({animating: false});
+    };
+
+    _userProfileKin = () => {
+        this.setState({animating: false});
+    };
+
+    _differentUserFollowers = () => {
+        /*this.props.action.userLikedFiles(this.state.id).then(response => {
             this.setState({searchResult:this.props.fileLikers});
             this.setState({animating: false});
-        });
+        });*/
+    };
+
+    componentWillMount () {
+        switch(this.state.type) {
+            case 'USER_FOLLOWER': this._userProfileFollowers();
+            break;
+            case 'USER_KIN': this._userProfileKin();
+            break;
+        }
     }
 
     _onFollow = (e) => {
@@ -77,12 +118,7 @@ class UserLikes extends React.Component {
         });
     };
 
-    _onUserView = (e) => {
-        const { navigate } = this.props.navigation;
-        navigate('UserProfile', { user: e, navigation: this.props.screenProps.rootNavigation})
-    };
-
-    render () {
+    render(){
         return (
             <View style={styles.container}>
                 <View style={[styles.centerContent]}>
@@ -126,11 +162,6 @@ class UserLikes extends React.Component {
             </View>
         )
     }
-
-    componentDidMount() {
-
-    }
-
 }
 
 const styles = StyleSheet.create({
@@ -216,9 +247,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state, ownProps) {
     return {
-        user: state.user.presentUser,
-        fileLikers: state.files.likers
+        user: state.user.presentUser
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserLikes);
+export default connect(mapStateToProps, mapDispatchToProps)(Followers);

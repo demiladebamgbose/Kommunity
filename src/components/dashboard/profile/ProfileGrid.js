@@ -17,7 +17,7 @@ class ProfileGrid extends React.Component {
     constructor(props){
         super(props);
         let userId = '';
-        let navigation = '';
+        let navigation = false;
         if(this.props.screenProps.userId) {
             userId = this.props.screenProps.userId;
             navigation = this.props.screenProps.nav;
@@ -47,8 +47,7 @@ class ProfileGrid extends React.Component {
         let singleViewImage = _.find(files.recent.message.data, ['_id', e]);
 
         this.props.action.fetchSingleFileView(singleViewImage).then( response => {
-            console.log(this.state.navigation);
-            const { navigate } = this.state.navigation || this.props.navigation;
+            const { navigate } = this.state.navigation || this.props.screenProps.rootNavigation;
             navigate('SingleView', { image: '' })
         });
     };

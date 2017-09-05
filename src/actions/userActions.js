@@ -29,6 +29,10 @@ export function unFollowUserSuccess(user) {
     return {type: types.UNFOLLOW_USER, user};
 }
 
+export function userFoundSuccess(user) {
+    return {type: types.FIND_ONE_SEARCH, user};
+}
+
 export function createUser(user) {
     return dispatch => {
         return UserApi.createUser(user).then(user => {
@@ -85,6 +89,14 @@ export function unFollowUser(user) {
             dispatch(unFollowUserSuccess(user));
         }).catch(err => {
             throw(err);
+        })
+    }
+}
+
+export function findUser(userId){
+    return dispatch => {
+        return UserApi.findOneUser(userId).then( user=> {
+            dispatch(userFoundSuccess(user));
         })
     }
 }

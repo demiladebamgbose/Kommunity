@@ -6,6 +6,7 @@ import Upload from './src/components/upload/index';
 import SingleView from './src/components/tabs/SingleViewTab';
 import LoginTab from './src/components/user/TabSignUp';
 import UserLikes from './src/components/dashboard/profile/likes/UserLikesIndex';
+import ViewUser from './src/components/dashboard/profile/views/ViewUserDisplay';
 import {Provider} from 'react-redux';
 import configureStore from './src/store/ConfigureStore';
 
@@ -22,7 +23,8 @@ const Route = StackNavigator({
     UploadView: {screen: Upload},
     SingleView: {screen: SingleView},
     LoginTab: {screen: LoginTab},
-    UserLikes: {screen: UserLikes}
+    UserLikes: {screen: UserLikes},
+    ViewFollowers: {screen: ViewUser}
 });
 
 const App = () => (

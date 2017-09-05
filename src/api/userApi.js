@@ -63,6 +63,17 @@ class UserApi {
         })
     };
 
+    findOneUser = (userId) => {
+        return new Promise((resolve, reject)=> {
+            return fetch(url + `api/v1/users/${userId}/user`,{
+                method: 'GET'
+            }).then((response) => response.json())
+                .then((responseJson) => {
+                    resolve(Object.assign({}, responseJson.data));
+            });
+        })
+    };
+
     findUser = (user) => {
         return new Promise((resolve, reject)=> {
             return fetch(url + `api/v1/users/${user}`, {
@@ -94,7 +105,6 @@ class UserApi {
     };
 
     unFollowUser = (user) => {
-        console.log('In testing',user.unfollow._id);
         return new Promise((resolve, reject) => {
             return fetch(url + `api/v1/users/friend/${user.unfollow._id}`, {
                 method: 'PUT',
