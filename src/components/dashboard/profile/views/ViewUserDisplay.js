@@ -1,7 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import Followers from './Followers';
-import Kin from './Kin';
 
 const ViewDisplay = StackNavigator(
     {

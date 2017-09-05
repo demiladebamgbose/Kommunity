@@ -29,12 +29,16 @@ class Followers extends React.Component {
             }else{
                 type= 'USER_KIN';
                 followers = this.props.user.followers;
-                console.log(this.props.user.kin);
                 searchResult  = this.props.user.kin;
                 kin = this.props.user.kin;
             }
         } else{
             // We need to fetch the user
+            if (this.props.screenProps.type === 'followers') {
+                type= 'USER_SEARCH_FOLLOWER';
+            }else{
+                type = 'USER_SEARCH_KIN'
+            }
         }
 
         this.state = {
@@ -76,11 +80,22 @@ class Followers extends React.Component {
         this.setState({animating: false});
     };
 
-    _differentUserFollowers = () => {
-        /*this.props.action.userLikedFiles(this.state.id).then(response => {
-            this.setState({searchResult:this.props.fileLikers});
-            this.setState({animating: false});
-        });*/
+    _userSearchFollower =() => {
+        this.props.userAction.findUser(this.state.id).then(response => {
+            console.log(this.props.userProfile);
+             this.setState({searchResult:
+                this.props.userProfile.followers, animating: false
+             });
+         });
+    };
+
+    _userSearchKin = () => {
+        this.props.userAction.findUser(this.state.id).then(response => {
+            console.log(this.props.userProfile);
+             this.setState({searchResult:
+                this.props.userProfile.kin, animating: false
+             });
+         });
     };
 
     componentWillMount () {
@@ -88,6 +103,10 @@ class Followers extends React.Component {
             case 'USER_FOLLOWER': this._userProfileFollowers();
             break;
             case 'USER_KIN': this._userProfileKin();
+            break;
+            case 'USER_SEARCH_FOLLOWER': this._userSearchFollower();
+            break;
+            case  'USER_SEARCH_KIN': this._userSearchKin();
             break;
         }
     }
@@ -247,7 +266,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state, ownProps) {
     return {
-        user: state.user.presentUser
+        user: state.user.presentUser,
+        userProfile: state.user.userProfile
     }
 }
 
