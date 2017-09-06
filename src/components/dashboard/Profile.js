@@ -20,7 +20,7 @@ class Profile extends React.Component {
         if(this.props.navigation.state.params) {
              id = this.props.navigation.state.params.user;
              rootNav = this.props.navigation.state.params.navigation
-        }else{
+        } else{
             id = this.props.user._id;
             followers = this.props.user.followers.length;
             kin = this.props.user.kin.length;
@@ -60,15 +60,15 @@ class Profile extends React.Component {
     };
 
     _onKin =()=> {
-        const {navigate} = this.props.screenProps.rootNavigation;
+        const {navigate} = this.state.screenProps;
         navigate('ViewFollowers', {type: 'kin', id: this.state.user || this.props.user._id,
-            nav: this.props.screenProps.rootNavigation})
+            nav: this.state.screenProps})
     };
 
     _onFollowers =()=> {
-        const {navigate} = this.props.screenProps.rootNavigation;
+        const {navigate} = this.state.screenProps;
         navigate('ViewFollowers', {type: 'followers', id: this.state.user || this.props.user._id,
-            nav: this.props.screenProps.rootNavigation})
+            nav: this.state.screenProps})
     };
 
     componentDidMount() {

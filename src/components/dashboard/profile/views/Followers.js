@@ -61,14 +61,30 @@ class Followers extends React.Component {
         })
     };
 
+    _getSearchVariable = ()=> {
+        switch(this.state.type) {
+            case 'USER_FOLLOWER': return this._userProfileFollowersSearch();
+                break;
+            case 'USER_KIN': return this._userProfileKinSearch();
+                break;
+            case 'USER_SEARCH_FOLLOWER': return this._userSearchFollowerSearch();
+                break;
+            case  'USER_SEARCH_KIN': return this._userSearchKinSearch();
+                break;
+        }
+    };
+
     _onSearch = (text) => {
+
+        let searchData = this._getSearchVariable();
+
         if(!text){
-            this.setState({searchResult: this.props.fileLikers});
+            this.setState({searchResult: searchData});
             return;
         }
 
         let userInput = new RegExp('(' + text+ ')', 'gi');
-        let foundElements = this.props.fileLikers.filter(obj => {
+        let foundElements = searchData.filter(obj => {
 
             return  userInput.test(obj.username) ||
                 userInput.test(obj.name.firstName) ||
@@ -80,12 +96,24 @@ class Followers extends React.Component {
         this.setState({searchResult: foundElements});
     };
 
+    _userProfileFollowersSearch = () => {
+       return this.props.user.followers;
+    };
+
     _userProfileFollowers = () => {
        this.setState({animating: false});
     };
 
+    _userProfileKinSearch = () => {
+        return this.props.user.kin;
+    };
+
     _userProfileKin = () => {
         this.setState({animating: false});
+    };
+
+    _userSearchFollowerSearch =() => {
+        return this.props.userProfile.followers;
     };
 
     _userSearchFollower =() => {
@@ -95,6 +123,10 @@ class Followers extends React.Component {
                 this.props.userProfile.followers, animating: false, kin: this.props.userProfile.followers
              });
          });
+    };
+
+    _userSearchKinSearch = () => {
+        return  this.props.userProfile.kin;
     };
 
     _userSearchKin = () => {
