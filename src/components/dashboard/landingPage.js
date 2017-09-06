@@ -48,7 +48,7 @@ class Land extends React.Component {
             fontSize: 31
         },
         headerRight: (
-            <MessageIcon/>
+            <MessageIcon screenProps={{ rootNavigation: navigation }} />
         ),
         headerLeft: (
             <Notification/>

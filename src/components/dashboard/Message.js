@@ -5,13 +5,24 @@ import React from 'react';
 import {Image, TouchableHighlight, StyleSheet} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const Message = ()=> {
+class Message extends React.Component {
 
-    return (
-        <TouchableHighlight style={styles.message}>
-            <FontAwesome name="envelope-o" size={18}  />
-        </TouchableHighlight>
-    )
+    constructor(props){
+        super(props);
+        console.log(this.props, 'in message icon');
+    }
+
+    _onMessageView = () => {
+
+    };
+
+ render() {
+     return (
+         <TouchableHighlight style={styles.message}>
+             <FontAwesome name="envelope-o" size={18}/>
+         </TouchableHighlight>
+     )
+ }
 };
 
 const styles = StyleSheet.create({
