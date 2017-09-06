@@ -8,6 +8,7 @@ import MessageIcon from './Message';
 import Notification from './Notification';
 import Pusher from 'pusher-js/react-native';
 import {Alert} from 'react-native';
+import {connect} from 'react-redux';
 
 Pusher.logToConsole = true;
 
@@ -40,7 +41,15 @@ const LandingPage = TabNavigator({
     },
 });
 
+let property = {};
+
 class Land extends React.Component {
+
+    constructor(props){
+        super(props);
+        property = this;
+    }
+
     static navigationOptions = ({ navigation }) => ({
         title: 'Kommunity',
         headerTitleStyle: {
@@ -48,12 +57,17 @@ class Land extends React.Component {
             fontSize: 31
         },
         headerRight: (
-            <MessageIcon screenProps={{ rootNavigation: navigation }} />
+            <MessageIcon screenProps={{ rootNavigation: navigation, parent: property }} />
         ),
         headerLeft: (
             <Notification/>
         ),
     });
+
+
+    componentWillMount() {
+
+    }
 
     componentDidMount(){
         var pusher = new Pusher('1dbaf5cd35a87b7793b5', {
@@ -61,10 +75,11 @@ class Land extends React.Component {
             encrypted: true
         });
 
-        var channel = pusher.subscribe('my-channel');
+        var channel = pusher.subscribe(this.props.user._id);
+
         channel.bind('my-event', function(data) {
             Alert.alert(
-                data.message
+                data.message.username + data.message.text
         )});
     }
 
@@ -75,4 +90,10 @@ class Land extends React.Component {
     }
 }
 
-export default Land;
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user.presentUser
+    }
+}
+
+export default connect(mapStateToProps, null)(Land);

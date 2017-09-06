@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../actions/fileActions';
 import * as userActions from '../../actions/userActions';
+import _ from 'lodash';
 
 class Profile extends React.Component {
 
@@ -17,20 +18,34 @@ class Profile extends React.Component {
         let followers = 0;
         let kin = 0;
         let screenProps = '';
+        let buttonText = 'Loading ...';
+        let name = '';
+        let userIdMessage = '';
+
+        // This is when profile is shown from a state that is not the current users
         if(this.props.navigation.state.params) {
              id = this.props.navigation.state.params.user;
              rootNav = this.props.navigation.state.params.navigation
         } else{
+            // The profile here belongs to the user
             id = this.props.user._id;
             followers = this.props.user.followers.length;
             kin = this.props.user.kin.length;
+            name = this.props.user.username;
+            userIdMessage = this.props.user._id;
         }
 
-        // This is gotten from when Profile.js is called when trnsition is from kins or followers
+        // This is gotten from when Profile.js is called when transition is from kins or followers
         if(this.props.screenProps){
             screenProps = this.props.screenProps.rootNavigation;
         }else{
             screenProps = this.props.navigation.state.params.navigation;
+        }
+
+
+        // This checks to see if the user is the current user
+        if(id === this.props.user._id) {
+            buttonText = 'Edit Profile';
         }
 
         this.state = {
@@ -39,7 +54,10 @@ class Profile extends React.Component {
             post: 0,
             followers: followers,
             kin: kin,
-            screenProps: screenProps
+            screenProps: screenProps,
+            buttonText,
+            name,
+            id: userIdMessage
         }
     }
 
@@ -73,16 +91,37 @@ class Profile extends React.Component {
 
     componentDidMount() {
         let userId = this.state.user || this.props.user._id;
+        // We want to fetch the users files for the total amount of post
         this.props.action.fetchUserFiles(userId).then( response => {
             let files = this.props.files;
             this.setState({post: (files.userFile.message.data.length)});
         });
 
+        // We want to fetch the users kins and followers
         if(this.props.navigation.state.params) {
             this.props.userAction.findUser(this.state.user).then( response => {
+                let buttonText = 'Follow';
+                let foundElement = _.find(this.props.user.kin, {'_id': this.props.userProfile._id});
+                if(foundElement){
+                    buttonText = 'Message';
+                }
                 this.setState({followers: this.props.userProfile.followers.length,
-                    kin: this.props.userProfile.kin.length});
+                    kin: this.props.userProfile.kin.length, buttonText,
+                    name: this.props.userProfile.username, id: this.props.userProfile._id});
             });
+        }
+    };
+
+    _navigateToMessage =() => {
+        const {navigate} = this.state.screenProps;
+        navigate('SingleMessage', {type: 'user', id: this.state.user || this.props.user._id,
+            nav: this.state.screenProps, 'sender': this.state.id})
+    };
+
+    _onRespondToButtonText = () => {
+        switch (this.state.buttonText) {
+            case 'Message': this._navigateToMessage();
+            break;
         }
     };
 
@@ -92,7 +131,7 @@ class Profile extends React.Component {
                 <View style={styles.topProfile}>
                     <View style={{width: ((25 / 100) * width)}}>
                         <Circle url="https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"
-                                label="jols"
+                                label={this.state.name}
                                 click={this._onProfileClick}
                         />
                     </View>
@@ -132,9 +171,9 @@ class Profile extends React.Component {
                                 justifyContent: 'space-between', marginTop: 4, marginBottom: 4}}
                         >
                             <View style={{width: ((50 / 100) * width)}}>
-                                <TouchableOpacity style={styles.button}>
+                                <TouchableOpacity onPress={this._onRespondToButtonText} style={styles.button}>
                                     <Text style={{fontSize: 11, textAlign: 'center'}}>
-                                        Edit Profile
+                                        {this.state.buttonText}
                                     </Text>
                                 </TouchableOpacity>
                             </View>

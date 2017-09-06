@@ -2,25 +2,25 @@
  * Created by jolaadeadewale on 04/08/2017.
  */
 import React from 'react';
-import {Image, TouchableHighlight, StyleSheet} from 'react-native';
+import {Image, TouchableOpacity, StyleSheet} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 class Message extends React.Component {
 
     constructor(props){
         super(props);
-        console.log(this.props, 'in message icon');
     }
 
     _onMessageView = () => {
-
+        const {navigate} = this.props.screenProps.rootNavigation;
+        navigate('Message', {user: ''});
     };
 
  render() {
      return (
-         <TouchableHighlight style={styles.message}>
+         <TouchableOpacity onPress={this._onMessageView} style={styles.message}>
              <FontAwesome name="envelope-o" size={18}/>
-         </TouchableHighlight>
+         </TouchableOpacity>
      )
  }
 };
