@@ -8,7 +8,8 @@ const initialState = {
     allUsers: {},
     searchUsers: [],
     likedFiles: [],
-    userProfile: {}
+    userProfile: {},
+    messageStatus: ''
 };
 
 export default function userReducer(state = initialState, action) {
@@ -58,6 +59,11 @@ export default function userReducer(state = initialState, action) {
         case types.FIND_ONE_SEARCH:
             return {
                 ...state, userProfile: action.user
+            };
+
+        case types.SEND_MESSAGE_USER:
+            return {
+                ...state, messageStatus: action.data
             };
 
         default:
