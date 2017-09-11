@@ -118,7 +118,6 @@ class Followers extends React.Component {
 
     _userSearchFollower =() => {
         this.props.userAction.findUser(this.state.id).then(response => {
-            console.log(this.props.userProfile);
              this.setState({searchResult:
                 this.props.userProfile.followers, animating: false, kin: this.props.userProfile.followers
              });

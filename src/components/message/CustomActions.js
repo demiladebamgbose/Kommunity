@@ -154,7 +154,7 @@ export default class CustomActions extends React.Component {
                         maximum={10}
                         imagesPerRow={4}
                         groupTypes="Album"
-                        assetType="assetType"
+                        assetType="All"
                         callback={this.selectImages}
                         selected={[]}
                     />

@@ -134,7 +134,7 @@ class UserApi {
                 body: JSON.stringify(obj)
             }).then((response)=> response.json()).then((responseJson) => {
                 if(responseJson.message.data === 'sent')
-                resolve(Object.assign({}, responseJson.message.data));
+                resolve(Object.assign({}, {'data': responseJson.message.data}));
                 else{
                     reject(Object.assign({}, responseJson));
                 }
