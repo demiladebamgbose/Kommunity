@@ -16,9 +16,15 @@ export function screenShowingSuccess(data) {
     }
 }
 
-export function newMessage(msg) {
+export function currentUserSuccess(data) {
+    return {
+        type: types.CURRENT_MESSAE_USER, data
+    }
+}
+
+export function sendNewMessage(msg) {
     return dispatch => {
-        MessageApi.newMessage(msg).then(data => {
+        return MessageApi.newMessage(msg).then(data => {
             dispatch(newMessageSuccess(data));
         })
     }
@@ -26,6 +32,16 @@ export function newMessage(msg) {
 
 export function screenShowing(status) {
     return dispatch => {
-        dispatch(screenShowingSuccess(status))
+        return new Promise((resolve, reject)=> {
+            resolve(dispatch(screenShowingSuccess(Object.assign({},status))))
+        });
+    }
+}
+
+export function currentUser(user) {
+    return dispatch => {
+        return new Promise((resolve, reject) => {
+            resolve(dispatch(currentUserSuccess(Object.assign({},user))))
+        });
     }
 }

@@ -9,7 +9,8 @@ const initialState = {
     currentMessage : {},
     userPreviousMessage: [],
     newMessage: {},
-    isShowing: false
+    isShowing: false,
+    currentUser: []
 };
 
 export default function messageReducer(state = initialState, action) {
@@ -17,6 +18,11 @@ export default function messageReducer(state = initialState, action) {
         case types.NEW_USER_MESSAGE:
             return {
                 ...state, newMessage: action.data
+            };
+
+        case types.MESSAGE_SCREEN_SHOWING:
+            return {
+                ...state, isShowing: action.data
             };
 
         default:

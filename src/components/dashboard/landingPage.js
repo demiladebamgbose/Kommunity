@@ -79,9 +79,11 @@ class Land extends React.Component {
 
         var channel = pusher.subscribe(this.props.user._id);
 
+
         channel.bind('my-event', function(data) {
-            this.props.action.newMessage(data).then( response => {
-                console.log('Message has returned', this.props.message);
+           // if(property.props.messageScreen)
+            property.props.action.sendNewMessage(data).then( response => {
+                console.log('Message has returned', property.props.message);
             });
 
             /*Alert.alert(
@@ -101,7 +103,8 @@ class Land extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         user: state.user.presentUser,
-        message: state.message.newMessage
+        message: state.messages.newMessage,
+        messageScreen: state.messages
     }
 }
 

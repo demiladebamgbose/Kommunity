@@ -12,6 +12,8 @@ import CustomActions from './CustomActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
+import * as messageActions from '../../actions/messageActions';
+
 //import CustomView from './CustomView';
 
 class SingleMessage extends React.Component {
@@ -22,8 +24,7 @@ class SingleMessage extends React.Component {
          nav: this.state.screenProps, 'sender': this.state.id})
          */
 
-        console.log(this.props, 'in messages');
-        console.log('The sender is ', this.props.navigation.state.params.sender);
+
         this.state = {
             messages: [],
             loadEarlier: true,
@@ -44,6 +45,14 @@ class SingleMessage extends React.Component {
     }
 
     componentWillMount() {
+        let obj = {'data': true};
+        this.props.messages.screenShowing(obj).then( response => {
+
+        });
+        let user = {'data': this.state.sender};
+        this.props.messages.currentUser(user).then( response => {
+
+        });
         this._isMounted = true;
         this.setState(() => {
             return {
@@ -79,6 +88,26 @@ class SingleMessage extends React.Component {
 
     componentWillUnmount() {
         this._isMounted = false;
+        let obj = {'data': false};
+        this.props.messages.screenShowing(obj).then( response => {
+
+        });
+        let user = {'data': ''};
+        this.props.messages.currentUser(user).then( response => {
+
+        });
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.message.newMessage.message) {
+            this.setState((previousState) => {
+                return {
+                    messages: GiftedChat.append(previousState.messages,
+                        nextProps.message.newMessage.message.text),
+                };
+            });
+        }
     }
 
     onLoadEarlier() {
@@ -293,13 +322,15 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state, ownProps) {
     return {
-        user: state.user.presentUser
+        user: state.user.presentUser,
+        message: state.messages
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        action: bindActionCreators(userActions, dispatch)
+        action: bindActionCreators(userActions, dispatch),
+        messages: bindActionCreators(messageActions, dispatch)
     }
 }
 
