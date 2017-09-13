@@ -101,6 +101,7 @@ class SingleMessage extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.message.newMessage.message) {
+            console.log(this.props.message)
             this.setState((previousState) => {
                 return {
                     messages: GiftedChat.append(previousState.messages,

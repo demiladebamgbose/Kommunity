@@ -41,7 +41,7 @@ export function screenShowing(status) {
 export function currentUser(user) {
     return dispatch => {
         return new Promise((resolve, reject) => {
-            resolve(dispatch(currentUserSuccess(Object.assign({},user))))
+            resolve(dispatch(currentUserSuccess(Object.assign([],user))))
         });
     }
 }
