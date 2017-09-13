@@ -123,6 +123,25 @@ class UserApi {
         });
     };
 
+    sendMessage = (obj) => {
+        return new Promise((resolve, reject) => {
+            return fetch(url + `api/v1/message`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(obj)
+            }).then((response)=> response.json()).then((responseJson) => {
+                if(responseJson.message.data === 'sent')
+                resolve(Object.assign({}, {'data': responseJson.message.data}));
+                else{
+                    reject(Object.assign({}, responseJson));
+                }
+            })
+        })
+    };
+
 }
 
 export default new UserApi();

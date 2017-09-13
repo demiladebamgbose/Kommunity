@@ -1,3 +1,46 @@
+/**
+ * Created by jolaadeadewale on 09/09/2017.
+ */
+/*import React from 'react';
+import {View, Text, Image, Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
+const {width, height} = Dimensions.get('window');
+
+const ChatView = ({message, sender}) => {
+    return (
+        <View style={{margin: 5,  width: ((65 / 100) * width), flexDirection: 'column', alignItems: (sender) ? 'flex-start': 'flex-end'}}>
+            <TouchableOpacity style={{
+            marginTop: 4,
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 5,
+            paddingRight: 5,
+            borderRadius: 7,
+            backgroundColor: (sender) ? 'white': '#d3d3d3', borderColor: 'grey',
+            borderWidth: 1,
+            borderStyle: 'solid',
+              }}>
+            <Text style={{ fontSize: 10}}>
+                {message}
+            </Text>
+            </TouchableOpacity>
+        </View>
+    )
+};
+
+const styles = StyleSheet.create({
+    button: {
+        marginTop: 2,
+        paddingTop: 3,
+        paddingBottom: 3,
+        backgroundColor: 'white',
+        borderRadius: 7,
+        borderColor: '#D3D3D3',
+        borderWidth: 1,
+        borderStyle: 'solid',
+    }
+});
+
+export default ChatView; */
 
 import React from 'react';
 import {
@@ -9,28 +52,16 @@ import {
 
 import {GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as userActions from '../../actions/userActions';
-import * as messageActions from '../../actions/messageActions';
-
 //import CustomView from './CustomView';
 
-class SingleMessage extends React.Component {
+ class ChatView extends React.Component {
     constructor(props) {
         super(props);
-        /*
-         navigate('SingleMessage', {type: 'user', id: this.state.user || this.props.user._id,
-         nav: this.state.screenProps, 'sender': this.state.id})
-         */
-
-
         this.state = {
             messages: [],
             loadEarlier: true,
             typingText: null,
             isLoadingEarlier: false,
-            sender: this.props.navigation.state.params.sender
         };
 
         this._isMounted = false;
@@ -45,21 +76,13 @@ class SingleMessage extends React.Component {
     }
 
     componentWillMount() {
-        let obj = {'data': true};
-        this.props.messages.screenShowing(obj).then( response => {
-
-        });
-        let user = {'data': this.state.sender};
-        this.props.messages.currentUser(user).then( response => {
-
-        });
         this._isMounted = true;
         this.setState(() => {
             return {
                 messages: [
                     {
                         _id: Math.round(Math.random() * 1000000),
-                        text: 'Yes, and I love it',
+                        text: 'Yes, and I use Gifted Chat!',
                         createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
                         user: {
                             _id: 1,
@@ -74,11 +97,11 @@ class SingleMessage extends React.Component {
                     },
                     {
                         _id: Math.round(Math.random() * 1000000),
-                        text: 'Are you using Kommuniyt?',
+                        text: 'Are you building a chat app?',
                         createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
                         user: {
                             _id: 2,
-                            name: 'Titcombe',
+                            name: 'React Native',
                         },
                     },
                 ]
@@ -88,26 +111,6 @@ class SingleMessage extends React.Component {
 
     componentWillUnmount() {
         this._isMounted = false;
-        let obj = {'data': false};
-        this.props.messages.screenShowing(obj).then( response => {
-
-        });
-        let user = {'data': ''};
-        this.props.messages.currentUser(user).then( response => {
-
-        });
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.message.newMessage.message) {
-            this.setState((previousState) => {
-                return {
-                    messages: GiftedChat.append(previousState.messages,
-                        nextProps.message.newMessage.message.text),
-                };
-            });
-        }
     }
 
     onLoadEarlier() {
@@ -148,29 +151,16 @@ class SingleMessage extends React.Component {
             }
         }, 1000); // simulating network
     }
-    /*
-     let senderId = req.body.senderId;
-     let message = req.body.message;
-     let userName = req.body.user.username;
-     let userId = req.body.user._id;
-     */
-    onSend(messages = []) {
-        let obj = {};
-        obj.senderId = this.state.sender;
-        obj.message = messages;
-        obj.user = this.props.user;
 
-        console.log(obj, 'just before sending');
-        this.props.action.sendMessage(obj).then(response => {
-            this.setState((previousState) => {
-                return {
-                    messages: GiftedChat.append(previousState.messages, messages),
-                };
-            });
+    onSend(messages = []) {
+        this.setState((previousState) => {
+            return {
+                messages: GiftedChat.append(previousState.messages, messages),
+            };
         });
 
         // for demo purpose
-       // this.answerDemo(messages);
+        this.answerDemo(messages);
     }
 
     answerDemo(messages) {
@@ -265,10 +255,10 @@ class SingleMessage extends React.Component {
 
     renderCustomView(props) {
         return (
-            /* <CustomView
-             {...props}
-             /> */
-            null
+           /* <CustomView
+                {...props}
+            /> */
+           null
         );
     }
 
@@ -295,7 +285,7 @@ class SingleMessage extends React.Component {
                 isLoadingEarlier={this.state.isLoadingEarlier}
 
                 user={{
-          _id: this.props.user._id, // sent messages should have same user._id
+          _id: 1, // sent messages should have same user._id
         }}
 
                 renderActions={this.renderCustomActions}
@@ -320,18 +310,4 @@ const styles = StyleSheet.create({
     },
 });
 
-function mapStateToProps(state, ownProps) {
-    return {
-        user: state.user.presentUser,
-        message: state.messages
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        action: bindActionCreators(userActions, dispatch),
-        messages: bindActionCreators(messageActions, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleMessage);
+ export default ChatView;

@@ -9,6 +9,8 @@ import Notification from './Notification';
 import Pusher from 'pusher-js/react-native';
 import {Alert} from 'react-native';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as messageActions from '../../actions/messageActions';
 
 Pusher.logToConsole = true;
 
@@ -77,10 +79,18 @@ class Land extends React.Component {
 
         var channel = pusher.subscribe(this.props.user._id);
 
+
         channel.bind('my-event', function(data) {
-            Alert.alert(
+           // if(property.props.messageScreen)
+            property.props.action.sendNewMessage(data).then( response => {
+                console.log('Message has returned', property.props.message);
+            });
+
+            /*Alert.alert(
                 data.message.username + data.message.text
-        )});
+            ) */
+
+        });
     }
 
     render () {
@@ -92,8 +102,16 @@ class Land extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        user: state.user.presentUser
+        user: state.user.presentUser,
+        message: state.messages.newMessage,
+        messageScreen: state.messages
     }
 }
 
-export default connect(mapStateToProps, null)(Land);
+function mapDispatchToProps(dispatch) {
+    return {
+        action: bindActionCreators(messageActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Land);

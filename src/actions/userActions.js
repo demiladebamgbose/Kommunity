@@ -33,6 +33,10 @@ export function userFoundSuccess(user) {
     return {type: types.FIND_ONE_SEARCH, user};
 }
 
+export function sentMessageSuccess(data) {
+    return {type: types.SEND_MESSAGE_USER, data};
+}
+
 export function createUser(user) {
     return dispatch => {
         return UserApi.createUser(user).then(user => {
@@ -97,6 +101,18 @@ export function findUser(userId){
     return dispatch => {
         return UserApi.findOneUser(userId).then( user=> {
             dispatch(userFoundSuccess(user));
+        }).catch(err => {
+            throw(err);
+        })
+    }
+}
+
+export function sendMessage(obj){
+    return dispatch => {
+        return UserApi.sendMessage(obj).then(data => {
+            dispatch(sentMessageSuccess(data));
+        }).catch(err => {
+            throw(err);
         })
     }
 }
