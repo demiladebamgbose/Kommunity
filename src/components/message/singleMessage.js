@@ -14,8 +14,6 @@ import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
 import * as messageActions from '../../actions/messageActions';
 
-//import CustomView from './CustomView';
-
 class SingleMessage extends React.Component {
     constructor(props) {
         super(props);
@@ -23,14 +21,13 @@ class SingleMessage extends React.Component {
          navigate('SingleMessage', {type: 'user', id: this.state.user || this.props.user._id,
          nav: this.state.screenProps, 'sender': this.state.id})
          */
-
-
         this.state = {
             messages: [],
             loadEarlier: true,
             typingText: null,
             isLoadingEarlier: false,
-            sender: this.props.navigation.state.params.sender
+            sender: this.props.navigation.state.params.sender,
+            newConversation: false
         };
 
         this._isMounted = false;
@@ -40,11 +37,20 @@ class SingleMessage extends React.Component {
         this.renderBubble = this.renderBubble.bind(this);
         this.renderFooter = this.renderFooter.bind(this);
         this.onLoadEarlier = this.onLoadEarlier.bind(this);
-
         this._isAlright = null;
     }
 
     componentWillMount() {
+
+        if(!this.props.message.previousMessages) {
+            this.setState({newConversation: true});
+            this.setState(() => {
+                return {
+                    messages: []
+                };
+            });
+        }
+
         let obj = {'data': true};
         this.props.messages.screenShowing(obj).then( response => {
 
@@ -54,39 +60,37 @@ class SingleMessage extends React.Component {
 
         });
         this._isMounted = true;
-        this.setState(() => {
-            return {
-                messages: [
-                    {
-                        _id: Math.round(Math.random() * 1000000),
-                        text: 'Yes, and I love it',
-                        createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
-                        user: {
-                            _id: 1,
-                            name: 'Developer',
-                        },
-                        sent: true,
-                        received: true,
-                        // location: {
-                        //   latitude: 48.864601,
-                        //   longitude: 2.398704
-                        // },
-                    },
-                    {
-                        _id: Math.round(Math.random() * 1000000),
-                        text: 'Are you using Kommuniyt?',
-                        createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
-                        user: {
-                            _id: 2,
-                            name: 'Titcombe',
-                        },
-                    },
-                ]
-            };
-        });
     }
 
+    /*
+     {
+     _id: Math.round(Math.random() * 1000000),
+     text: 'Yes, and I love it',
+     createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
+     user: {
+     _id: 1,
+     name: 'Developer',
+     },
+     sent: true,
+     received: true,
+     // location: {
+     //   latitude: 48.864601,
+     //   longitude: 2.398704
+     // },
+     },
+     {
+     _id: Math.round(Math.random() * 1000000),
+     text: 'Are you using Kommuniyt?',
+     createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
+     user: {
+     _id: 2,
+     name: 'Titcombe',
+     },
+     },
+     */
+
     componentWillUnmount() {
+
         this._isMounted = false;
         let obj = {'data': false};
         this.props.messages.screenShowing(obj).then( response => {
@@ -118,7 +122,13 @@ class SingleMessage extends React.Component {
             };
         });
 
-        setTimeout(() => {
+        this.setState((previousState) => {
+            return {
+                isLoadingEarlier: false,loadEarlier: false
+            };
+        });
+
+        /*setTimeout(() => {
             if (this._isMounted === true) {
                 this.setState((previousState) => {
                     return {
@@ -148,27 +158,28 @@ class SingleMessage extends React.Component {
                 });
             }
         }, 1000); // simulating network
+        */
     }
-    /*
-     let senderId = req.body.senderId;
-     let message = req.body.message;
-     let userName = req.body.user.username;
-     let userId = req.body.user._id;
-     */
+
     onSend(messages = []) {
         let obj = {};
-        obj.senderId = this.state.sender;
-        obj.message = messages;
+        obj.recipient = this.state.sender;
+        obj.composedMessage = messages;
         obj.user = this.props.user;
 
         console.log(obj, 'just before sending');
-        this.props.action.sendMessage(obj).then(response => {
-            this.setState((previousState) => {
-                return {
-                    messages: GiftedChat.append(previousState.messages, messages),
-                };
+        if(this.state.messages.length) {
+
+        } else{
+            this.props.action.sendMessage(obj).then(response => {
+                console.log(this.props.userStatus);
+                this.setState((previousState) => {
+                    return {
+                        messages: GiftedChat.append(previousState.messages, messages),
+                    };
+                });
             });
-        });
+        }
 
         // for demo purpose
        // this.answerDemo(messages);
@@ -324,7 +335,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state, ownProps) {
     return {
         user: state.user.presentUser,
-        message: state.messages
+        message: state.messages,
+        userStatus: state.user
     }
 }
 

@@ -68,7 +68,10 @@ class Land extends React.Component {
 
 
     componentWillMount() {
-
+        let user = this.props.user;
+        this.props.action.previousMessages(user).then( response => {
+            console.log(this.props.messageScreen, 'returned from retrieving conversation');
+        });
     }
 
     componentDidMount(){

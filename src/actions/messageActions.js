@@ -22,6 +22,24 @@ export function currentUserSuccess(data) {
     }
 }
 
+export function getMessagesSuccess(data) {
+    return {
+        type: types.PREVIOUS_MESSAGES, data
+    }
+}
+
+export function getPreviousConversationSucess(data) {
+    return {
+        type: types.USER_CONVERSATION_MESSAGE, data
+    }
+}
+
+export function getConversationListSuccess(data) {
+    return {
+        type: types.GET_CONVERSATION_LIST, data
+    }
+}
+
 export function sendNewMessage(msg) {
     return dispatch => {
         return MessageApi.newMessage(msg).then(data => {
@@ -43,5 +61,29 @@ export function currentUser(user) {
         return new Promise((resolve, reject) => {
             resolve(dispatch(currentUserSuccess(Object.assign([],user))))
         });
+    }
+}
+
+export function previousMessages(user) {
+    return dispatch => {
+        return MessageApi.retrieveMessages(user).then( data => {
+            dispatch(getMessagesSuccess(data))
+        })
+    }
+}
+
+export function previousConversations(user) {
+    return dispatch => {
+        return MessageApi.previousConversation().then( data => {
+            dispatch(getPreviousConversationSucess(data))
+        })
+    }
+}
+
+export function getConversationList(user) {
+    return dispatch => {
+        return MessageApi.getConversationList(user).then(data => {
+            dispatch(getConversationListSuccess(data))
+        })
     }
 }
