@@ -10,7 +10,8 @@ const initialState = {
     userPreviousMessage: [],
     newMessage: {},
     isShowing: false,
-    currentUser: []
+    currentUser: [],
+    conversationList: []
 };
 
 export default function messageReducer(state = initialState, action) {
@@ -38,6 +39,11 @@ export default function messageReducer(state = initialState, action) {
         case types.USER_CONVERSATION_MESSAGE:
             return {
                 ...state, userPreviousMessage: action.data
+            };
+
+        case types.GET_CONVERSATION_LIST:
+            return {
+                ...state, conversationList: action.data
             };
 
         default:

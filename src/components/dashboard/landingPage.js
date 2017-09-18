@@ -72,6 +72,10 @@ class Land extends React.Component {
         this.props.action.previousMessages(user).then( response => {
             console.log(this.props.messageScreen, 'returned from retrieving conversation');
         });
+
+        this.props.action.getConversationList(user).then(response => {
+            console.log(this.props.messageScreen, 'returned after convo list');
+        })
     }
 
     componentDidMount(){
@@ -93,9 +97,6 @@ class Land extends React.Component {
                     'message screen');
             }
 
-            /*Alert.alert(
-                data.message.username + data.message.text
-            ) */
 
         });
     }
