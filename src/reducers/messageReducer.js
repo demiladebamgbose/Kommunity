@@ -25,6 +25,21 @@ export default function messageReducer(state = initialState, action) {
                 ...state, isShowing: action.data
             };
 
+        case types.CURRENT_MESSAE_USER:
+            return{
+                ...state, currentUser: action.data
+            };
+
+        case types.PREVIOUS_MESSAGES:
+            return {
+                ...state, previousMessages: action.data
+            };
+
+        case types.USER_CONVERSATION_MESSAGE:
+            return {
+                ...state, userPreviousMessage: action.data
+            };
+
         default:
             return state;
     }

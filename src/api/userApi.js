@@ -3,7 +3,7 @@
  */
 import {Constants} from 'expo';
 let  url = Constants.manifest.infoPlist.url;
-// let  url = 'https://kommunity-2-2-2.herokuapp.com/';
+/// let  url = 'https://kommunity-2-2-2.herokuapp.com/';
 
 class UserApi {
 
@@ -30,7 +30,6 @@ class UserApi {
 
     logUserIn =(user)=> {
         return new Promise((resolve, reject)=> {
-
             return fetch(url + 'api/v1/users/login' ,{
                 method: 'POST',
                 headers: {
@@ -53,7 +52,6 @@ class UserApi {
 
     findAll = () => {
         return new Promise((resolve, reject)=> {
-
             return fetch(url + 'api/v1/users', {
                 method: 'GET'
               }).then((response) => response.json())
@@ -133,10 +131,10 @@ class UserApi {
                 },
                 body: JSON.stringify(obj)
             }).then((response)=> response.json()).then((responseJson) => {
-                if(responseJson.message.data === 'sent')
-                resolve(Object.assign({}, {'data': responseJson.message.data}));
+                if(responseJson.message === 'Conversation started!')
+                    resolve(Object.assign({}, responseJson.conversationId));
                 else{
-                    reject(Object.assign({}, responseJson));
+                    reject('Error');
                 }
             })
         })

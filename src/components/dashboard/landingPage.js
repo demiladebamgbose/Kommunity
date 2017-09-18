@@ -7,7 +7,7 @@ import Profile from './Profile';
 import MessageIcon from './Message';
 import Notification from './Notification';
 import Pusher from 'pusher-js/react-native';
-import {Alert} from 'react-native';
+import {Alert, Modal} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as messageActions from '../../actions/messageActions';
@@ -68,7 +68,10 @@ class Land extends React.Component {
 
 
     componentWillMount() {
-
+        let user = this.props.user;
+        this.props.action.previousMessages(user).then( response => {
+            console.log(this.props.messageScreen, 'returned from retrieving conversation');
+        });
     }
 
     componentDidMount(){
@@ -81,10 +84,14 @@ class Land extends React.Component {
 
 
         channel.bind('my-event', function(data) {
-           // if(property.props.messageScreen)
-            property.props.action.sendNewMessage(data).then( response => {
-                console.log('Message has returned', property.props.message);
-            });
+            if(property.props.messageScreen.isShowing) {
+                property.props.action.sendNewMessage(data).then(response => {
+                    console.log('Message has returned', property.props.message);
+                });
+            }else{
+                console.log('send to previous message as the user is not in ' +
+                    'message screen');
+            }
 
             /*Alert.alert(
                 data.message.username + data.message.text
