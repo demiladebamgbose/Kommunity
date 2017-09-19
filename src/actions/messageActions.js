@@ -74,7 +74,7 @@ export function previousMessages(user) {
 
 export function previousConversations(user) {
     return dispatch => {
-        return MessageApi.previousConversation().then( data => {
+        return MessageApi.previousConversation(user).then( data => {
             dispatch(getPreviousConversationSucess(data))
         })
     }

@@ -28,7 +28,7 @@ class Message extends React.Component {
         conversationList.forEach((data)=> {
             data.participants.forEach((obj)=> {
                 if(obj._id !== user._id){
-                    userConvos.push(obj);
+                    userConvos.push({userData: obj, id: data._id});
                 }
             });
         });
@@ -36,22 +36,36 @@ class Message extends React.Component {
         this.setState({searchResult:userConvos, animating: false});
     }
 
+    _onMessage = (conversationId) => {
+        let conversationSepearator = conversationId.split('::');
+        const {navigate} = this.props.navigation;
+        navigate('SingleMessage', {'id': conversationSepearator[0],
+            'sender': conversationSepearator[1]});
+    };
+
     render () {
        return (
            <View style={styles.container}>
+               <View style={{height: 15}}>
                <ActivityIndicator
                    animating = {this.state.animating}
                    size = "large"
                    style = {styles.activityIndicator}
                />
+               </View>
+               <View>
                <FlatList
                    data={this.state.searchResult}
                    renderItem={  ({item}) =>
 
-                        <SearchDisplay img="" id={item._id} userId={this.state.userId}
-                            other={item.name} name={item.username}
+                        <SearchDisplay img=""
+                         id={item.id + '::' +item.userData._id}
+                         userId={item.id + '::' +item.userData._id}
+                         viewClicked={this._onMessage}
+                            other={item.userData.name} name={item.userData.username}
                          /> }
                />
+               </View>
 
            </View>
 
@@ -61,8 +75,7 @@ class Message extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'space-between'
+        flex: 1
     },
     horizontalBox: {
         flexDirection: 'row',

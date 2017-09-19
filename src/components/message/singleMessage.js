@@ -21,14 +21,31 @@ class SingleMessage extends React.Component {
          navigate('SingleMessage', {type: 'user', id: this.state.user || this.props.user._id,
          nav: this.state.screenProps, 'sender': this.state.id})
          */
-        this.state = {
-            messages: [],
-            loadEarlier: true,
-            typingText: null,
-            isLoadingEarlier: false,
-            sender: this.props.navigation.state.params.sender,
-            newConversation: false
-        };
+
+        console.log('This is the conversation ', this.props.navigation.state.params);
+
+        if(this.props.navigation.state.params.id) {
+            this.state = {
+                messages: [],
+                conversation: this.props.navigation.state.params.id,
+                loadEarlier: true,
+                typingText: null,
+                isLoadingEarlier: false,
+                sender: this.props.navigation.state.params.sender,
+                newConversation: false
+            };
+
+        }else{
+            this.state = {
+                messages: [],
+                loadEarlier: true,
+                typingText: null,
+                isLoadingEarlier: false,
+                sender: this.props.navigation.state.params.sender,
+                newConversation: false
+            };
+        }
+
 
         this._isMounted = false;
         this.onSend = this.onSend.bind(this);
@@ -50,6 +67,17 @@ class SingleMessage extends React.Component {
                 };
             });
         }
+
+        // We want to fetch the previous conversation
+        if(this.props.navigation.state.params.id) {
+            let user = {};
+            user.conversationId = this.props.navigation.state.params.id;
+            this.props.messages.
+            previousConversations(user).then(resonse => {
+                console.log(this.props.message, 'from the user is here ');
+            })
+        }
+
 
         let obj = {'data': true};
         this.props.messages.screenShowing(obj).then( response => {
