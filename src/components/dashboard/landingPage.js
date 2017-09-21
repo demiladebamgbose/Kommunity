@@ -88,7 +88,12 @@ class Land extends React.Component {
 
 
         channel.bind('my-event', function(data) {
-            if(property.props.messageScreen.isShowing) {
+            console.log('Data that entered first is ', data);
+            if(property.props.messageScreen.isShowing
+                    && (property.props.messageScreen.currentUser
+                    ==  data.message.userId)) {
+
+                let id= data.message.userId;
                 property.props.action.sendNewMessage(data).then(response => {
                     console.log('Message has returned', property.props.message);
                 });

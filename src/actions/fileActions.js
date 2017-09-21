@@ -65,6 +65,7 @@ export function fetchUserFiles(userId) {
 
 export function likeFile(user, fileId, old) {
     return dispatch => {
+        console.log(user, '..... ->    ->    -> ')
         return FileApi.likeUserFile(user, fileId, old).then( data => {
             dispatch(fetchLikesSuccess(data));
         }).catch(err => {
