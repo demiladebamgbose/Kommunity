@@ -40,6 +40,12 @@ export function getConversationListSuccess(data) {
     }
 }
 
+export function sendReplySuccess(data) {
+    return {
+        type: types.SEND_CONVERSATION_REPLY, data
+    }
+}
+
 export function sendNewMessage(msg) {
     return dispatch => {
         return MessageApi.newMessage(msg).then(data => {
@@ -59,7 +65,7 @@ export function screenShowing(status) {
 export function currentUser(user) {
     return dispatch => {
         return new Promise((resolve, reject) => {
-            resolve(dispatch(currentUserSuccess(Object.assign([],user))))
+            resolve(dispatch(currentUserSuccess(user)))
         });
     }
 }
@@ -74,7 +80,7 @@ export function previousMessages(user) {
 
 export function previousConversations(user) {
     return dispatch => {
-        return MessageApi.previousConversation().then( data => {
+        return MessageApi.previousConversation(user).then( data => {
             dispatch(getPreviousConversationSucess(data))
         })
     }
@@ -84,6 +90,14 @@ export function getConversationList(user) {
     return dispatch => {
         return MessageApi.getConversationList(user).then(data => {
             dispatch(getConversationListSuccess(data))
+        })
+    }
+}
+
+export function sendReply(user) {
+    return dispatch => {
+        return MessageApi.sendConversationReply(user).then(data => {
+            dispatch(sendReplySuccess(data))
         })
     }
 }

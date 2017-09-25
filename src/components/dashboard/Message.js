@@ -13,7 +13,7 @@ class Message extends React.Component {
 
     _onMessageView = () => {
         const {navigate} = this.props.screenProps.rootNavigation;
-        navigate('Message', {user: ''});
+        navigate('Message', {user: '', root: this.props.screenProps.rootNavigation});
     };
 
  render() {

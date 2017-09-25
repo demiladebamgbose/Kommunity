@@ -17,18 +17,28 @@ import * as messageActions from '../../actions/messageActions';
 class SingleMessage extends React.Component {
     constructor(props) {
         super(props);
-        /*
-         navigate('SingleMessage', {type: 'user', id: this.state.user || this.props.user._id,
-         nav: this.state.screenProps, 'sender': this.state.id})
-         */
-        this.state = {
-            messages: [],
-            loadEarlier: true,
-            typingText: null,
-            isLoadingEarlier: false,
-            sender: this.props.navigation.state.params.sender,
-            newConversation: false
-        };
+        if(this.props.navigation.state.params.id) {
+            this.state = {
+                messages: [],
+                conversation: this.props.navigation.state.params.id,
+                loadEarlier: true,
+                typingText: null,
+                isLoadingEarlier: false,
+                sender: this.props.navigation.state.params.sender,
+                newConversation: false
+            };
+
+        }else{
+            this.state = {
+                messages: [],
+                loadEarlier: true,
+                typingText: null,
+                isLoadingEarlier: false,
+                sender: this.props.navigation.state.params.sender,
+                newConversation: false
+            };
+        }
+
 
         this._isMounted = false;
         this.onSend = this.onSend.bind(this);
@@ -51,11 +61,14 @@ class SingleMessage extends React.Component {
             });
         }
 
+        // We want to set teh screen to showing so when new messages come in,
+        // the screen showing can be set to true
+
         let obj = {'data': true};
         this.props.messages.screenShowing(obj).then( response => {
 
         });
-        let user = {'data': this.state.sender};
+        let user = this.state.sender;
         this.props.messages.currentUser(user).then( response => {
 
         });
@@ -96,7 +109,7 @@ class SingleMessage extends React.Component {
         this.props.messages.screenShowing(obj).then( response => {
 
         });
-        let user = {'data': ''};
+        let user = '';
         this.props.messages.currentUser(user).then( response => {
 
         });
@@ -113,6 +126,22 @@ class SingleMessage extends React.Component {
                 };
             });
         }
+    }
+
+    componentDidMount () {
+        if(this.props.navigation.state.params.id) {
+            let user = {};
+            user.conversationId = this.props.navigation.state.params.id;
+            this.props.messages.
+            previousConversations(user).then(resonse => {
+                console.log(this.props.message.userPreviousMessage, 'check')
+                this.props.message.userPreviousMessage.forEach((data)=> {
+                    console.log(data);
+                    this.setState({ messages: GiftedChat.append(this.state.messages, data.body)})
+                })
+            })
+        }
+
     }
 
     onLoadEarlier() {
@@ -153,7 +182,7 @@ class SingleMessage extends React.Component {
                             },
                         ]),
                         loadEarlier: false,
-                        isLoadingEarlier: false,
+                        isLoadingEarlier: false
                     };
                 });
             }
@@ -166,22 +195,38 @@ class SingleMessage extends React.Component {
         obj.recipient = this.state.sender;
         obj.composedMessage = messages;
         obj.user = this.props.user;
-
         console.log(obj, 'just before sending');
-        if(this.state.messages.length) {
 
-        } else{
-            this.props.action.sendMessage(obj).then(response => {
-                console.log(this.props.userStatus);
+        if(this.state.conversation && (this.state.messages.length)) {
+            obj.conversationId = this.state.conversation;
+            obj.author = this.props.user;
+            this.props.messages.sendReply(obj).then(response => {
+                console.log(this.props.message, ' back from message');
                 this.setState((previousState) => {
                     return {
                         messages: GiftedChat.append(previousState.messages, messages),
                     };
                 });
             });
+        }else {
+            if (this.state.messages.length) {
+
+            } else {
+                this.props.action.sendMessage(obj).then(response => {
+                    console.log(this.props.userStatus.messageStatus, ' send message');
+                    this.setState((previousState) => {
+                        return {
+                            conversation: this.props.userStatus.messageStatus,
+                            messages: GiftedChat.append(previousState.messages, messages)
+                        };
+                    });
+
+                    console.log('let us see the present state', this.state)
+                });
+            }
         }
 
-        // for demo purpose
+        // for demo purpose in gifted chat
        // this.answerDemo(messages);
     }
 
@@ -297,6 +342,10 @@ class SingleMessage extends React.Component {
         return null;
     }
 
+    typingMessage = (text) => {
+       // This shoudl be used to send is typing message
+    };
+
     render() {
         return (
             <GiftedChat
@@ -314,6 +363,7 @@ class SingleMessage extends React.Component {
                 renderBubble={this.renderBubble}
                 renderCustomView={this.renderCustomView}
                 renderFooter={this.renderFooter}
+                onInputTextChanged={this.typingMessage}
             />
         );
     }

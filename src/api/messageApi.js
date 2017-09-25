@@ -18,7 +18,6 @@ class MessageApi {
                 method: 'GET'
             }).then((response) => response.json())
                 .then((responseJson) => {
-                console.log('Came back as ', responseJson);
                     resolve(Object.assign([], responseJson.conversations));
                 });
         })
@@ -30,7 +29,9 @@ class MessageApi {
                 method: 'GET'
             }).then((response) => response.json())
                 .then((responseJson) => {
-                    resolve(Object.assign([], responseJson.conversations));
+                console.log('Thsi is meant to be a message', responseJson);
+
+                    resolve(Object.assign([], responseJson.conversation));
                 });
         })
     };
@@ -42,9 +43,25 @@ class MessageApi {
           })  .then((response) => response.json())
               .then((responseJson) => {
                   resolve(Object.assign([], responseJson.conversationList));
-              });
+          });
         })
     };
+
+    sendConversationReply = (user) => {
+        return new Promise((resolve, reject) => {
+            return fetch(url + `api/v1/message/reply`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify(user)
+            }).then((response)=> response.json())
+                .then((responseJson) => {
+                    resolve(responseJson.message);
+            });
+        });
+    }
 }
 
 export default new MessageApi();

@@ -132,7 +132,7 @@ class UserApi {
                 body: JSON.stringify(obj)
             }).then((response)=> response.json()).then((responseJson) => {
                 if(responseJson.message === 'Conversation started!')
-                    resolve(Object.assign({}, responseJson.conversationId));
+                    resolve(responseJson.conversationId);
                 else{
                     reject('Error');
                 }
