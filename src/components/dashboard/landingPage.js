@@ -11,6 +11,9 @@ import {Alert, Modal} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as messageActions from '../../actions/messageActions';
+import { Permissions, Notifications, Constants } from 'expo';
+const PUSH_ENDPOINT = `${Constants.manifest.infoPlist.url}api/v1/push-token`;
+//import registerForPushNotificationsAsync from 'registerForPushNotificationsAsync';
 
 Pusher.logToConsole = true;
 
@@ -43,7 +46,9 @@ const LandingPage = TabNavigator({
     },
 });
 
+
 let property = {};
+
 
 class Land extends React.Component {
 
@@ -51,6 +56,36 @@ class Land extends React.Component {
         super(props);
         property = this;
     }
+
+    registerForPushNotificationsAsync = async () => {
+        // Android remote notification permissions are granted during the app
+        // install, so this will only ask on iOS
+        let { status } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
+
+        // Stop here if the user did not grant permissions
+        if (status !== 'granted') {
+            return;
+        }
+
+        // Get the token that uniquely identifies this device
+        let token = await Notifications.getExponentPushTokenAsync();
+
+
+        // POST the token to our backend so we can use it to send pushes from there
+        return fetch(PUSH_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: {
+                    value: token,
+                },
+                _id: this.props.user._id
+            }),
+        });
+    };
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Kommunity',
@@ -67,16 +102,49 @@ class Land extends React.Component {
     });
 
 
+
+
     componentWillMount() {
         let user = this.props.user;
+       /* registerForPushNotification(user.username).then(data => {
+            Alert.alert('a', data)
+        }); */
+        this.registerForPushNotificationsAsync();
+
+
+        this._notificationSubscription = Notifications.addListener(this._handleNotification);
+
+
+        console.log('sent push notifction')
         this.props.action.previousMessages(user).then( response => {
             console.log(this.props.messageScreen, 'returned from retrieving conversation');
         });
 
         this.props.action.getConversationList(user).then(response => {
             console.log(this.props.messageScreen, 'returned after convo list');
-        })
+        });
+
+
+    //    registerForPushNotificationsAsync();
+
+        // Handle notifications that are received or selected while the app
+        // is open. If the app was closed and then opened by tapping the
+        // notification (rather than just tapping the app icon to open it),
+        // this function will fire on the next tick after the app starts
+        // with the notification data.
+    //    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+
+        //Expo.Notifications.addListener(this.notifcations)
     }
+
+
+    _handleNotification = (notification) => {
+        console.log(notification);
+    };
+
+    notifcations = () => {
+
+    };
 
     componentDidMount(){
         var pusher = new Pusher('1dbaf5cd35a87b7793b5', {
