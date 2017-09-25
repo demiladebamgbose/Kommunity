@@ -7,13 +7,14 @@ import Profile from './Profile';
 import MessageIcon from './Message';
 import Notification from './Notification';
 import Pusher from 'pusher-js/react-native';
-import {Alert, Modal} from 'react-native';
+import {Alert, Modal, AppState, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as messageActions from '../../actions/messageActions';
 import { Permissions, Notifications, Constants } from 'expo';
 const PUSH_ENDPOINT = `${Constants.manifest.infoPlist.url}api/v1/push-token`;
-//import registerForPushNotificationsAsync from 'registerForPushNotificationsAsync';
+import {MessageBar, MessageBarManager} from 'react-native-message-bar';
+const soundObject = new Expo.Audio.Sound();
 
 Pusher.logToConsole = true;
 
@@ -51,6 +52,10 @@ let property = {};
 
 
 class Land extends React.Component {
+
+    state = {
+        appState: AppState.currentState
+    };
 
     constructor(props){
         super(props);
@@ -124,26 +129,43 @@ class Land extends React.Component {
             console.log(this.props.messageScreen, 'returned after convo list');
         });
 
-
-    //    registerForPushNotificationsAsync();
-
-        // Handle notifications that are received or selected while the app
-        // is open. If the app was closed and then opened by tapping the
-        // notification (rather than just tapping the app icon to open it),
-        // this function will fire on the next tick after the app starts
-        // with the notification data.
-    //    this._notificationSubscription = Notifications.addListener(this._handleNotification);
-
-        //Expo.Notifications.addListener(this.notifcations)
     }
 
 
-    _handleNotification = (notification) => {
-        console.log(notification);
-    };
+    _handleNotification = async (notification) => {
 
-    notifcations = () => {
+        if(this.state.appState === 'active') {
+            try {
+                await soundObject.loadAsync('http://res.cloudinary.com/dd58mfinr/video/upload/v1506374324/button-26_zpnrpu.mp3');
+                await soundObject.playAsync();
+                // Your sound is playing!
+            } catch (error) {
+                // An error occurred!
+            };
 
+
+            MessageBarManager.showAlert({
+                title: 'Test',
+                titleStyle: { color: 'black', fontSize: 11, fontWeight: 'bold' },
+                message: JSON.stringify(notification),
+                alertType: 'info',
+                animationType: 'SlideFromLeft',
+                stylesheetInfo : { backgroundColor : '#ADD8E6',
+                    strokeColor : '#ADD8E6',
+                     color: 'black',
+                    fontFamily:'Serif',
+                    fontSize: 8,
+                    borderRadius: 15,
+                    viewTopInset : 8, // Default is 0
+                    viewLeftInset : 6, // Default is 0
+                    viewRightInset : 6,
+
+                },
+                messageStyle: { color: 'black', fontSize: 10,  fontFamily:'Serif' }
+                // See Properties section for full customization
+                // Or check `index.ios.js` or `index.android.js` for a complete example
+            });
+        }
     };
 
     componentDidMount(){
@@ -151,6 +173,10 @@ class Land extends React.Component {
             cluster: 'eu',
             encrypted: true
         });
+
+        AppState.addEventListener('change', this._handleAppStateChange);
+
+        MessageBarManager.registerMessageBar(this.refs.alert);
 
         var channel = pusher.subscribe(this.props.user._id);
 
@@ -174,9 +200,27 @@ class Land extends React.Component {
         });
     }
 
+    _handleAppStateChange = (nextAppState) => {
+        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+            console.log('App has come to the foreground!')
+        }
+        this.setState({appState: nextAppState});
+    }
+
+    componentWillUnmount() {
+        // Remove the alert located on this master page from the manager
+        AppState.removeEventListener('change', this._handleAppStateChange);
+
+        MessageBarManager.unregisterMessageBar();
+    }
+
     render () {
         return (
+            <View style={{flex: 1}}>
             <LandingPage screenProps={{ rootNavigation: this.props.navigation }} />
+                <MessageBar  ref="alert" />
+            </View>
+
         )
     }
 }
