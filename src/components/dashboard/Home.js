@@ -8,7 +8,7 @@ import Circle from '../dashboard/helper/Circle';
 let {height, width} = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
 import PostTab from './postTab/PostTab';
-let pictureSize = ((width/ 3) - 6);
+let pictureSize = ((33 / 100) * width)
 
 class Home extends React.Component {
 
@@ -150,15 +150,12 @@ const styles = StyleSheet.create({
         flex: 1
     },
     scrollViewStyle:{
-        borderBottomColor: 'grey',
+        borderBottomColor: '#e6e6e6',
         borderBottomWidth: 1,
-        margin: 15,
+        marginTop: 15,
         flex: 1
     },
     pictureContainer: {
-        marginRight: 15,
-        marginLeft: 15,
-        marginBottom: 15,
         flex: 1,
     }
 });

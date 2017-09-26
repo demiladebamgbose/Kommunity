@@ -4,6 +4,7 @@
     "sdkVersion": "18.0.0",
     "privacy": "public",
     "version": "1.0.0",
+    "orientation": "portrait",
     "icon": "./src/logo.png",
     "facebookScheme" : "810700055775747",
     "infoPlist": {

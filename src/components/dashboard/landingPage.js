@@ -65,6 +65,7 @@ class Land extends React.Component {
     registerForPushNotificationsAsync = async () => {
         // Android remote notification permissions are granted during the app
         // install, so this will only ask on iOS
+
         let { status } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
 
         // Stop here if the user did not grant permissions
@@ -136,24 +137,25 @@ class Land extends React.Component {
 
         if(this.state.appState === 'active') {
             try {
-                await soundObject.loadAsync('http://res.cloudinary.com/dd58mfinr/video/upload/v1506374324/button-26_zpnrpu.mp3');
+                await soundObject.loadAsync(require('../../sounds/notification.mp3'));
                 await soundObject.playAsync();
-                // Your sound is playing!
+
+                // Your sound is playing
             } catch (error) {
-                // An error occurred!
-            };
+                console.log(error)
+
+            }
 
 
             MessageBarManager.showAlert({
-                title: 'Test',
+                title: notification.data.title,
                 titleStyle: { color: 'black', fontSize: 11, fontWeight: 'bold' },
-                message: JSON.stringify(notification),
+                message: notification.data.message,
                 alertType: 'info',
                 animationType: 'SlideFromLeft',
                 stylesheetInfo : { backgroundColor : '#ADD8E6',
                     strokeColor : '#ADD8E6',
                      color: 'black',
-                    fontFamily:'Serif',
                     fontSize: 8,
                     borderRadius: 15,
                     viewTopInset : 8, // Default is 0
@@ -161,7 +163,8 @@ class Land extends React.Component {
                     viewRightInset : 6,
 
                 },
-                messageStyle: { color: 'black', fontSize: 10,  fontFamily:'Serif' }
+                messageStyle: { color: 'black', fontSize: 10 },
+                duration: 5000
                 // See Properties section for full customization
                 // Or check `index.ios.js` or `index.android.js` for a complete example
             });
