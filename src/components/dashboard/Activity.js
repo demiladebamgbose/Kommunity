@@ -1,6 +1,9 @@
 import React from 'react'
 import {Image, Button, Alert, View, Text} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as eventActions from '../../actions/eventActions';
 
 class Activity extends React.Component {
 
@@ -16,6 +19,12 @@ class Activity extends React.Component {
         ),
     };
 
+    componentWillMount() {
+        this.props.action.getEvents().then( response => {
+            console.log(this.props.event)
+        })
+    }
+
     render() {
         return (
             <View style={{flex: 1}}>
@@ -23,9 +32,26 @@ class Activity extends React.Component {
             </View>
         );
     }
+
+    componentDidMount () {
+
+    }
 }
 
-export default Activity;
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user.presentUser,
+        event: state.events
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        action: bindActionCreators(eventActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Activity);
 /*
 import React, { Component } from 'react';
 import {
