@@ -16,7 +16,7 @@ class EventApi {
             }).then((response)=> response.json()).then((responseJson) => {
 
                 if(responseJson.file) {
-                    resolve(Object.assign([], responseJson.message.file.likes))
+                    resolve(Object.assign([], responseJson.file))
                 }
             })
         })
@@ -33,7 +33,7 @@ class EventApi {
             }).then((response)=> response.json()).then((responseJson) => {
 
                 if(responseJson.sponsored) {
-                    resolve(Object.assign([], responseJson.message.file.likes))
+                    resolve(Object.assign([], responseJson.sponsored))
                 }
             })
         })

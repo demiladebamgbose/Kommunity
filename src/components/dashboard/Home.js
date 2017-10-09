@@ -3,7 +3,7 @@ import {Image, Button, Alert,  CameraRoll, StyleSheet, View, FlatList, Text, Scr
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../actions/fileActions';
-import _ from 'lodash'
+import _ from 'lodash';
 import Circle from '../dashboard/helper/Circle';
 let {height, width} = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
