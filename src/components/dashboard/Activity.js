@@ -51,7 +51,7 @@ class Activity extends React.Component {
                     />
                  }
                 />
-                <Text>{this.state.events[0]}</Text>
+              
             </View>
         );
     }

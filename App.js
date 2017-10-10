@@ -10,6 +10,7 @@ import ViewUser from './src/components/dashboard/profile/views/ViewUserDisplay';
 import Profile from './src/components/dashboard/Profile';
 import Message from './src/components/message';
 import SingleMessage from './src/components/message/singleMessage';
+import DrawerNavigation from './src/components/dashboard/helper/drawer';
 import {Provider} from 'react-redux';
 import configureStore from './src/store/ConfigureStore';
 
@@ -22,7 +23,6 @@ const store = configureStore();
 const Route = StackNavigator({
     Home: { screen: Login },
     SignUp: { screen: SignUp },
-    Landing: {screen: Dashboard},
     UploadView: {screen: Upload},
     SingleView: {screen: SingleView},
     LoginTab: {screen: LoginTab},
@@ -30,7 +30,8 @@ const Route = StackNavigator({
     ViewFollowers: {screen: ViewUser},
     UserProfileView: {screen: Profile},
     Message: {screen: Message},
-    SingleMessage: {screen: SingleMessage}
+    SingleMessage: {screen: SingleMessage},
+    drawerStack: { screen: DrawerNavigation }
 });
 
 const App = () => (
