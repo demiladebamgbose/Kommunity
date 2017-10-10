@@ -21,7 +21,7 @@ class Activity extends React.Component {
 
     static navigationOptions = {
         tabBarLabel: 'Activity',
-        // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+         /// Note: By default the icon is only shown on iOS. Search the showIcon option below.
         tabBarIcon: ({ tintColor }) => (
             <Ionicons name="ios-eye-outline" size={20} />
         ),
@@ -29,9 +29,8 @@ class Activity extends React.Component {
 
     componentWillMount() {
         this.props.action.getEvents().then( response => {
-            console.log('Hello there events ->', this.props.event);
            let  gridImages = _.chunk(this.props.event, 3);
-            this.setState({events: gridImages});
+           this.setState({events: gridImages});
         })
     }
 
@@ -41,7 +40,7 @@ class Activity extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, paddingTop: 5}}>
                 <FlatList
                     data={this.state.events}
                     renderItem={({item}) =>
@@ -51,7 +50,6 @@ class Activity extends React.Component {
                     />
                  }
                 />
-                <Text>{this.state.events[0]}</Text>
             </View>
         );
     }
