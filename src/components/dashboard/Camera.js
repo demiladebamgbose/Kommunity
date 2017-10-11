@@ -1,15 +1,17 @@
 import React from 'react';
 import { Button, Image, View } from 'react-native';
-import { ImagePicker } from 'expo';
+import { ImagePicker,Camera, Permissions } from 'expo';
 import {connect} from 'react-redux';
 import {Ionicons} from '@expo/vector-icons';
 import {bindActionCreators} from 'redux';
 import * as uploadActions from '../../actions/uploadActions';
 
-class Camera extends React.Component {
+class CameraView extends React.Component {
 
     state = {
         image: null,
+        hasCameraPermission: null,
+        type: Camera.Constants.Type.back
     };
 
     static navigationOptions = {
@@ -20,25 +22,96 @@ class Camera extends React.Component {
         ),
     };
 
+    async componentWillMount() {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({ hasCameraPermission: status === 'granted' });
+    }
+
     render() {
         let { image } = this.state;
 
-        return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Button
-                    title="Pick an image from camera roll"
-                    onPress={this._pickImage}
-                />
+        const { hasCameraPermission } = this.state;
+        if (hasCameraPermission === null) {
+            return <View />;
+        } else if (hasCameraPermission === false) {
+            return <Text>No access to camera</Text>;
+        } else {
+            return (
+                <View style={{ flex: 1 }}>
+                    <Camera style={{ flex: 1 }} type={this.state.type}>
+                        <View
+                            style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+              }}>
+                            <TouchableOpacity
+                                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                                onPress={() => {
+                  this.setState({
+                    type: this.state.type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back,
+                  });
+                }}>
+                                <Text
+                                    style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                                    {' '}Flip{' '}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Button
+                                title="Pick an image from camera roll"
+                                onPress={this._pickImage}
+                            />
 
-                <Button
-                    title="Take a picture"
-                    onPress={this._cameraRoll}
-                />
+                            <Button
+                                title="Take a picture"
+                                onPress={this._cameraRoll}
+                            />
 
-            </View>
-        );
+                            <Button
+                                title="Take a video"
+                                onPress={this._videoRoll}
+                            />
 
-    }
+
+                        </View>
+                    </Camera>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Button
+                            title="Pick an image from camera roll"
+                            onPress={this._pickImage}
+                        />
+
+                        <Button
+                            title="Take a picture"
+                            onPress={this._cameraRoll}
+                        />
+
+                        <Button
+                            title="Take a video"
+                            onPress={this._videoRoll}
+                        />
+
+
+                    </View>
+                </View>
+            );
+        }
+     }
+
+
+
+
+    _videoRoll = async () => {
+
+    };
 
     _pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -85,7 +158,7 @@ function mapStateToProps(state, ownProps) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Camera);
+export default connect(mapStateToProps, mapDispatchToProps)(CameraView);
 
 
 
