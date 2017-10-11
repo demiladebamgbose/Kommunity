@@ -57,7 +57,8 @@ class Profile extends React.Component {
             screenProps: screenProps,
             buttonText,
             name,
-            id: userIdMessage
+            id: userIdMessage,
+            image: false
         }
     }
 
@@ -78,12 +79,18 @@ class Profile extends React.Component {
     };
 
     _onKin =()=> {
+        if (this.state.kin === 0)
+          return;
+
         const {navigate} = this.state.screenProps;
         navigate('ViewFollowers', {type: 'kin', id: this.state.user || this.props.user._id,
             nav: this.state.screenProps})
     };
 
     _onFollowers =()=> {
+      if (this.state.followers === 0)
+        return;
+
         const {navigate} = this.state.screenProps;
         navigate('ViewFollowers', {type: 'followers', id: this.state.user || this.props.user._id,
             nav: this.state.screenProps})
@@ -94,7 +101,7 @@ class Profile extends React.Component {
         // We want to fetch the users files for the total amount of post
         this.props.action.fetchUserFiles(userId).then( response => {
             let files = this.props.files;
-            this.setState({post: (files.userFile.message.data.length)});
+            this.setState({post: (files.userFile.message.data.length), image: true});
         });
 
         // We want to fetch the users kins and followers
@@ -130,7 +137,7 @@ class Profile extends React.Component {
             <View style={styles.container}>
                 <View style={styles.topProfile}>
                     <View style={{width: ((25 / 100) * width)}}>
-                        <Circle url="https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"
+                        <Circle url={this.props.user.image || "https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"}
                                 label={this.state.name}
                                 click={this._onProfileClick}
                         />
@@ -187,9 +194,17 @@ class Profile extends React.Component {
 
                     </View>
                 </View>
+
                 <View style={styles.container}>
-                    <ProfileTab screenProps={{ rootNavigation:  this.state.screenProps ,
-                    userId: this.state.user , nav: this.state.rootNav }} />
+                {( this.state.image && (this.state.post <= 0)) ?
+                      <View style={{ padding: 10,justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', height: ((70 / 100) * height)}}>
+                      <Image style={{width:100 , height: 100 }}
+                              source={require("./../../images/no-photo.png")}
+                      />
+                      <Text style={{textAlign: 'center'}}>Share your first photo</Text>
+                      </View>
+
+                  :   <ProfileTab screenProps={{ rootNavigation:  this.state.screenProps , userId: this.state.user , nav: this.state.rootNav }} /> }
                 </View>
             </View>
         );

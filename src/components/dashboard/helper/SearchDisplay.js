@@ -2,33 +2,39 @@
  * Created by jolaadeadewale on 05/08/2017.
  */
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, Dimensions, Image} from 'react-native';
 let {width, height} = Dimensions.get('window');
 
 
-const Circle = ({label}) => {
+const Circle = ({label, img, click, id}) => {
     return (
-        <View style={[stylesCircle.center]}>
-            <View style={stylesCircle.circle}>
 
-            </View>
-            <Text style={stylesCircle.text}>{label}</Text>
-        </View>
+
+      <View style={stylesCircle.center}>
+          <TouchableOpacity onPress={() => click(id)}>
+              <View style={stylesCircle.circle}>
+                  <Image  style={{width: 50, height: 50, borderRadius: 50/2,}}
+                          source={{ uri: img || "https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"}}
+                  />
+              </View>
+          </TouchableOpacity>
+          <Text style={stylesCircle.text}>{label}</Text>
+      </View>
+
     )
 };
 
 const stylesCircle = StyleSheet.create({
     circle: {
-        width:  ((10/ 100) * width),
-        height: ((10/ 100) * width),
-        borderRadius: ((10/ 100) * width),
-        backgroundColor: '#D3D3D3',
-        marginRight: 2
+      width: 50,
+      height: 50,
+      borderRadius: 50/2,
+      marginRight: 6
     },
+
     center: {
-        alignContent: 'center',
-        alignItems: 'center'
     },
+
     text: {
         marginTop: 2,
         fontSize: 8,
@@ -42,7 +48,7 @@ const SearchDisplay = ({img, name, other, follow, following, unfollow, userId, i
         <TouchableOpacity onPress={()=> viewClicked(id)}>
             <View style={styles.container}>
                     <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                        <Circle/>
+                        <Circle label="" img={img} click={viewClicked}  id={id}/>
                         <View style={{ width: ((35/ 100) * width), height: ((15/ 100) * width), paddingTop: 5,  alignContent: 'center',
                                 }}>
                             <Text style={{fontSize: 11, marginBottom: 1}}>{name}</Text>
