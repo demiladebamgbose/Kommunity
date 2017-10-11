@@ -76,7 +76,6 @@ class Login extends React.Component {
                     ]
                 });
                 this.props.navigation.dispatch(resetAction)
-
             } else {
                 this.setState({information: this.props.user.presentUser.error});
             }

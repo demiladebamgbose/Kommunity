@@ -243,7 +243,7 @@ let {height, width} = Dimensions.get('window');
                         const resetAction = NavigationActions.reset({
                             index: 0,
                             actions: [
-                                NavigationActions.navigate({ routeName: 'drawerStack'})
+                                NavigationActions.navigate({ routeName: 'Landing'})
                             ]
                         });
                         this.props.navigation.dispatch(resetAction)
@@ -252,7 +252,7 @@ let {height, width} = Dimensions.get('window');
                         const resetAction = NavigationActions.reset({
                             index: 0,
                             actions: [
-                                NavigationActions.navigate({ routeName: 'drawerStack'})
+                                NavigationActions.navigate({ routeName: 'Landing'})
                             ]
                         });
                         this.props.navigation.dispatch(resetAction)

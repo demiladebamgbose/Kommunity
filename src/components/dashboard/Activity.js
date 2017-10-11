@@ -8,7 +8,7 @@ import * as eventActions from '../../actions/eventActions';
 import Grid from './helper/grid';
 
 let {height, width} = Dimensions.get('window');
-let pictureSize = ((33 / 100) * width)
+let pictureSize = ((33 / 100) * width);
 
 class Activity extends React.Component {
 
