@@ -43,7 +43,7 @@ const LandingPage = TabNavigator({
     }
 }, {
     tabBarOptions: {
-        activeTintColor: '#000000',
+        activeTintColor: '#000000'
     },
 });
 
@@ -74,8 +74,7 @@ class Land extends React.Component {
         }
 
         // Get the token that uniquely identifies this device
-        let token = await Notifications.getExponentPushTokenAsync();
-
+        let token = await Notifications.getExpoPushTokenAsync();
 
         // POST the token to our backend so we can use it to send pushes from there
         return fetch(PUSH_ENDPOINT, {

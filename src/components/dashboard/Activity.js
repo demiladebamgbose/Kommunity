@@ -6,16 +6,20 @@ import _ from 'lodash'
 import {bindActionCreators} from 'redux';
 import * as eventActions from '../../actions/eventActions';
 import Grid from './helper/grid';
+import SearchDisplay from './helper/SearchDisplay';
 
-let {height, width} = Dimensions.get('window');
-let pictureSize = ((33 / 100) * width)
 
 class Activity extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            events: []
+            events: [{name: 'BBC'},
+                {name: 'CNN'},
+                {name: 'Dynamix'},
+                {name: 'MTv'}, {name: 'City House'},
+                {name: 'Rumours'}, {name: 'Nta'}],
+            show: true
         }
     }
 
@@ -28,26 +32,48 @@ class Activity extends React.Component {
     };
 
     componentWillMount() {
-        this.props.action.getEvents().then( response => {
+
+        /*this.props.action.getEvents().then( response => {
            let  gridImages = _.chunk(this.props.event, 3);
            this.setState({events: gridImages});
-        })
+        }) */
     }
 
     _onChangeView = () => {
 
     };
 
+   _onUserView = () => {
+       const {navigate} = this.props.screenProps.rootNavigation;
+       navigate('Events', {});
+
+   };
+
+   _onFollow = () => {
+
+   };
+
+   _onUnFollow = () => {
+
+   };
+
+
     render() {
         return (
             <View style={{flex: 1, paddingTop: 5}}>
-                <FlatList
-                    data={this.state.events}
-                    renderItem={({item}) =>
-                 <Grid obj={item}
-                    click={this._onChangeView}
-                    width={pictureSize}
-                    />
+                 <FlatList
+                            data={this.state.events}
+                            renderItem={({item}) =>
+                                 <SearchDisplay
+                                        img=""
+                                        id={1}
+                                        userId={1}
+                                        follow={this._onFollow}
+                                        unfollow={this._onUnFollow}
+                                        following={true}
+                                        viewClicked={this._onUserView}
+                                        other={'Name'} name={item.name}
+                                 />
                  }
                 />
             </View>
