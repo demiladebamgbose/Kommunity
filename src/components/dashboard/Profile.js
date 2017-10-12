@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image, Button, Alert, View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import { Image, Button, Alert, View, Text, StyleSheet, TouchableOpacity, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import ProfileTab from './profile/ProfileTab';
 import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 let {height, width} = Dimensions.get('window');
@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fileActions from '../../actions/fileActions';
 import * as userActions from '../../actions/userActions';
+import EditProfile from './helper/EditProfile'
 import _ from 'lodash';
 
 class Profile extends React.Component {
@@ -58,7 +59,8 @@ class Profile extends React.Component {
             buttonText,
             name,
             id: userIdMessage,
-            image: false
+            image: false,
+            modalVisible:false
         }
     }
 
@@ -73,6 +75,10 @@ class Profile extends React.Component {
     _onProfileClick = () => {
 
     };
+
+    _toggleModal = (toggleState) => {
+      this.setState({ modalVisible: toggleState });
+    }
 
     _onRefresh =() => {
 
@@ -178,7 +184,7 @@ class Profile extends React.Component {
                                 justifyContent: 'space-between', marginTop: 4, marginBottom: 4}}
                         >
                             <View style={{width: ((50 / 100) * width)}}>
-                                <TouchableOpacity onPress={this._onRespondToButtonText} style={styles.button}>
+                                <TouchableOpacity onPress={() => {this._toggleModal(true)}} style={styles.button}>
                                     <Text style={{fontSize: 11, textAlign: 'center'}}>
                                         {this.state.buttonText}
                                     </Text>
@@ -206,6 +212,30 @@ class Profile extends React.Component {
 
                   :   <ProfileTab screenProps={{ rootNavigation:  this.state.screenProps , userId: this.state.user , nav: this.state.rootNav }} /> }
                 </View>
+
+                <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {alert("Modal has been closed.")}}>
+                     <View>
+                         <View style={styles.editModalTop}>
+                             <TouchableHighlight onPress={() => { this._toggleModal(!this.state.modalVisible) }}>
+                                 <Text style={{textAlign: 'left', padding: 12, textSize: 20 }}>Cancel</Text>
+                             </TouchableHighlight>
+                             <Text style={{textAlign: 'center', padding: 12, textSize: 20, fontWeight: 'bold',   }}>Edit Profile</Text>
+
+                              <View style={{width:((20 / 100) * width)}}>
+                                  <Text style={{textAlign: 'right', padding: 12, textSize: 20 }}>Done</Text>
+                              </View>
+                         </View>
+
+                        <ScrollView>
+                            <View style={{ padding: 15, backgroundColor: '#f3f3f3'}}>
+
+                                  <EditProfile/>
+                                  </View>
+
+                              </ScrollView>
+                     </View>
+                </Modal>
+
             </View>
         );
     }
@@ -225,6 +255,7 @@ const Circle = ({label, url, click}) => {
         </View>
      )
 };
+
 
 
 const styles = StyleSheet.create({
@@ -279,6 +310,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
     },
+    editModalTop: {
+      borderColor: '#D3D3D3',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      paddingTop: 25,
+      backgroundColor: '#f3f3f3',
+      flexDirection: 'row',
+      height:((12 / 100) * height)
+    }
 });
 
 function mapDispatchToProps(dispatch) {
