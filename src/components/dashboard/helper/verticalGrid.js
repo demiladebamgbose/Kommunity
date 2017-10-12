@@ -8,13 +8,13 @@ let {height, width} = Dimensions.get('window');
 import Moment from 'react-moment';
 
 const VerticalGrid = ({obj, click, like, uid, userLike}) => {
-    let data1 = {};
+   /* let data1 = {};
     if(obj['0'].content.secure_url) {
       //  data1 = obj['0'].content.secure_url.split('upload/');
       //  data1 = data1.join('upload/c_scale,h_300,w_300/');
     }else{
         data1 = '';
-    }
+    } */
 
     return (
         <View key={obj['0'].content} style={{flex: 1, flexDirection: 'row', marginBottom: 15}}>
@@ -32,18 +32,25 @@ const VerticalGrid = ({obj, click, like, uid, userLike}) => {
 
                 <TouchableOpacity onPress={() => click(obj['0']._id)}>
                     <View style={{width: width, height: ((55/ 100) * height), backgroundColor: 'white',  margin: 1}} >
-                        <Image  style={{width: width, height: ((55/ 100) * height)}} source={{ uri: obj['0'].content.secure_url} }  />
+                        <Image  style={{width: width, height: ((55/ 100) * height)}} source={{ uri: obj['0'].link
+                        ||
+                        obj['0'].content.secure_url} }  />
                     </View>
                 </TouchableOpacity>
-                <View style={{flex: 1, flexDirection: 'column',  paddingLeft: 10, marginTop: 8}}>
+                { (! obj['0'].link) ? <View style={{flex: 1, flexDirection: 'column',  paddingLeft: 10, marginTop: 8}}>
+
+
                     <TouchableOpacity onPress={()=>{like(obj['0']._id, (obj[0].likes.indexOf(uid) >= 0))}}>
+
                         <Ionicons name="ios-heart-outline"  size={20} color={
                             (obj[0].likes.indexOf(uid) >= 0) ? 'red': 'black'
                         } />
                     </TouchableOpacity>
                     <Text onPress={()=> userLike(obj['0']._id)} style={styles.commentText}>{obj[0].likes.length} Likes</Text>
-                    <Moment style={styles.commentText} element={Text} fromNow>{obj[0].timestamp}</Moment>
-                </View>
+                    <Moment
+                        style={styles.commentText} element={Text} fromNow>{obj[0].timestamp}
+                    </Moment>
+                </View> : null}
             </View>
         </View>
     )
