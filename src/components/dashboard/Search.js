@@ -83,7 +83,7 @@ class Search extends React.Component {
                         <FlatList
                         data={this.state.searchResult}
                         renderItem={({item}) =>
-                        <SearchDisplay img="" id={item._id} userId={this.state.userId}
+                        <SearchDisplay img={item.image} id={item._id} userId={this.state.userId}
                             follow={this._onFollow} unfollow={this._onUnfollow}
                             following={
                                this.state.kin.filter((obj)=>{

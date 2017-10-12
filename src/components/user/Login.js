@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
 import { NavigationActions } from 'react-navigation'
 let {height, width} = Dimensions.get('window');
+import {SecureStore} from 'expo';
 
 
 class Login extends React.Component {
@@ -34,6 +35,20 @@ class Login extends React.Component {
             'complete': false,
             'animating': false
         };
+
+
+    }
+
+    async componentDidMount(){
+        if(await SecureStore.getItemAsync("Ixoti")){
+            let username = await SecureStore.getItemAsync("Ixoti");
+            let password = await SecureStore.getItemAsync("Pxye");
+
+            this.setState({'username': username,
+                'password': password}
+            );
+            this._onLogin();
+        }
     }
 
     _onUserNameChange = (username) => {
@@ -68,6 +83,8 @@ class Login extends React.Component {
             this.setState({animating: false});
 
             if(this.props.user.presentUser._id) {
+                SecureStore.setItemAsync("Ixoti", username);
+                SecureStore.setItemAsync("Pxye", password);
 
                 const resetAction = NavigationActions.reset({
                     index: 0,
@@ -76,8 +93,9 @@ class Login extends React.Component {
                     ]
                 });
                 this.props.navigation.dispatch(resetAction)
-
             } else {
+                SecureStore.deleteItemAsync("Ixoti");
+                SecureStore.deleteItemAsync("Pxye");
                 this.setState({information: this.props.user.presentUser.error});
             }
 
