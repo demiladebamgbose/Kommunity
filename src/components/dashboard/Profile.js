@@ -227,9 +227,9 @@ class Profile extends React.Component {
                          </View>
 
                         <ScrollView>
-                            <View style={{ padding: 15, backgroundColor: '#f3f3f3'}}>
+                            <View style={{ paddingTop: 15, backgroundColor: '#f3f3f3'}}>
 
-                                  <EditProfile/>
+                                  <EditProfile />
                                   </View>
 
                               </ScrollView>

@@ -11,27 +11,80 @@ class EditProfile extends React.Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
           text:"demi"
         };
-
-        this.onChangeText = this._onChangeText.bind(this);
     }
 
-    _onChangeText (text) {
-      this.setState({text});
-    }
+    _onChangeText = (text) => {
+        this.setState({'text': text});
+    };
 
     render () {
         return (
             <View>
-              <Circle/>
+                <Circle}/>
+
+                <View  style={styles.body}>
+                    <View style={{ flexDirection: 'row',  }}>
+                        <Text style={{ width: ((30 /100) * width), paddingTop: 10 }}> Name </Text>
+                        <View style={{ borderBottomColor: '#D3D3D3', borderBottomWidth: 1, paddingTop: 10, paddingBottom: 10, width: ((60 / 100)* width)}}>
+                            <TextInput
+                                style={{fontSize: 14}}
+                                onChangeText={this._onChangeText}
+                                value={this.state.text}
+                            />
+                        </View>
+
+                    </View>
+
+                    <View style={{ flexDirection: 'row',  }}>
+                        <Text style={{ width: ((30 /100) * width), paddingTop: 10 }}> Email </Text>
+                        <View style={{ borderBottomColor: '#D3D3D3', borderBottomWidth: 1, paddingTop: 10, paddingBottom: 10, width: ((60 / 100)* width)}}>
+                            <TextInput
+                                style={{fontSize: 14}}
+                                onChangeText={this._onChangeText}
+                                value={this.state.text}
+                                keyboardType='email-address'
+                            />
+
+                        </View>
+
+                    </View>
+
+                    <View style={{ flexDirection: 'row',  }}>
+                        <Text style={{ width: ((30 /100) * width), paddingTop: 10 }}> Phone </Text>
+                        <View style={{ borderBottomColor: '#D3D3D3', borderBottomWidth: 1, paddingTop: 10, paddingBottom: 10, width: ((60 / 100)* width)}}>
+                            <TextInput
+                                style={{fontSize: 14}}
+                                onChangeText={this._onChangeText}
+                                value={this.state.text}
+                                keyboardType='phone-pad'
+                            />
+
+                        </View>
+
+                    </View>
+
+                    <View style={{ flexDirection: 'row',  }}>
+                        <Text style={{ width: ((30 /100) * width), paddingTop: 10 }}> Password </Text>
+                        <View style={{ borderBottomColor: '#D3D3D3', borderBottomWidth: 1, paddingTop: 10, paddingBottom: 10, width: ((60 / 100)* width)}}>
+                            <TextInput
+                                style={{fontSize: 14}}
+                                onChangeText={this._onChangeText}
+                                value={this.state.text}
+                                secureTextEntry={true}
+                            />
+                        </View>
+                    </View>
+                </View>
             </View>
         )
     }
 }
 
-const Circle = ({url, click}) => {
+const Circle = ({url, click, image}) => {
     return (
         <View style={styles.center}>
             <TouchableOpacity onPress={() => click()}>
@@ -45,34 +98,6 @@ const Circle = ({url, click}) => {
             </TouchableOpacity>
             <View>
                 <Text style={{justifyContent: 'center', padding: 10,  fontWeight: 'bold', color:'#71b5ed'}}> Change Profile Photo </Text>
-            </View>
-
-            <View  style={styles.body}>
-                <View style={{ flexDirection: 'row',  }}>
-                    <Text style={{ width: ((30 /100) * width), paddingTop: 10 }}> Name </Text>
-                    <View style={{ borderBottomColor: '#D3D3D3', borderBottomWidth: 1, paddingTop: 10, paddingBottom: 10, width: ((60 / 100)* width)}}>
-                        <Text > Demilade Bamgbise </Text>
-                    </View>
-
-                </View>
-
-                <View style={{ flexDirection: 'row',  }}>
-                    <Text style={{ width: ((30 /100) * width), paddingTop: 10 }}> Username </Text>
-                    <View style={{ borderBottomColor: '#D3D3D3', borderBottomWidth: 1, paddingTop: 10, paddingBottom: 10, width: ((60 / 100)* width)}}>
-                      <TextInput
-                          editable={true}
-                          style={{marginTop:10}}
-                          onChangeText={this.onChangeText}
-                          value= "tf"
-                      />
-                    </View>
-
-                </View>
-
-                <View></View>
-
-                <View></View>
-
             </View>
         </View>
     )
@@ -113,12 +138,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state, ownProps) {
-    // return {
-    //     upload: state.upload,
-    //     files: state.files,
-    //     user: state.user.presentUser,
-    //     likedFiles: state.user.likedFiles
-    // }
+    return {
+        // user: state.user.presentUser,
+
+    }
 }
 
 export default connect(null, null)(EditProfile);
