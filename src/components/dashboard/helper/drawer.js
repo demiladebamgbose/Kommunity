@@ -11,15 +11,33 @@ const Drawer = DrawerNavigator({
 }, {
     drawerWidth: (80/ 100) * width,
     drawerPosition: 'right',
-    contentComponent: props => <CustomDrawerContentComponent/>
+    contentComponent: props => <CustomDrawerContentComponent/>,
+    drawerBackgroundColor: 'transparent',
+    header: null
 });
 
 
-const CustomDrawerContentComponent = (props) => (
-    <View style={styles.container}>
-        <Adverts/>
-    </View>
-);
+class CustomDrawerContentComponent extends React.Component {
+    static navigationOptions = ({ navigation }) => ({
+        title: 'Kommunity',
+        headerTitleStyle: {
+            fontFamily: 'Noteworthy-Bold',
+            fontSize: 31
+        },
+        header: null
+    });
+
+    render() {
+        return(
+            <View style={styles.container}>
+                <Adverts/>
+            </View>
+        )
+    }
+}
+
+
+
 
 const styles = StyleSheet.create({
     container: {

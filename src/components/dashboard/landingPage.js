@@ -43,7 +43,7 @@ const LandingPage = TabNavigator({
     }
 }, {
     tabBarOptions: {
-        activeTintColor: '#000000',
+        activeTintColor: '#000000'
     },
 });
 

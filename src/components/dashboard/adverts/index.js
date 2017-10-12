@@ -9,7 +9,7 @@ import {bindActionCreators} from 'redux';
 import * as eventActions from '../../../actions/eventActions';
 import Grid from '../helper/grid';
 let {height, width} = Dimensions.get('window');
-let pictureSize = ((26 / 100) * width);
+let pictureSize = ((22 / 100) * width);
 class Advert extends React.Component {
 
 
@@ -22,14 +22,15 @@ class Advert extends React.Component {
     }
 
     componentWillMount() {
-        this.props.action.getSponsored().then( res => {
+        this.props.action.getEvents().then( res => {
+            console.log('----->', this.props.event)
             let  gridImages = _.chunk(this.props.event, 3);
             this.setState({events: gridImages});
         });
     }
 
     _onChangeView = () => {
-
+        Alert.alert('BBC', 'News outreaching media for likes and hates');
     };
 
     render () {
@@ -45,6 +46,7 @@ class Advert extends React.Component {
                  <Grid obj={item}
                     click={this._onChangeView}
                     width={pictureSize}
+                    margin={7}
                     />
                  }
                 />
@@ -57,7 +59,7 @@ class Advert extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         user: state.user.presentUser,
-        event: state.events.sponsors
+        event: state.events.events
     }
 }
 

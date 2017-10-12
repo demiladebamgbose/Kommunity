@@ -14,7 +14,11 @@ class Activity extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            events: [{}, {}, {}, {}, {}, {}, {}],
+            events: [{name: 'BBC'},
+                {name: 'CNN'},
+                {name: 'Dynamix'},
+                {name: 'MTv'}, {name: 'City House'},
+                {name: 'Rumours'}, {name: 'Nta'}],
             show: true
         }
     }
@@ -68,7 +72,7 @@ class Activity extends React.Component {
                                         unfollow={this._onUnFollow}
                                         following={true}
                                         viewClicked={this._onUserView}
-                                        other={'Name'} name={"Name"}
+                                        other={'Name'} name={item.name}
                                  />
                  }
                 />
