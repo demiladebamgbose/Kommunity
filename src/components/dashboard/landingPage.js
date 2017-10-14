@@ -3,7 +3,7 @@ import Home from './Home';
 import Search from './Search';
 import Camera from './Camera';
 import Activity from './Activity';
-import Profile from './Profile';
+import Profile from './profile/settings';
 import MessageIcon from './Message';
 import Notification from './Notification';
 import Pusher from 'pusher-js/react-native';

@@ -1,6 +1,9 @@
 import React from 'react'
 import { Image, Button, Alert, View, Text, StyleSheet, TouchableOpacity, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import ProfileTab from './profile/ProfileTab';
+import { ImagePicker,
+    Permissions,
+} from 'expo';
 import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 let {height, width} = Dimensions.get('window');
 import {connect} from 'react-redux';
@@ -9,6 +12,7 @@ import * as fileActions from '../../actions/fileActions';
 import * as userActions from '../../actions/userActions';
 import EditProfile from './helper/EditProfile'
 import _ from 'lodash';
+
 
 class Profile extends React.Component {
 
@@ -60,8 +64,15 @@ class Profile extends React.Component {
             name,
             id: userIdMessage,
             image: false,
-            modalVisible:false
+            modalVisible:false,
+            userImage: '',
+            hasCameraPermission: false
         }
+    }
+
+    async componentWillMount() {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({ hasCameraPermission: status === 'granted' });
     }
 
     static navigationOptions = {
@@ -72,13 +83,16 @@ class Profile extends React.Component {
         ),
     };
 
-    _onProfileClick = () => {
-
+    _onProfileClick = (id) => {
+        // This should only work if we are on the user's Profile
+        if(id === this.props.user._id) {
+            this._cameraRoll();
+        }
     };
 
     _toggleModal = (toggleState) => {
       this.setState({ modalVisible: toggleState });
-    }
+    };
 
     _onRefresh =() => {
 
@@ -120,21 +134,63 @@ class Profile extends React.Component {
                 }
                 this.setState({followers: this.props.userProfile.followers.length,
                     kin: this.props.userProfile.kin.length, buttonText,
-                    name: this.props.userProfile.username, id: this.props.userProfile._id});
+                    name: this.props.userProfile.username, id: this.props.userProfile._id,
+                    userImage: this.props.userProfile.image ||
+                    'https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png'});
             });
-        }
+        };
     };
 
-    _navigateToMessage =() => {
+    _navigateToMessage = () => {
         const {navigate} = this.state.screenProps;
         navigate('SingleMessage', {type: 'user', id: this.state.user || this.props.user._id,
             nav: this.state.screenProps, 'sender': this.state.id})
+    };
+
+    _navigateToEditProfile = () => {
+        this._toggleModal(true);
+    };
+
+    _followUser = () => {
+
+    };
+
+    _onSetting = () => {
+        const {navigate} = this.props.navigation;
+        navigate('Settings', {});
+    };
+
+    _onSubmitEdit = () => {
+        this._toggleModal(false);
+    };
+
+    _cameraRoll = async () => {
+        if(!this.state.hasCameraPermission)
+            return;
+
+        let result = await ImagePicker.launchCameraAsync({  allowsEditing: true,
+            aspect: [4, 3]});
+
+        if (!result.cancelled) {
+            this.setState({userImage: result.uri});
+            console.log(result);
+            /*this.props.action.uploadCameraImage(result).then(response => {
+                this.props.screenProps.rootNavigation.navigate('UploadView');
+            }).catch(err => {
+                console.log(err);
+            }); */
+        }
     };
 
     _onRespondToButtonText = () => {
         switch (this.state.buttonText) {
             case 'Message': this._navigateToMessage();
             break;
+            case 'Edit Profile': this._navigateToEditProfile();
+            break;
+            case 'Follow': this._followUser();
+            break;
+            default: return;
         }
     };
 
@@ -143,8 +199,11 @@ class Profile extends React.Component {
             <View style={styles.container}>
                 <View style={styles.topProfile}>
                     <View style={{width: ((25 / 100) * width)}}>
-                        <Circle url={this.props.user.image || "https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"}
+                        <Circle url={ this.state.userImage ||
+                                    this.props.user.image ||
+                                    "https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"}
                                 label={this.state.name}
+                                id={this.state.id}
                                 click={this._onProfileClick}
                         />
                     </View>
@@ -184,7 +243,7 @@ class Profile extends React.Component {
                                 justifyContent: 'space-between', marginTop: 4, marginBottom: 4}}
                         >
                             <View style={{width: ((50 / 100) * width)}}>
-                                <TouchableOpacity onPress={() => {this._toggleModal(true)}} style={styles.button}>
+                                <TouchableOpacity onPress={this._onRespondToButtonText} style={styles.button}>
                                     <Text style={{fontSize: 11, textAlign: 'center'}}>
                                         {this.state.buttonText}
                                     </Text>
@@ -192,7 +251,7 @@ class Profile extends React.Component {
                             </View>
 
                             <View style={{width: ((20 / 100) * width), marginLeft: 2}}>
-                                <TouchableOpacity style={styles.button2}>
+                                <TouchableOpacity onPress={this._onSetting} style={styles.button2}>
                                     <Ionicons style={{textAlign: 'center'}} name="ios-settings-outline" size={11} />
                                 </TouchableOpacity>
                             </View>
@@ -216,13 +275,15 @@ class Profile extends React.Component {
                 <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {alert("Modal has been closed.")}}>
                      <View>
                          <View style={styles.editModalTop}>
-                             <TouchableHighlight onPress={() => { this._toggleModal(!this.state.modalVisible) }}>
-                                 <Text style={{textAlign: 'left', padding: 12, textSize: 20 }}>Cancel</Text>
-                             </TouchableHighlight>
-                             <Text style={{textAlign: 'center', padding: 12, textSize: 20, fontWeight: 'bold',   }}>Edit Profile</Text>
+                             <TouchableOpacity onPress={() => { this._toggleModal(!this.state.modalVisible) }}>
+                                 <Text style={{textAlign: 'left', padding: 12, fontSize: 20 }}>Cancel</Text>
+                             </TouchableOpacity>
+                             <Text style={{textAlign: 'center', padding: 12, fontSize: 20, fontWeight: 'bold',   }}>Edit Profile</Text>
 
                               <View style={{width:((20 / 100) * width)}}>
-                                  <Text style={{textAlign: 'right', padding: 12, textSize: 20 }}>Done</Text>
+                                  <TouchableOpacity onPress={this._onSubmitEdit}>
+                                    <Text style={{textAlign: 'right', padding: 12, fontSize: 20 }}>Done</Text>
+                                  </TouchableOpacity>
                               </View>
                          </View>
 
@@ -241,10 +302,10 @@ class Profile extends React.Component {
     }
 }
 
-const Circle = ({label, url, click}) => {
+const Circle = ({label, url, click, id}) => {
     return (
         <View style={styles.center}>
-            <TouchableOpacity onPress={() => click(label)}>
+            <TouchableOpacity onPress={() => click(id)}>
                 <View style={styles.circle}>
                     <Image  style={{width: 50, height: 50, borderRadius: 50/2,}}
                             source={{ uri: url} }
@@ -311,13 +372,14 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
     },
     editModalTop: {
-      borderColor: '#D3D3D3',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      paddingTop: 25,
-      backgroundColor: '#f3f3f3',
-      flexDirection: 'row',
-      height:((12 / 100) * height)
+          borderColor: '#D3D3D3',
+          borderWidth: 1,
+          borderStyle: 'solid',
+          paddingTop: 25,
+          backgroundColor: '#f3f3f3',
+          flexDirection: 'row',
+          height:((12 / 100) * height),
+        justifyContent: 'space-between'
     }
 });
 
