@@ -9,6 +9,7 @@ import React from 'react';
 import {View, StyleSheet, TextInput, TouchableOpacity, Text, Modal, Dimensions} from 'react-native';
 let {height, width} = Dimensions.get('window');
 import PasswordEntry from './PasswordEntry';
+import PhoneInput from 'react-native-phone-input'
 
 
 class PhoneTab extends React.Component {
@@ -39,16 +40,19 @@ class PhoneTab extends React.Component {
         }
 
         this.setState({ modalVisible: toggleState });
-    }
+    };
 
     _formChange = (key, value) => {
         this.state.formData[key] = value;
-
-    }
+    };
 
     _doneCliked = () => {
         console.log(this.state.formData);
-    }
+    };
+
+    _onPhone = (e) => {
+        //this.refs.phone.getValue()
+    };
 
     render () {
         return (
@@ -56,9 +60,12 @@ class PhoneTab extends React.Component {
                 <View style={[styles.centerContent]}>
                     <View style={styles.textBox}>
                         <View style={styles.horizontalBox}>
-                            <Text style={[styles.textCenter, {color: '#3B5998'}]}>
-                                +234
-                            </Text>
+
+                                <PhoneInput ref='phone'
+                                            initialCountry='ng'
+                                            onChangePhoneNumber={this._onPhone}
+                                />
+
 
                             <View style={styles.separator}></View>
 
@@ -81,17 +88,18 @@ class PhoneTab extends React.Component {
 
                     <Text style={styles.centerText}> {this.state.error} </Text>
 
-                    <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {alert("Modal has been closed.")}}>
+                    <Modal animationType="slide" transparent={false} visible={this.state.modalVisible}
+                           onRequestClose={() => {alert("Modal has been closed.")}}>
                          <View>
                              <View style={styles.editModalTop}>
                                  <TouchableOpacity onPress={()=>{this._toggleModal(false)}} >
-                                     <Text style={{textAlign: 'left', padding: 12, textSize: 20 }}>Cancel</Text>
+                                     <Text style={{textAlign: 'left', padding: 12, fontSize: 20 }}>Cancel</Text>
                                  </TouchableOpacity>
-                                 <Text style={{textAlign: 'center', padding: 12, textSize: 20, fontWeight: 'bold',   }}>SignUp</Text>
+                                 <Text style={{textAlign: 'center', padding: 12, fontSize: 20, fontWeight: 'bold',   }}>SignUp</Text>
 
                                   <View style={{width:((20 / 100) * width)}}>
                                       <TouchableOpacity onPress={this._doneCliked}>
-                                          <Text style={{textAlign: 'right', padding: 12, textSize: 20 }}>Done</Text>
+                                          <Text style={{textAlign: 'right', padding: 12, fontSize: 20 }}>Done</Text>
                                       </TouchableOpacity>
                                   </View>
                              </View>

@@ -42,15 +42,18 @@ class PasswordEntry extends React.Component {
         this.props.formChange('confirmPassword', confirmPassword);
     };
 
-
+    componentWillReceiveProps(nextProps) {
+        this.setState({error: nextProps.errors});
+    }
 
     render() {
         return (
             <View style={{padding:10}}>
-            <Text style={styles.centerText}>Last step to join KOMMUNITY</Text>
+            <Text style={styles.notifyText}>Last step to join KOMMUNITY</Text>
                 <View style={styles.buttonContainer}>
                     <TextInput
-                        style={{ paddingLeft: 10, fontSize: 14, height: 40,  fontFamily: 'Arial', borderColor: '#D5D5D5', borderWidth: 1, borderRadius: 5, backgroundColor: '#E5E5E5'}}
+                        style={{ paddingLeft: 10, fontSize: 14, height: 40,  fontFamily:
+                        'Arial', borderColor: '#D5D5D5', borderWidth: 1, borderRadius: 5, backgroundColor: '#E5E5E5'}}
                         placeholder='Full name'
                         onChangeText={this._onFullNameChange}
                         value={this.state.fullName}
@@ -98,15 +101,20 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        margin: 20
+        marginTop: 10,
+        marginLeft: 20,
+        marginRight: 20
     },
     alternativeLayoutButtonContainer: {
         margin: 20,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    notifyText: {
+        color: 'red',
+        marginLeft: 20
+    },
     centerText: {
-        textAlign: 'center',
         color: 'red'
     },
     logInText: {
@@ -116,7 +124,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 14,
         fontFamily: 'Arial-BoldMT'
-
     },
     logButton: {
         marginTop: 10,
