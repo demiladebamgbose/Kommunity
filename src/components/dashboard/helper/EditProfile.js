@@ -139,9 +139,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state, ownProps) {
     return {
-        // user: state.user.presentUser,
+        user: state.user.presentUser,
 
     }
 }
 
-export default connect(null, null)(EditProfile);
+export default connect(mapStateToProps, null)(EditProfile);
