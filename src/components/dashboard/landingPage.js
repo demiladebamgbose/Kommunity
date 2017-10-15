@@ -207,7 +207,7 @@ class Land extends React.Component {
             console.log('App has come to the foreground!')
         }
         this.setState({appState: nextAppState});
-    }
+    };
 
     componentWillUnmount() {
         // Remove the alert located on this master page from the manager

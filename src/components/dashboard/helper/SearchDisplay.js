@@ -4,6 +4,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Dimensions, Image} from 'react-native';
 let {width, height} = Dimensions.get('window');
+import { Ionicons } from '@expo/vector-icons';
 
 
 const Circle = ({label, img, click, id}) => {
@@ -42,7 +43,7 @@ const stylesCircle = StyleSheet.create({
 });
 
 
-const SearchDisplay = ({img, name, other, follow, following, unfollow, userId, id, viewClicked}) => {
+const SearchDisplay = ({img, name, other, follow, following, unfollow, userId, id, viewClicked, more}) => {
 
     return (
         <TouchableOpacity onPress={()=> viewClicked(id)}>
@@ -67,6 +68,7 @@ const SearchDisplay = ({img, name, other, follow, following, unfollow, userId, i
                             }
 
                         </View>
+                        {(more) ?  <Ionicons name="ios-arrow-forward" size={18} /> : null}
                     </View>
 
             </View>

@@ -2,11 +2,14 @@
  * Created by jolaadeadewale on 14/10/2017.
  */
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Dimensions} from 'react-native';
+let {width, height} = Dimensions.get('window');
 
-const Back = () => {
+const Layer = ({text}) => {
     return (
-        <Text>Back</Text>
+        <View style={styles.panel}>
+            <Text style={{alignContent: 'center' }}>{text}</Text>
+        </View>
     )
 };
 
@@ -14,6 +17,9 @@ class SettingsList extends React.Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            settings: ['Comments', 'Edit Profile', 'Logout']
+        }
     }
 
     static navigationOptions = {
@@ -27,14 +33,11 @@ class SettingsList extends React.Component {
     render (){
         return (
             <View style={styles.container}>
-                <SectionList
-                    renderItem={({item}) => <ListItem title={item} />}
-                    renderSectionHeader={({section}) => <Header title={section.title} />}
-                    sections={[ // homogenous rendering between sections
-                        {data: [...], title: ...},
-                        {data: [...], title: ...},
-                        {data: [...], title: ...},
-  ]}
+                <FlatList
+                    data={this.state.settings}
+                    renderItem={({item}) =>
+                    <Layer text={item} />
+                 }
                 />
             </View>
         )
@@ -43,7 +46,13 @@ class SettingsList extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingTop: (((50) / 100) * ((7 / 100) * height))
+    },
+    panel: {
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        height: ((7 / 100) * height)
     }
 });
 

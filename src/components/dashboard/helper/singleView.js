@@ -9,6 +9,11 @@ import * as fileActions from '../../../actions/fileActions';
 let {height, width} = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
 import Moment from 'react-moment';
+import ActionSheet from 'react-native-actionsheet';
+
+const CANCEL_INDEX = 0;
+const DESTRUCTIVE_INDEX = 3;
+const options = [ 'Cancel', 'Save', 'Delete', 'Report' ];
 
 class SingleView extends React.Component {
 
@@ -41,10 +46,15 @@ class SingleView extends React.Component {
             'time': this.props.files.viewFile.timestamp,
             'id': this.props.files.viewFile._id,
             'likes': userLiked || this.props.files.viewFile.likes.length,
-            'liked': likeState
+            'liked': likeState,
+            'selected': 0
         };
 
     }
+
+    showActionSheet = () => {
+        this.ActionSheet.show();
+    };
 
     _onUser = (e) => {
         console.log('I was clicked, you cut ', e);
@@ -73,15 +83,28 @@ class SingleView extends React.Component {
         console.log('The message icon');
     };
 
+    _options = () => {
+        this.showActionSheet();
+    };
+
+    handlePress = (i) =>{
+        this.setState({
+            selected: i
+        })
+    };
+
     render () {
         return (
             <View>
                 <View style={[styles.hBox, styles.contentPadding]}>
-                    <View>
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <TouchableOpacity style={styles.headerContent}>
                             <View>
                                 <Circle url="" label="username" click={this._onUser} />
                             </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this._options}>
+                            <Ionicons name="ios-more-outline" size={20} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -91,7 +114,7 @@ class SingleView extends React.Component {
                 <View  style={[styles.hBox, styles.contentPadding, styles.boxHeight]}>
                     <View>
                         <TouchableOpacity onPress={this._onLike}>
-                            <Ionicons name="ios-heart-outline"  size={20} color={(this.state.liked) ? 'red': 'black'} />
+                            <Ionicons name="ios-heart-outline" size={20} color={(this.state.liked) ? 'red': 'black'} />
                         </TouchableOpacity>
                     </View>
                     <View style={{marginLeft: 15}}>
@@ -115,7 +138,13 @@ class SingleView extends React.Component {
                         </View>
                     </TouchableOpacity>
                 </View>
-
+                <ActionSheet
+                    ref={o => this.ActionSheet = o}
+                    options={options}
+                    cancelButtonIndex={CANCEL_INDEX}
+                    destructiveButtonIndex={DESTRUCTIVE_INDEX}
+                    onPress={this.handlePress}
+                />
             </View>
         )
     }

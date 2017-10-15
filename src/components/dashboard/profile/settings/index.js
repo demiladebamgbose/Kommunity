@@ -24,7 +24,7 @@ class Set extends React.Component {
 
     static navigationOptions = {
         tabBarLabel: 'Profile',
-        // Note: By default the icon is only shown on iOS.
+        // Note: By default the icon is only shown on iOS
         tabBarIcon: ({ tintColor }) => (
             <Ionicons name="ios-person-outline" size={20} />
         ),
@@ -35,7 +35,7 @@ class Set extends React.Component {
 
     render () {
         return (
-            <Setting screenProps={{ rootNavigation: this.props.rootNavigation }}  />
+            <Setting screenProps={{ rootNavigation: this.props.screenProps.rootNavigation }}  />
         )
     }
 }

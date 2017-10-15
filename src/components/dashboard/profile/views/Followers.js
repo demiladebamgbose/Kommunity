@@ -215,7 +215,7 @@ class Followers extends React.Component {
                                         return obj._id === item._id
                                     }).length
                                 }
-                            img="" viewClicked={this._onUserView} other={item.name} name={item.username}/> }
+                            img={item.image} viewClicked={this._onUserView} other={item.name} name={item.username}/> }
                             /> : <Text style={{margin: 20, fontSize: 12}}>No Result found</Text>
                     }
 

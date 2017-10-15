@@ -57,13 +57,13 @@ class Message extends React.Component {
                <FlatList
                    data={this.state.searchResult}
                    renderItem={  ({item}) =>
-
-                        <SearchDisplay img=""
+                        <SearchDisplay img={item.userData.image}
                          id={item.id + '::' +item.userData._id}
                          userId={item.id + '::' +item.userData._id}
                          viewClicked={this._onMessage}
                             other={item.userData.name} name={item.userData.username}
-                         /> }
+                         />
+                   }
                />
                </View>
 
