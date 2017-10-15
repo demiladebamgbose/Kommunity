@@ -17,7 +17,7 @@ class Login extends React.Component {
         headerTintColor: 'white',
         headerTitleStyle: {
             fontFamily: 'Noteworthy-Bold',
-            fontSize: 31
+            fontSize: 10
         },
         left:null
     };
