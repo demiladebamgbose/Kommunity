@@ -5,6 +5,7 @@ export const SEARCH_USER = 'SEARCH_USER';
 export const FIND_ONE_SEARCH = 'FIND_ONE_SEARCH';
 export const USER_FOLLOW = 'USER_FOLLOW';
 export const UNFOLLOW_USER = 'UNFOLLOW_USER';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
 
 
 export const UPLOAD_IMAGE_CAMERA = 'UPLOAD_IMAGE_CAMERA';
@@ -36,6 +37,7 @@ export const SEND_CONVERSATION_REPLY = 'SEND_CONVERSATION_REPLY';
 
 export const GET_EVENTS = 'GET_EVENTS';
 export const GET_SPONSORED = 'GET_SPONSORED';
+
 
 
 

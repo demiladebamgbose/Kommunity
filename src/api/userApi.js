@@ -140,6 +140,12 @@ class UserApi {
         })
     };
 
+    resetPassword = (id) => {
+        return new Promise((resolve, reject) => {
+            
+        });
+    };
+
 }
 
 export default new UserApi();

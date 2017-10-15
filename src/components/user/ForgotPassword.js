@@ -41,6 +41,10 @@ class Forgot extends React.Component {
         }
     };
 
+    _confirmEmail = () => {
+
+    };
+
     validateEmail = (email) => {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
@@ -57,6 +61,7 @@ class Forgot extends React.Component {
                         style={styles.textBox}
                     />
                     <TouchableOpacity
+                        onPress={this._confirmEmail}
                         disabled={!this.state.confirm}
                         style={ (this.state.confirm) ? styles.blueButton : styles.logButton}>
                         <Text style={styles.buttonText}>Confirm</Text>
