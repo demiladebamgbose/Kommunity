@@ -7,7 +7,7 @@ let {height, width} = Dimensions.get('window');
 
 
 const Circle = ({label, url, click}) => {
-  
+
     return (
         <View style={styles.center}>
             <TouchableOpacity onPress={() => click(label)}>
