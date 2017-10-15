@@ -14,7 +14,8 @@ class Forgot extends React.Component {
         super(props);
         this.state = {
             email: '',
-            error: ''
+            error: '',
+            confirm: false
         };
     }
 
@@ -32,6 +33,17 @@ class Forgot extends React.Component {
 
     _onEmailChange = (email) => {
         this.setState({email});
+
+        if(this.validateEmail(email)) {
+            this.setState({confirm: true});
+        }else{
+            this.setState({confirm: false});
+        }
+    };
+
+    validateEmail = (email) => {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     };
 
     render () {
@@ -44,7 +56,9 @@ class Forgot extends React.Component {
                         onChangeText={this._onEmailChange}
                         style={styles.textBox}
                     />
-                    <TouchableOpacity style={styles.blueButton}>
+                    <TouchableOpacity
+                        disabled={!this.state.confirm}
+                        style={ (this.state.confirm) ? styles.blueButton : styles.logButton}>
                         <Text style={styles.buttonText}>Confirm</Text>
                     </TouchableOpacity>
 
@@ -107,6 +121,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'red'
     },
+    logButton: {
+        marginTop: 10,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: '#b0c4de',
+        borderRadius: 5
+    }
 
 });
 

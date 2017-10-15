@@ -38,6 +38,7 @@ class Login extends React.Component {
     constructor(props) {
 
         super(props);
+        console.log('The width -->', width)
         this.state = {
             username: '',
             password: '',
@@ -46,7 +47,9 @@ class Login extends React.Component {
             screenWidth: width,
             complete: false,
             animating: false,
-            modalVisible: false
+            modalVisible: false,
+            showReturn: false,
+            disableText: false
         };
     }
 
@@ -66,10 +69,16 @@ class Login extends React.Component {
     _onUserNameChange = (username) => {
         this.setState({'username': username});
 
-        if(this.state.username && this.state.password) {
+        if((this.state.password.length > 0) && username) {
             this.setState({complete: true});
         }else{
             this.setState({complete: false});
+        }
+
+        if(this.state.password || this.state.username) {
+            this.setState({showReturn: true});
+        }else{
+            this.setState({showReturn: false});
         }
     };
 
@@ -77,10 +86,16 @@ class Login extends React.Component {
     _onPasswordChange = (password) => {
         this.setState({'password': password});
 
-        if(this.state.username && this.state.password) {
+        if((this.state.username.length > 0) && password) {
             this.setState({complete: true});
         }else{
             this.setState({complete: false});
+        }
+
+        if(this.state.password || this.state.username) {
+            this.setState({showReturn: true});
+        }else{
+            this.setState({showReturn: false});
         }
     };
 
@@ -90,9 +105,9 @@ class Login extends React.Component {
         let that = this;
 
         let userData = {username, password};
-        this.setState({animating: true});
+        this.setState({animating: true, complete: false});
         this.props.action.logUserIn(userData).then((response)=> {
-            this.setState({animating: false});
+            this.setState({animating: false, complete: true});
 
             if(this.props.user.presentUser._id) {
                 SecureStore.setItemAsync("Ixoti", username);
@@ -134,6 +149,12 @@ class Login extends React.Component {
         }
     };
 
+    _onEdited = () => {
+        if(this.state.password.length && this.state.username.length) {
+            dismissKeyboard();
+        }
+    };
+
     render() {
         return (
             <KeyboardAvoidingView
@@ -148,6 +169,7 @@ class Login extends React.Component {
                         style={{ paddingLeft: 10, fontSize: 14, height: 40,  fontFamily: 'Arial', borderColor: '#D5D5D5', borderWidth: 1, borderRadius: 5, backgroundColor: '#E5E5E5'}}
                         placeholder='Enter Email or Username'
                         onChangeText={this._onUserNameChange}
+                        disabled={true}
                         value={this.state.username}
                     />
                 </View>
@@ -158,8 +180,9 @@ class Login extends React.Component {
                         placeholder='Enter Password'
                         onChangeText={this._onPasswordChange}
                         value={this.state.password}
-                        returnKeyType="done"
+                        returnKeyType={(this.state.showReturn) ? 'done': 'none'}
                         onKeyPress={this._handleKeyDown}
+                        onSubmitEditing={this._onLogin}
                     />
                 </View>
 

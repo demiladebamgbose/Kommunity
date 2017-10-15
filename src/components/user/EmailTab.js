@@ -12,11 +12,13 @@ class EmailTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'email': '',
-            'modalVisible': false,
-            'error': '',
-            'formDataError': {},
-            'formData': {},
+            email: '',
+            modalVisible: false,
+            error: '',
+            formDataError: {},
+            formData: {},
+            center: false,
+            enable: false
         }
     }
 
@@ -68,6 +70,12 @@ class EmailTab extends React.Component {
 
     _onEmailChange = (email) => {
         this.setState({email});
+
+        if(this.state.email.length >= 3){
+            this.setState({enable: true});
+        }else{
+            this.setState({enable: false});
+        }
     };
 
 
@@ -78,10 +86,16 @@ class EmailTab extends React.Component {
 
     _toggleModal = (toggleState) => {
       if (!this.validateEmail(this.state.email)) {
-        this.setState({ error: 'Enter a valid email address'});
-        return;
+            this.setState({ error: 'Enter a valid email address'});
+              if(this.state.email.length <= 1){
+                  this.setState({center: true});
+              } else{
+                  this.setState({center: false});
+              }
+          return;
       }
-      this.setState({ modalVisible: toggleState });
+
+      this.setState({ modalVisible: toggleState , error: ''});
     };
 
     render () {
@@ -95,11 +109,13 @@ class EmailTab extends React.Component {
                         style={styles.textBox}
                     />
 
-                <TouchableOpacity onPress={()=>{this._toggleModal(true)}} style={styles.blueButton}>
+                <TouchableOpacity disabled={!this.state.enable}
+                                  onPress={()=>{this._toggleModal(true)}}
+                                  style={(this.state.enable) ? styles.blueButton : styles.logButton}>
                     <Text style={styles.buttonText}>Next</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.centerText}> {this.state.error} </Text>
+                <Text style={ (this.state.center) ? styles.centerText: styles.leftText}> {this.state.error} </Text>
 
                 </View>
 
@@ -172,13 +188,23 @@ const styles = StyleSheet.create({
       height:((12 / 100) * height),
       justifyContent:'space-between'
     },
-
+    leftText: {
+        marginTop: 10,
+        color: 'red',
+        textAlign: 'left'
+    },
     centerText: {
         marginTop: 10,
         textAlign: 'center',
         color: 'red'
     },
-
+    logButton: {
+        marginTop: 10,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: '#b0c4de',
+        borderRadius: 5
+    }
 });
 
 export default EmailTab;

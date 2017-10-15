@@ -21,16 +21,22 @@ class PhoneTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'number': '',
-            'modalVisible': false,
-            'error': '',
-            'formData': {},
-            'formDataError': {}, 
+             number: '',
+             modalVisible: false,
+             error: '',
+             formData: {},
+             formDataError: {},
+             enabled : false
         }
     }
 
     _onNumberChange = (number) => {
         this.setState({number: number});
+        if(this.state.number.length >= 4){
+            this.setState({enable: true});
+        }else{
+            this.setState({enable: false});
+        }
     };
 
     _toggleModal = (toggleState) => {
@@ -81,7 +87,9 @@ class PhoneTab extends React.Component {
 
                         </View>
                     </View>
-                    <TouchableOpacity onPress={()=>{this._toggleModal(true)}} style={styles.blueButton} >
+                    <TouchableOpacity disabled={!this.state.enable}
+                                      onPress={()=>{this._toggleModal(true)}}
+                                      style={(this.state.enable) ? styles.blueButton : styles.logButton}>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableOpacity>
 
@@ -190,6 +198,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'red'
     },
+    logButton: {
+        marginTop: 10,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: '#b0c4de',
+        borderRadius: 5
+    }
 });
 
 export default PhoneTab;
