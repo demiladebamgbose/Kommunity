@@ -11,6 +11,7 @@ import Message from './src/components/message';
 import SingleMessage from './src/components/message/singleMessage';
 import Events from './src/components/dashboard/activity/index';
 import Landing from './src/components/dashboard/helper/drawer';
+import ForgotPassword from './src/components/user/ForgotPassword';
 import {Provider} from 'react-redux';
 import configureStore from './src/store/ConfigureStore';
 
@@ -32,7 +33,8 @@ const Route = StackNavigator({
     UserProfileView: {screen: Profile},
     Message: {screen: Message},
     Events: {screen: Events},
-    SingleMessage: {screen: SingleMessage}
+    SingleMessage: {screen: SingleMessage},
+    ForgotPassword: {screen: ForgotPassword}
 });
 
 const App = () => (

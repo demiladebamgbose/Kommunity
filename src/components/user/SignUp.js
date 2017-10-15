@@ -159,7 +159,7 @@ let {height, width} = Dimensions.get('window');
 
      static navigationOptions = {
          title: 'KOMMUNITY',
-         headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3)},
+         headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3.6)},
          headerTintColor: 'white',
          headerTitleStyle: {
              fontFamily: 'Noteworthy-Bold',

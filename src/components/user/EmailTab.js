@@ -26,8 +26,7 @@ class EmailTab extends React.Component {
 
     _formChange = (key, value) => {
         this.state.formData[key] = value;
-
-    }
+    };
 
     _doneCliked = () => {
         console.log(this.state.formData);
@@ -36,25 +35,28 @@ class EmailTab extends React.Component {
         } else {
           console.log("not validated");
         }
-
-    }
+    };
 
     _validateFormData = (formData) => {
+
       let obj = {};
-      let validated  = true;
+      let validated = true;
 
         if (!formData.fullName) {
             obj.fullName = 'Enter your full name';
             validated = false;
         }
+
         if (!formData.username) {
             obj.username = 'Enter a username';
             validated = false;
         }
+
         if (!formData.password) {
             obj.password = 'Enter a valid password';
             validated = false;
         }
+
         if (formData.password !== formData.confirmPassword) {
             obj.password = 'Passwords do not match';
             validated = false;
@@ -62,7 +64,7 @@ class EmailTab extends React.Component {
 
         this.setState({ formDataError: obj });
         return validated;
-    }
+    };
 
     _onEmailChange = (email) => {
         this.setState({email});
@@ -72,7 +74,7 @@ class EmailTab extends React.Component {
    validateEmail = (email) => {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
-    }
+    };
 
     _toggleModal = (toggleState) => {
       if (!this.validateEmail(this.state.email)) {
@@ -80,7 +82,7 @@ class EmailTab extends React.Component {
         return;
       }
       this.setState({ modalVisible: toggleState });
-    }
+    };
 
     render () {
         return (
@@ -106,13 +108,13 @@ class EmailTab extends React.Component {
                      <View>
                          <View style={styles.editModalTop}>
                              <TouchableOpacity onPress={()=>{this._toggleModal(false)}} >
-                                 <Text style={{textAlign: 'left', padding: 12, textSize: 20 }}>Cancel</Text>
+                                 <Text style={{textAlign: 'left', padding: 12, fontSize: 20 }}>Cancel</Text>
                              </TouchableOpacity>
-                             <Text style={{textAlign: 'center', padding: 12, textSize: 20, fontWeight: 'bold',   }}>SignUp</Text>
+                             <Text style={{textAlign: 'center', padding: 12, fontSize: 20, fontWeight: 'bold',   }}>SignUp</Text>
 
                               <View style={{width:((20 / 100) * width)}}>
                                   <TouchableOpacity onPress={this._doneCliked}>
-                                      <Text style={{textAlign: 'right', padding: 12, textSize: 20 }}>Done</Text>
+                                      <Text style={{textAlign: 'right', padding: 12, fontSize: 20 }}>Done</Text>
                                   </TouchableOpacity>
                               </View>
                          </View>
