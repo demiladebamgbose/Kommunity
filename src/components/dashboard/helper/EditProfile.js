@@ -174,8 +174,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     }
 
-
-
 });
 
 function mapDispatchToProps(dispatch) {
@@ -188,7 +186,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, ownProps) {
     return {
          user: state.user.presentUser,
-
     }
 }
 
