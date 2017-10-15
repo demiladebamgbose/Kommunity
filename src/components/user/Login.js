@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {} from 'react';
 import { StyleSheet,
     Text,
     View ,
@@ -29,7 +29,7 @@ class Login extends React.Component {
         headerTintColor: 'white',
         headerTitleStyle: {
             fontFamily: 'Noteworthy-Bold',
-            fontSize: 31
+            fontSize: width * (20 / width)
         },
         left:null
     };
@@ -51,6 +51,8 @@ class Login extends React.Component {
             showReturn: false,
             disableText: false
         };
+        console.log(width);
+        console.log('---------------------------------------------');
     }
 
     async componentDidMount(){
