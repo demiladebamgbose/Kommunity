@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 let {height, width} = Dimensions.get('window');
 import Moment from 'react-moment';
 
-const VerticalGrid = ({obj, click, like, uid, userLike}) => {
+const VerticalGrid = ({obj, click, like, uid, userLike, options}) => {
    /* let data1 = {};
     if(obj['0'].content.secure_url) {
       //  data1 = obj['0'].content.secure_url.split('upload/');
@@ -26,8 +26,10 @@ const VerticalGrid = ({obj, click, like, uid, userLike}) => {
                     <Circle url="https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"
                         label="jols" clicked={click}
                     />
+                    <TouchableOpacity onPress={()=> options()}>
+                        <Ionicons name="ios-more-outline" size={20} />
+                    </TouchableOpacity>
 
-                   <Ionicons name="ios-more-outline" size={20} />
                 </View>
 
                 <TouchableOpacity onPress={() => click(obj['0']._id)}>

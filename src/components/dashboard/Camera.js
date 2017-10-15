@@ -324,6 +324,7 @@ import { ImagePicker,
     Video,
     FileSystem,
     } from 'expo';
+import { SimpleLineIcons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 import {connect} from 'react-redux';
 import {Ionicons} from '@expo/vector-icons';
@@ -505,24 +506,39 @@ class CameraView extends React.Component {
             flex: 0.5,
             backgroundColor: 'transparent',
             flexDirection: 'row',
+            alignSelf: 'flex-end',
+                justifyContent: 'space-between',
+                marginRight: 10
           }}>
                     <TouchableOpacity
-                        style={styles.flipButton}
+                        style={styles.flash}
                         onPress={this.toggleFacing.bind(this)}>
-                        <Text style={styles.flipText}> FLIP </Text>
+                        <Ionicons
+                            name="ios-reverse-camera-outline"
+                            size={40}
+                            color="white"
+                        />
                     </TouchableOpacity>
+
                     <TouchableOpacity
-                        style={styles.flipButton}
+                        style={styles.flash}
                         onPress={this.toggleFlash.bind(this)}>
-                        <Text style={styles.flipText}>
-                            {' '}FLASH: {this.state.flash}{' '}
-                        </Text>
+                        <Ionicons
+                            name="ios-flash-outline"
+                            size={40}
+                            color="white"
+                        />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.flipButton}
+                        style={styles.flash}
                         onPress={this.toggleWB.bind(this)}>
                         <Text style={styles.flipText}>
-                            {' '}WB: {this.state.whiteBalance}{' '}
+                            <Ionicons
+                                name="ios-color-filter-outline"
+                                size={40}
+                                color="white"
+                            />
+
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -538,17 +554,53 @@ class CameraView extends React.Component {
                 <View
                     style={{
                 marginTop: 30,
-                flex: 0.5,
+                flex: 0.2,
                 backgroundColor: 'transparent',
                 flexDirection: 'row',
-                alignSelf: 'flex-end'
+                alignSelf: 'flex-end',
+                justifyContent: 'space-between',
+                marginRight: 10
+
           }}>
 
+                    <TouchableOpacity
+                        style={styles.flash}
+                        onPress={this.toggleFacing.bind(this)}>
+                        <MaterialIcons
+                            name="photo-library"
+                            color="white"
+                            size={40}
+                        />
+                    </TouchableOpacity>
 
+
+                    <TouchableOpacity
+                        style={styles.flash}
+                        onPress={this.toggleFacing.bind(this)}>
+                        <MaterialCommunityIcons
+                            name="camera-iris"
+                            color="white"
+                            size={40}
+                        />
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity
+                        style={styles.flash}
+                        onPress={this.toggleFacing.bind(this)}>
+                        <Ionicons
+                            name="ios-videocam-outline"
+                            color="white"
+                            size={40}
+                        />
+                    </TouchableOpacity>
 
 
 
                 </View>
+
+
+
             </Camera>
         );
     }
@@ -632,6 +684,17 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
+    },
+    flash: {
+        flex: 0.3,
+        height: 40,
+        marginHorizontal: 2,
+        marginBottom: 10,
+        marginTop: 20,
+        borderRadius: 8,
+        padding: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     flipButton: {
         flex: 0.3,

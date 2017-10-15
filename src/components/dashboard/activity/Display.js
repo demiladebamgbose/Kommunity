@@ -25,6 +25,10 @@ class Display extends React.Component {
         })
     }
 
+    _onOptions = () => {
+
+    };
+
     _onImage = () => {
 
     };
@@ -38,6 +42,7 @@ class Display extends React.Component {
                  <VerticalGrid obj={item} click={this._onImage}
                     width={pictureSize}
                      userLike={this._onImage} like={this._onImage} uid={1}
+                     options={this._onOptions}
                      />
                  }
                 />

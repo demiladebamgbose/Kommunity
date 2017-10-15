@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 let {height, width} = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
+import { ImagePicker,
+    Permissions,
+} from 'expo';
 
 
 class EditProfile extends React.Component {
@@ -13,18 +16,60 @@ class EditProfile extends React.Component {
 
 
         this.state = {
-          text:"demi"
+            text:"demi",
+            hasCameraPermission: false
         };
+    }
+
+    async componentWillMount() {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({ hasCameraPermission: status === 'granted' });
     }
 
     _onChangeText = (text) => {
         this.setState({'text': text});
     };
 
+    _cameraRoll = async () => {
+        if(!this.state.hasCameraPermission)
+            return;
+
+        let result = await ImagePicker.launchCameraAsync({  allowsEditing: true,
+            aspect: [4, 3]});
+
+        if (!result.cancelled) {
+            this.setState({userImage: result.uri});
+            console.log(result);
+            /*this.props.action.uploadCameraImage(result).then(response => {
+             this.props.screenProps.rootNavigation.navigate('UploadView');
+             }).catch(err => {
+             console.log(err);
+             }); */
+        }
+    };
+
+    _library = async () => {
+        if(!this.state.hasCameraPermission)
+            return;
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+
+        if (!result.cancelled) {
+            /*this.props.action.uploadCameraImage(result).then(response => {
+                this.props.screenProps.rootNavigation.navigate('UploadView');
+            }).catch(err => {
+                console.log(err);
+            }); */
+        }
+    };
+
     render () {
         return (
             <View>
-                <Circle}/>
+                <Circle url={this.props.image} click={this._cameraRoll} library={this._library} />
 
                 <View  style={styles.body}>
                     <View style={{ flexDirection: 'row',  }}>
@@ -84,7 +129,7 @@ class EditProfile extends React.Component {
     }
 }
 
-const Circle = ({url, click, image}) => {
+const Circle = ({url, click, library}) => {
     return (
         <View style={styles.center}>
             <TouchableOpacity onPress={() => click()}>
@@ -92,12 +137,15 @@ const Circle = ({url, click, image}) => {
                     <View style={styles.circle}>
                         <Image  style={{width: 70, height: 70, borderRadius: 70/2 }}
                             source={{ uri:
-                            'http://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png' || url} } />
+                            url || 'http://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png'} } />
                     </View>
                 </View>
             </TouchableOpacity>
             <View>
-                <Text style={{justifyContent: 'center', padding: 10,  fontWeight: 'bold', color:'#71b5ed'}}> Change Profile Photo </Text>
+                <Text onPress={()=> library()} style={{justifyContent:
+                'center', padding: 10,
+                fontWeight: 'bold',
+                color:'#71b5ed'}}> Import photo from Library </Text>
             </View>
         </View>
     )
@@ -126,8 +174,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     }
 
-
-
 });
 
 function mapDispatchToProps(dispatch) {
@@ -139,9 +185,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state, ownProps) {
     return {
-        // user: state.user.presentUser,
-
+         user: state.user.presentUser,
     }
 }
 
-export default connect(null, null)(EditProfile);
+export default connect(mapStateToProps, null)(EditProfile);

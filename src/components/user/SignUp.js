@@ -154,16 +154,20 @@ import * as userActions from '../../actions/userActions';
 import { NavigationActions } from 'react-navigation'
 let {height, width} = Dimensions.get('window');
 
+const headerSize = 31;
+if (width < 375) {
+    headerSize = 20;
+}
 
  class SignUp extends React.Component {
 
      static navigationOptions = {
          title: 'KOMMUNITY',
-         headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3)},
+         headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3.6)},
          headerTintColor: 'white',
          headerTitleStyle: {
              fontFamily: 'Noteworthy-Bold',
-             fontSize: 31
+             fontSize: headerSize
          },
          headerBackTitle: null,
          headerBackTitleStyle: {display: 'none'}

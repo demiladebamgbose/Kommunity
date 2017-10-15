@@ -73,6 +73,7 @@ class Activity extends React.Component {
                                         following={true}
                                         viewClicked={this._onUserView}
                                         other={'Name'} name={item.name}
+                                        more={true}
                                  />
                  }
                 />

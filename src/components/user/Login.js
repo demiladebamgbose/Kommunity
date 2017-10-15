@@ -1,23 +1,39 @@
-import React from 'react';
-import { StyleSheet, Text, View , Button, Alert, TextInput, TouchableOpacity, Dimensions, ActivityIndicator} from 'react-native';
+import React, {} from 'react';
+import { StyleSheet,
+    Text,
+    View ,
+    Button,
+    Alert,
+    TextInput,
+    TouchableOpacity,
+    Dimensions,
+    ActivityIndicator,
+    KeyboardAvoidingView,
+    Modal
+} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
 import { NavigationActions } from 'react-navigation'
 let {height, width} = Dimensions.get('window');
 import {SecureStore} from 'expo';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
+
+const headerSize = 31;
+if (width < 375) {
+    headerSize = 20;
+}
 
 class Login extends React.Component {
 
-
     static navigationOptions = {
         title: 'KOMMUNITY',
-        headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3)},
+        headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3.6)},
         headerTintColor: 'white',
         headerTitleStyle: {
             fontFamily: 'Noteworthy-Bold',
-            fontSize: 31
+            fontSize: headerSize
         },
         left:null
     };
@@ -26,21 +42,26 @@ class Login extends React.Component {
     constructor(props) {
 
         super(props);
+        console.log('The width -->', width)
         this.state = {
-            'username': '',
-            'password': '',
-            'information': '',
-            'screnHeight': height,
-            'screenWidth': width,
-            'complete': false,
-            'animating': false
+            username: '',
+            password: '',
+            information: '',
+            screnHeight: height,
+            screenWidth: width,
+            complete: false,
+            animating: false,
+            modalVisible: false,
+            showReturn: false,
+            disableText: false
         };
-
-
+        console.log(width);
+        console.log('---------------------------------------------');
     }
 
     async componentDidMount(){
         if(await SecureStore.getItemAsync("Ixoti")){
+            return;
             let username = await SecureStore.getItemAsync("Ixoti");
             let password = await SecureStore.getItemAsync("Pxye");
 
@@ -54,10 +75,16 @@ class Login extends React.Component {
     _onUserNameChange = (username) => {
         this.setState({'username': username});
 
-        if(this.state.username && this.state.password) {
+        if((this.state.password.length > 0) && username) {
             this.setState({complete: true});
         }else{
             this.setState({complete: false});
+        }
+
+        if(this.state.password || this.state.username) {
+            this.setState({showReturn: true});
+        }else{
+            this.setState({showReturn: false});
         }
     };
 
@@ -65,10 +92,16 @@ class Login extends React.Component {
     _onPasswordChange = (password) => {
         this.setState({'password': password});
 
-        if(this.state.username && this.state.password) {
+        if((this.state.username.length > 0) && password) {
             this.setState({complete: true});
         }else{
             this.setState({complete: false});
+        }
+
+        if(this.state.password || this.state.username) {
+            this.setState({showReturn: true});
+        }else{
+            this.setState({showReturn: false});
         }
     };
 
@@ -78,9 +111,9 @@ class Login extends React.Component {
         let that = this;
 
         let userData = {username, password};
-        this.setState({animating: true});
+        this.setState({animating: true, complete: false});
         this.props.action.logUserIn(userData).then((response)=> {
-            this.setState({animating: false});
+            this.setState({animating: false, complete: true});
 
             if(this.props.user.presentUser._id) {
                 SecureStore.setItemAsync("Ixoti", username);
@@ -107,15 +140,33 @@ class Login extends React.Component {
 
     _onLinkToSignUp = () =>{
         const { navigate } = this.props.navigation;
-        navigate('SignUp', { name: 'Jane' })
+        navigate('SignUp', { name: '' })
     };
 
     _onForgotPassword = () =>{
+        const { navigate } = this.props.navigation;
+        navigate('ForgotPassword', { name: '' })
+    };
 
+    _handleKeyDown = (e) => {
+        if(e.nativeEvent.key == "Enter") {
+            dismissKeyboard();
+            this._onLogin();
+        }
+    };
+
+    _onEdited = () => {
+        if(this.state.password.length && this.state.username.length) {
+            dismissKeyboard();
+        }
     };
 
     render() {
         return (
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior="padding"
+            >
             <View style={styles.container}>
                 <View>
                 </View>
@@ -124,6 +175,7 @@ class Login extends React.Component {
                         style={{ paddingLeft: 10, fontSize: 14, height: 40,  fontFamily: 'Arial', borderColor: '#D5D5D5', borderWidth: 1, borderRadius: 5, backgroundColor: '#E5E5E5'}}
                         placeholder='Enter Email or Username'
                         onChangeText={this._onUserNameChange}
+                        disabled={true}
                         value={this.state.username}
                     />
                 </View>
@@ -134,11 +186,15 @@ class Login extends React.Component {
                         placeholder='Enter Password'
                         onChangeText={this._onPasswordChange}
                         value={this.state.password}
+                        returnKeyType={(this.state.showReturn) ? 'done': 'none'}
+                        onKeyPress={this._handleKeyDown}
+                        onSubmitEditing={this._onLogin}
                     />
                 </View>
 
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
+                        disabled={!this.state.complete}
                         style={(this.state.complete) ? styles.logButtonClicked : styles.logButton}
                         onPress={this._onLogin}
                     >
@@ -153,10 +209,19 @@ class Login extends React.Component {
                     />
                 </View>
                 <View style={styles.alternativeLayoutButtonContainer}>
-                    <Text style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold'}} onPress={this._onLinkToSignUp}>Sign Up</Text>
-                    <Text style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold'}} onPress={this._onForgotPassword}>Forgot Password </Text>
+                    <TouchableOpacity  onPress={this._onLinkToSignUp}>
+                        <Text style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold'}}>
+                            Sign Up
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this._onForgotPassword}>
+                        <Text style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold'}}>Forgot Password </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
+
+                <View style={{ height: 0}} />
+            </KeyboardAvoidingView>
         );
     }
 }

@@ -118,7 +118,7 @@ class SingleMessage extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.message.newMessage.message) {
-            console.log(this.props.message)
+            console.log(this.props.message);
             this.setState((previousState) => {
                 return {
                     messages: GiftedChat.append(previousState.messages,
@@ -186,16 +186,19 @@ class SingleMessage extends React.Component {
                     };
                 });
             }
-        }, 1000); // simulating network
+        }, 1000); //simulating network
         */
     }
 
     onSend(messages = []) {
+        messages[0].user.avatar = this.props.user.image
+            || 'https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png';
         let obj = {};
         obj.recipient = this.state.sender;
         obj.composedMessage = messages;
         obj.user = this.props.user;
         console.log(obj, 'just before sending');
+
 
         if(this.state.conversation && (this.state.messages.length)) {
             obj.conversationId = this.state.conversation;
