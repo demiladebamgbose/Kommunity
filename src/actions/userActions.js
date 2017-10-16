@@ -37,6 +37,14 @@ export function sentMessageSuccess(data) {
     return {type: types.SEND_MESSAGE_USER, data};
 }
 
+export function editUserSuccess(data) {
+    return {type: types.EDIT_USER, data};
+}
+
+export function resetPasswordSuccess(data) {
+    return {type: types.RESET_PASSWORD, data};
+}
+
 export function createUser(user) {
     return dispatch => {
         return UserApi.createUser(user).then(user => {
@@ -112,6 +120,26 @@ export function sendMessage(obj){
         return UserApi.sendMessage(obj).then(data => {
             dispatch(sentMessageSuccess(data));
         }).catch(err => {
+            throw(err);
+        })
+    }
+}
+
+export function editUser(user) {
+    return dispatch => {
+        return UserApi.editUser(user).then(data => {
+            dispatch(editUserSuccess(data));
+        }).catch( err => {
+            throw(err);
+        })
+    }
+}
+
+export function resetPassword(id) {
+    return dispatch => {
+        return UserApi.resetPassword(id).then( data => {
+            dispatch(resetPasswordSuccess(data));
+        }).catch( err => {
             throw(err);
         })
     }

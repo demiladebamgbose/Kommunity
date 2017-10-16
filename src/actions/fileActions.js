@@ -33,6 +33,10 @@ export function fetchUserLikedFilesSuccess(users) {
     return {type: Types.USER_LIKED_FILES, users};
 }
 
+export function deletFileSuccess(data) {
+    return {type: Types.DELETE_FILE, data};
+}
+
 export function fetchAllFiles() {
     return dispatch => {
         return FileApi.recentFile().then(data => {
@@ -99,6 +103,16 @@ export function userLikedFiles(fileId) {
         return FileApi.userLikedFiles(fileId).then( users => {
             dispatch(fetchUserLikedFilesSuccess(users));
         }).catch(err=> {
+            throw(err);
+        })
+    }
+}
+
+export function deleteFile(fileId, old) {
+    return dispatch => {
+        return FileApi.deleteFile(fileId, old).then( data => {
+            dispatch(deletFileSuccess(data))
+        }).catch(err => {
             throw(err);
         })
     }

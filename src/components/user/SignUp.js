@@ -151,7 +151,7 @@ import { Alert, Button, Linking, StyleSheet, View,
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
 let {height, width} = Dimensions.get('window');
 
 

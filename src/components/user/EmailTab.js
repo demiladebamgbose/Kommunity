@@ -6,6 +6,10 @@ import React from 'react';
 import {View, StyleSheet, TextInput, TouchableOpacity, Text, Modal, Dimensions} from 'react-native';
 let {height, width} = Dimensions.get('window');
 import PasswordEntry from './PasswordEntry';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as userActions from '../../actions/userActions';
+import { NavigationActions } from 'react-navigation'
 
 class EmailTab extends React.Component {
 
@@ -31,9 +35,34 @@ class EmailTab extends React.Component {
     };
 
     _doneCliked = () => {
-        console.log(this.state.formData);
         if (this._validateFormData (this.state.formData)) {
-            console.log("validated");
+            let obj = this.state.formData;
+            obj.email = this.state.email;
+            obj.name = {firstName: this.state.formData.fullName.split(' ')[0] || '',
+                lastName: this.state.formData.fullName.split(' ')[1] || ''
+            };
+
+            this.props.action.createUser(obj).then( data => {
+                if(this.props.user._id) {
+
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Landing'})
+                        ]
+                    });
+                    this.props.navigation.dispatch(resetAction)
+
+                } else {
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Landing'})
+                        ]
+                    });
+                    this.props.navigation.dispatch(resetAction)
+                }
+            });
         } else {
           console.log("not validated");
         }
@@ -207,4 +236,18 @@ const styles = StyleSheet.create({
     }
 });
 
-export default EmailTab;
+
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user.presentUser,
+        message: state.user.passwordMessage
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        action: bindActionCreators(userActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmailTab);

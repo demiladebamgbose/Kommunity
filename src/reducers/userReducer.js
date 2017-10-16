@@ -9,7 +9,8 @@ const initialState = {
     searchUsers: [],
     likedFiles: [],
     userProfile: {},
-    messageStatus: ''
+    messageStatus: '',
+    passwordMessage: ''
 };
 
 export default function userReducer(state = initialState, action) {
@@ -64,6 +65,16 @@ export default function userReducer(state = initialState, action) {
         case types.SEND_MESSAGE_USER:
             return {
                 ...state, messageStatus: action.data
+            };
+
+        case types.RESET_PASSWORD:
+            return {
+                ...state, passwordMessage: action.data
+            };
+
+        case types.EDIT_USER:
+            return {
+                ...state, presentUser: action.data
             };
 
         default:
