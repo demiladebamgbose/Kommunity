@@ -7,6 +7,11 @@ let {height, width} = Dimensions.get('window');
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../../actions/userActions';
+let headerSize = 31;
+
+if (width < 375) {
+    headerSize = 20;
+}
 
 class Forgot extends React.Component {
     constructor(props) {
@@ -25,7 +30,7 @@ class Forgot extends React.Component {
         headerTintColor: 'white',
         headerTitleStyle: {
             fontFamily: 'Noteworthy-Bold',
-            fontSize: 31
+            fontSize: headerSize
         },
         headerBackTitle: null,
         headerBackTitleStyle: {display: 'none'}

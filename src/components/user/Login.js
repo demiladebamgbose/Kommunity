@@ -20,8 +20,12 @@ import {SecureStore} from 'expo';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 
-class Login extends React.Component {
+let headerSize = 31;
+if (width < 375) {
+    headerSize = 20;
+}
 
+class Login extends React.Component {
 
     static navigationOptions = {
         title: 'KOMMUNITY',
@@ -29,7 +33,7 @@ class Login extends React.Component {
         headerTintColor: 'white',
         headerTitleStyle: {
             fontFamily: 'Noteworthy-Bold',
-            fontSize: width * (20 / width)
+            fontSize: headerSize
         },
         left:null
     };
@@ -51,8 +55,6 @@ class Login extends React.Component {
             showReturn: false,
             disableText: false
         };
-        console.log(width);
-        console.log('---------------------------------------------');
     }
 
     async componentDidMount(){

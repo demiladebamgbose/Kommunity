@@ -9,7 +9,6 @@ import {
     StackNavigator
 } from 'react-navigation';
 
-
 const ForgotPassword = StackNavigator({
 
     PasswordTab: {
@@ -18,7 +17,5 @@ const ForgotPassword = StackNavigator({
 },{
     headerMode: 'none'
 });
-
-
 
 export default ForgotPassword;
