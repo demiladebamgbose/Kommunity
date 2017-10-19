@@ -20,7 +20,7 @@ class Forgot extends React.Component {
             email: '',
             error: '',
             confirm: false,
-            message: ''
+            emailResponse: false
         };
     }
 
@@ -47,8 +47,13 @@ class Forgot extends React.Component {
     };
 
     _confirmEmail = () => {
-        this.props.action.resetPassword(this.props.user._id).then( data => {
-            this.setState({message: this.props.message});
+        this.props.action.resetPassword(this.state.email).then( data => {
+            if(this.props.message = 'Reset'){
+                this.setState({emailResponse: true, error: `Email link has been successfully sent to ${this.state.email} !!`});
+            }else{
+
+            }
+
         })
     };
 
@@ -73,9 +78,7 @@ class Forgot extends React.Component {
                         style={ (this.state.confirm) ? styles.blueButton : styles.logButton}>
                         <Text style={styles.buttonText}>Confirm</Text>
                     </TouchableOpacity>
-
-                    <Text style={styles.centerText}> {this.state.error} </Text>
-                    <Text style={styles.verifyText}> {this.state.message} </Text>
+                    <Text style={ (this.state.emailResponse ? styles.verifyText: styles.centerText)}> {this.state.error} </Text>
                 </View>
             </View>
         )
@@ -130,7 +133,7 @@ const styles = StyleSheet.create({
     verifyText: {
         marginTop: 10,
         textAlign: 'center',
-
+        color: 'green'
     },
     centerText: {
         marginTop: 10,

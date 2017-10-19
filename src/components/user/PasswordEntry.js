@@ -77,6 +77,7 @@ class PasswordEntry extends React.Component {
                         placeholder='Password'
                         onChangeText={this._onPasswordChange}
                         value={this.state.password}
+                        secureTextEntry={true}
                     />
                     <Text style={styles.centerText} > {this.state.error.password}</Text>
                 </View>
@@ -87,6 +88,7 @@ class PasswordEntry extends React.Component {
                         placeholder='Confirm Password'
                         onChangeText={this._onConfirmPasswordChange}
                         value={this.state.confirmPassword}
+                        secureTextEntry={true}
                     />
                     <Text style={styles.centerText} > {this.state.error.confirmPassword}</Text>
                 </View>

@@ -35,6 +35,7 @@
     "react-native-facebook-login": "^1.5.0",
     "react-native-gifted-chat": "^0.2.7",
     "react-native-invertible-flat-list": "^1.1.1",
+    "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-message-bar": "^2.0.4",
     "react-native-nav": "^2.0.2",
     "react-native-phone-input": "^0.1.9",

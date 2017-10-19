@@ -9,7 +9,8 @@ import PasswordEntry from './PasswordEntry';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class EmailTab extends React.Component {
 
@@ -22,7 +23,8 @@ class EmailTab extends React.Component {
             formDataError: {},
             formData: {},
             center: false,
-            enable: false
+            enable: false,
+            visible: false
         }
     }
 
@@ -41,7 +43,7 @@ class EmailTab extends React.Component {
             obj.name = {firstName: this.state.formData.fullName.split(' ')[0] || '',
                 lastName: this.state.formData.fullName.split(' ')[1] || ''
             };
-
+            this.setState({visible: true});
             this.props.action.createUser(obj).then( data => {
                 if(this.props.user._id) {
 
@@ -107,7 +109,6 @@ class EmailTab extends React.Component {
         }
     };
 
-
    validateEmail = (email) => {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
@@ -129,6 +130,11 @@ class EmailTab extends React.Component {
 
     render () {
         return (
+            (this.state.visible) ?<View style={{ flex: 1 , height: height}}>
+                    <Spinner visible={this.state.visible} style={{backgroundColor: 'blue'}}
+                             overlayColor="#b0c4de"
+                             textContent={"Loading..."} textStyle={{color: 'white'}} />
+                </View>:
             <View style={styles.container}>
                 <View style={styles.centerContent}>
                     <TextInput

@@ -140,19 +140,20 @@ class UserApi {
         })
     };
 
-    resetPassword = (id) => {
+    resetPassword = (email) => {
         return new Promise((resolve, reject) => {
-            return fetch(url + `api/v1/users/password/${id}`, {
+            return fetch(url + `api/v1/users/reset/id`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({email: email})
             }).then((response)=> response.json()).then((responseJson)=> {
-                if(responseJson.message.data)
-                    resolve(Object.assign({}, responseJson.message.data));
+                if(responseJson.message)
+                    resolve(responseJson.message);
                 else{
-                    reject(Object.assign({}, responseJson.message.error));
+                    reject(responseJson.message);
                 }
             })
         });
