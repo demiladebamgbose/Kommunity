@@ -10,6 +10,10 @@ import {View, StyleSheet, TextInput, TouchableOpacity, Text, Modal, Dimensions} 
 let {height, width} = Dimensions.get('window');
 import PasswordEntry from './PasswordEntry';
 import PhoneInput from 'react-native-phone-input'
+import { NavigationActions } from 'react-navigation'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as userActions from '../../actions/userActions';
 
 
 class PhoneTab extends React.Component {
@@ -26,7 +30,8 @@ class PhoneTab extends React.Component {
              error: '',
              formData: {},
              formDataError: {},
-             enabled : false
+             enabled : false,
+             visible: false
         }
     }
 
@@ -43,6 +48,8 @@ class PhoneTab extends React.Component {
         if (!this.state.number || this.state.number.length < 5) {
           this.setState({ error: 'Enter a valid phone number'});
           return;
+        }else{
+            this.setState({ error: ''});
         }
 
         this.setState({ modalVisible: toggleState });
@@ -52,16 +59,83 @@ class PhoneTab extends React.Component {
         this.state.formData[key] = value;
     };
 
+    _validateFormData = (formData) => {
+
+        let obj = {};
+        let validated = true;
+
+        if (!formData.fullName) {
+            obj.fullName = 'Enter your full name';
+            validated = false;
+        }
+
+        if (!formData.username) {
+            obj.username = 'Enter a username';
+            validated = false;
+        }
+
+        if (!formData.password) {
+            obj.password = 'Enter a valid password';
+            validated = false;
+        }
+
+        if (formData.password !== formData.confirmPassword) {
+            obj.password = 'Passwords do not match';
+            validated = false;
+        }
+
+        this.setState({ formDataError: obj });
+        return validated;
+    };
+
+
     _doneCliked = () => {
-        console.log(this.state.formData);
+        if (this._validateFormData (this.state.formData)) {
+            let obj = this.state.formData;
+            obj.email = `${this._onPhone()} ${this.state.number}`;
+            obj.name = {firstName: this.state.formData.fullName.split(' ')[0] || '',
+                lastName: this.state.formData.fullName.split(' ')[1] || ''
+            };
+
+            this.setState({visible: true});
+            this.props.action.createUser(obj).then( data => {
+                if(this.props.user._id) {
+
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Landing'})
+                        ]
+                    });
+                    this.props.navigation.dispatch(resetAction)
+
+                } else {
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Landing'})
+                        ]
+                    });
+                    this.props.navigation.dispatch(resetAction)
+                }
+            });
+
+        } else {
+            console.log("not validated");
+        }
     };
 
     _onPhone = (e) => {
-        //this.refs.phone.getValue()
+        return this.refs.phone.getValue()
     };
 
     render () {
         return (
+            (this.state.visible) ?<View style={{ flex: 1 , height: height}}>
+                    <Spinner visible={this.state.visible} style={{backgroundColor: 'blue'}}
+                             overlayColor="#b0c4de"
+                             textContent={"Loading..."} textStyle={{color: 'white'}} />
+                </View>:
             <View style={styles.container}>
                 <View style={[styles.centerContent]}>
                     <View style={styles.textBox}>
@@ -207,4 +281,17 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PhoneTab;
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user.presentUser,
+        message: state.user.passwordMessage
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        action: bindActionCreators(userActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhoneTab);

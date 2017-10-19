@@ -140,9 +140,41 @@ class UserApi {
         })
     };
 
-    resetPassword = (id) => {
+    resetPassword = (email) => {
         return new Promise((resolve, reject) => {
-            
+            return fetch(url + `api/v1/users/reset/id`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email: email})
+            }).then((response)=> response.json()).then((responseJson)=> {
+                if(responseJson.message)
+                    resolve(responseJson.message);
+                else{
+                    reject(responseJson.message);
+                }
+            })
+        });
+    };
+
+    editUser = (user) => {
+        return new Promise((resolve, reject) => {
+            return fetch(url + `api/v1/users/${user._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            }).then((response)=> response.json()).then((responseJson)=> {
+                if(responseJson.message.data)
+                    resolve(Object.assign({}, responseJson.message.data));
+                else{
+                    reject(Object.assign({}, responseJson.message.error));
+                }
+            })
         });
     };
 

@@ -109,6 +109,26 @@ class FileAPi {
         })
     };
 
+    deleteFile = (fileId, old) => {
+        return new Promise((resolve, reject)=> {
+            return fetch(url + 'api/v1/file/' + fileId, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            }).then((response)=> response.json()).then((responseJson) => {
+
+                if(responseJson.message.data === 'success') {
+                    const array = old.filter((data) =>  data != fileId);
+                    resolve(Object.assign([], array))
+                }else{
+
+                }
+            })
+        })
+    };
+
 }
 
 export default new FileAPi();

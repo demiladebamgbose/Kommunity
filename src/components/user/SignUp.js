@@ -151,16 +151,21 @@ import { Alert, Button, Linking, StyleSheet, View,
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
 let {height, width} = Dimensions.get('window');
+import Spinner from 'react-native-loading-spinner-overlay';
 
-const headerSize = 31;
+let headerSize = 31;
 if (width < 375) {
     headerSize = 20;
 }
 
  class SignUp extends React.Component {
 
+     state = {
+        visible: false,
+         headerHeight: (height/ 3.6)
+     };
      static navigationOptions = {
          title: 'KOMMUNITY',
          headerStyle: {backgroundColor: '#b0c4de', height: (height/ 3.6)},
@@ -190,6 +195,11 @@ if (width < 375) {
 
     render() {
         return (
+        (this.state.visible) ?<View style={{ flex: 1 , height: height}}>
+                <Spinner visible={this.state.visible} style={{backgroundColor: 'blue'}}
+                         overlayColor="#b0c4de"
+                         textContent={"Loading..."} textStyle={{color: 'white'}} />
+            </View>:
             <View style={styles.container}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.logButtonClicked}
@@ -228,8 +238,10 @@ if (width < 375) {
             permissions: ['public_profile', 'email'],
         });
         if (type === 'success') {
+            this.setState({visible: true});
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,first_name,last_name,gender,picture,email`);
             const json = await response.json();
+
             if (json) {
                 let obj = {name: {}};
                 obj.email = json.email;

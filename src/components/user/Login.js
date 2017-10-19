@@ -20,7 +20,7 @@ import {SecureStore} from 'expo';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 
-const headerSize = 31;
+let headerSize = 31;
 if (width < 375) {
     headerSize = 20;
 }
@@ -55,8 +55,6 @@ class Login extends React.Component {
             showReturn: false,
             disableText: false
         };
-        console.log(width);
-        console.log('---------------------------------------------');
     }
 
     async componentDidMount(){

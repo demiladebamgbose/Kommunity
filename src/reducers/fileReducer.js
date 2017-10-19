@@ -32,6 +32,9 @@ export default function fileReducer(state = initialState, action) {
         case types.USER_LIKED_FILES:
             return {...state, likers: action.users};
 
+        case types.DELETE_FILE:
+            return {...state, userFile: action.data};
+
         default:
             return state;
     }
