@@ -85,11 +85,14 @@ class ProfileSingleView extends React.Component {
         }
     };
 
+    _keyExtractor = (item, index) => index;
+
     render () {
         return (
             <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.files}
+                    keyExtractor={this._keyExtractor}
                     renderItem={({item}) => <VerticalGrid obj={item}
                     userLike={this._userLikes} like={this._onLike} uid={this.state.id} click={this._onClick}
                     options={this._options}

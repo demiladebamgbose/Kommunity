@@ -57,12 +57,14 @@ class Activity extends React.Component {
 
    };
 
+    _keyExtractor = (item, index) => index;
 
     render() {
         return (
             <View style={{flex: 1, paddingTop: 5}}>
                  <FlatList
                             data={this.state.events}
+                            keyExtractor={this._keyExtractor}
                             renderItem={({item}) =>
                                  <SearchDisplay
                                         img=""

@@ -51,6 +51,8 @@ class Search extends React.Component {
         navigate('UserProfileView', { user: e, navigation: this.props.screenProps.rootNavigation});
     };
 
+    _keyExtractor = (item, index) => index;
+
     render() {
         return (
             <View style={styles.container}>
@@ -82,6 +84,7 @@ class Search extends React.Component {
                         (this.state.searchResult.length) ?
                         <FlatList
                         data={this.state.searchResult}
+                        keyExtractor={this._keyExtractor}
                         renderItem={({item}) =>
                         <SearchDisplay img={item.image} id={item._id} userId={this.state.userId}
                             follow={this._onFollow} unfollow={this._onUnfollow}
