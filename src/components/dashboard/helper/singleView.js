@@ -57,19 +57,24 @@ class SingleView extends React.Component {
     };
 
     _onUser = (e) => {
-        console.log('I was clicked, you cut ', e);
+        console.log('I was clicked, you cu', e);
     };
 
     _onLike = (e) => {
         if(this.state.liked) {
             this.props.action.unLikeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
                 this.setState({liked: false});
-                this.setState({likes: (--this.state.likes)})
+                this.setState({likes: (--this.state.likes)});
             })
         }else {
             this.props.action.likeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
                 this.setState({liked: true});
-                this.setState({likes: (++ this.state.likes)})
+                this.setState({likes: (++ this.state.likes)});
+                this.props.likedFiles = this.props.likedFiles.filter( data => {
+                    return data !== this.props.files.viewFile._id;
+                });
+
+                debugger;
             })
         }
     };

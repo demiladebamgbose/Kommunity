@@ -27,7 +27,6 @@ class Search extends React.Component {
     };
 
     _onSearch = (text) => {
-        let that = this;
         this.setState({animating: true});
 
         this.props.action.searchUser(text).then( response => {
