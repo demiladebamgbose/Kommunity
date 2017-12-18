@@ -26,6 +26,11 @@ export default function fileReducer(state = initialState, action) {
                 userFile: action.files
             };
 
+        case types.RESET_LIKED_FILE:
+            return {
+                ...state, viewFile: action.viewFile
+            };
+
         case types.FETCH_SINGLE_FILE_VIEW:
             return {...state, viewFile: action.viewFile};
 

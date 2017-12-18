@@ -605,7 +605,7 @@ class CameraView extends React.Component {
         );
     }
 
-    /*
+     /*
      <TouchableOpacity
      style={[styles.flipButton]}
      onPress={this._pickImage}>

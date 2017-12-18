@@ -5,36 +5,43 @@
 import * as Types from './actionTypes';
 import FileApi from '../api/fileApi';
 
-export function fetchUserFileSuccess(files){
+function fetchUserFileSuccess(files){
     return {type: Types.FETCH_USER_FILES, files}
 }
 
-export function fetchRecentFileSuccess(files){
+function fetchRecentFileSuccess(files){
     return {type: Types.FETCH_RECENT_FILES, files}
 }
 
-export function fetchSingleFileViewSuccess(viewFile) {
+function fetchSingleFileViewSuccess(viewFile) {
     return {type: Types.FETCH_SINGLE_FILE_VIEW, viewFile}
 }
 
-export function fetchLikesSuccess(data) {
+function fetchLikesSuccess(data) {
     return {type: Types.LIKE_USER_FILE, data}
 }
 
-export function fetchunLikeSuccess(data) {
+function fetchunLikeSuccess(data) {
     return {type: Types.UNLIKE_USER_FILE, data};
 }
 
-export function fetchPrevLikedSuccess(data) {
+function fetchPrevLikedSuccess(data) {
     return {type: Types.PREVIOUSLY_LIKED_FILE, data};
 }
 
-export function fetchUserLikedFilesSuccess(users) {
+function fetchUserLikedFilesSuccess(users) {
     return {type: Types.USER_LIKED_FILES, users};
 }
 
-export function deletFileSuccess(data) {
+function deletFileSuccess(data) {
     return {type: Types.DELETE_FILE, data};
+}
+
+function resetLikedFilesSuccess(viewFile) {
+    return {
+        type: Types.RESET_LIKED_FILE,
+        viewFile
+    }
 }
 
 export function fetchAllFiles() {
@@ -69,11 +76,20 @@ export function fetchUserFiles(userId) {
 
 export function likeFile(user, fileId, old) {
     return dispatch => {
-        console.log(user, '..... ->    ->    -> ')
         return FileApi.likeUserFile(user, fileId, old).then( data => {
             dispatch(fetchLikesSuccess(data));
         }).catch(err => {
             throw (err);
+        })
+    }
+}
+
+export function resetLikedFile(fileToDelete, oldData) {
+    return dispatch => {
+        return FileApi.resetFile(fileToDelete, oldData).then( data => {
+            dispatch(resetLikedFilesSuccess(data))
+        }).catch(err => {
+            throw(err);
         })
     }
 }

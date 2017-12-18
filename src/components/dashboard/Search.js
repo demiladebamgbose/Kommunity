@@ -30,7 +30,7 @@ class Search extends React.Component {
         this.setState({animating: true});
 
         this.props.action.searchUser(text).then( response => {
-            let userResponse = that.props.user;
+            let userResponse = this.props.user;
             let users = userResponse.searchUsers.user;
             this.setState({searchResult: users});
             this.setState({animating: false});

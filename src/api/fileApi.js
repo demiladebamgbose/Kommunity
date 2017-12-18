@@ -72,6 +72,7 @@ class FileAPi {
     };
 
     unLikeUserFile = (user, fileId, old) => {
+        debugger;
         return new Promise((resolve, reject)=> {
             return fetch(url + 'api/v1/like/' + fileId, {
                 method: 'DELETE',
@@ -79,7 +80,7 @@ class FileAPi {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(user)
+                body: JSON.stringify({user: user})
             }).then((response)=> response.json()).then((responseJson) => {
 
                 if(responseJson.message.data === 'success') {
@@ -89,6 +90,16 @@ class FileAPi {
 
                 }
             })
+        })
+    };
+
+    resetFile = (present, old) => {
+        return new Promise((resolve, reject) => {
+            let newArray = old.filter(data => {
+                debugger;
+                return data != present;
+            });
+          Object.assign({}, {likes: newArray});
         })
     };
 

@@ -24,9 +24,10 @@ class SingleView extends React.Component {
             return data == this.props.user._id
         });
 
+
        let likeState = false;
        let userLiked = 0;
-       if(liked.length){
+       if(liked.length) {
            likeState = true;
            this.props.action.previouslyLiked(this.props.files.viewFile._id, this.props.likedFiles).then(
                response => {
@@ -60,21 +61,27 @@ class SingleView extends React.Component {
         console.log('I was clicked, you cu', e);
     };
 
+    _refreshLikedFiles = () => {
+        this.props.action. resetLikedFile(this.props.files.viewFile._id, this.props.files.viewFile.likes).then(data => {
+            debugger;
+        })
+    };
+
     _onLike = (e) => {
         if(this.state.liked) {
             this.props.action.unLikeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
                 this.setState({liked: false});
                 this.setState({likes: (--this.state.likes)});
+                this._refreshLikedFiles();
             })
-        }else {
+        } else {
             this.props.action.likeFile(this.props.user, this.state.id, this.props.likedFiles).then(response => {
                 this.setState({liked: true});
                 this.setState({likes: (++ this.state.likes)});
                 this.props.likedFiles = this.props.likedFiles.filter( data => {
                     return data !== this.props.files.viewFile._id;
                 });
-
-                debugger;
+                this._refreshLikedFiles();
             })
         }
     };
