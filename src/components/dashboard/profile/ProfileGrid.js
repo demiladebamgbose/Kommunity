@@ -52,11 +52,14 @@ class ProfileGrid extends React.Component {
         });
     };
 
+    _keyExtractor = (item, index) => index;
+
     render () {
         return (
             <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.files}
+                    keyExtractor={this._keyExtractor}
                     extraData={this.state}
                     renderItem={({item}) => <Grid
                     obj={item} click={this._onClick}

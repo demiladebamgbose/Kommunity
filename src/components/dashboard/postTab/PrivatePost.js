@@ -18,11 +18,14 @@ class PrivatePost extends React.Component {
 
     };
 
+    _keyExtractor = (item, index) => index;
+
     render() {
         return (
             <View style={{flex: 1}}>
             <FlatList
                 data={this.props.screenProps.privateData}
+                keyExtractor={this._keyExtractor}
                 renderItem={({item}) => <Grid obj={item}
                 click={this.props.screenProps.click} width={this.props.screenProps.width} />}
             />

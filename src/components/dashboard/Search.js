@@ -27,11 +27,10 @@ class Search extends React.Component {
     };
 
     _onSearch = (text) => {
-        let that = this;
         this.setState({animating: true});
 
         this.props.action.searchUser(text).then( response => {
-            let userResponse = that.props.user;
+            let userResponse = this.props.user;
             let users = userResponse.searchUsers.user;
             this.setState({searchResult: users});
             this.setState({animating: false});
@@ -50,6 +49,8 @@ class Search extends React.Component {
         const {navigate} = this.props.screenProps.rootNavigation;
         navigate('UserProfileView', { user: e, navigation: this.props.screenProps.rootNavigation});
     };
+
+    _keyExtractor = (item, index) => index;
 
     render() {
         return (
@@ -82,6 +83,7 @@ class Search extends React.Component {
                         (this.state.searchResult.length) ?
                         <FlatList
                         data={this.state.searchResult}
+                        keyExtractor={this._keyExtractor}
                         renderItem={({item}) =>
                         <SearchDisplay img={item.image} id={item._id} userId={this.state.userId}
                             follow={this._onFollow} unfollow={this._onUnfollow}

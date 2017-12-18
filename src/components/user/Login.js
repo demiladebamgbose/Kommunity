@@ -42,7 +42,6 @@ class Login extends React.Component {
     constructor(props) {
 
         super(props);
-        console.log('The width -->', width)
         this.state = {
             username: '',
             password: '',
@@ -59,7 +58,6 @@ class Login extends React.Component {
 
     async componentDidMount(){
         if(await SecureStore.getItemAsync("Ixoti")){
-            return;
             let username = await SecureStore.getItemAsync("Ixoti");
             let password = await SecureStore.getItemAsync("Pxye");
 

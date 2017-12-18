@@ -214,17 +214,21 @@ if (width < 375) {
                     <Text style={styles.text}>    </Text>
                 </View>
                 <View style={styles.buttonContainerText}>
-                    <Text onPress={this._onTabSignUp} style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold', textAlign: 'center'}}>
-                        Sign Up with Phone or Email
-                    </Text>
+                    <TouchableOpacity  onPress={this._onTabSignUp}>
+                        <Text  style={{fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold', textAlign: 'center'}}>
+                            Sign Up with Phone or Email
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.alternativeLayout}>
                     <Text style={{ textAlign: 'center',  color: 'grey'}}>
                         Already have an account ?
                     </Text>
-                    <Text onPress={this._onLinkToSign} style={{ textAlign: 'center', fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold', marginLeft: 2}}>
-                        Sign In.
-                    </Text>
+                    <TouchableOpacity  onPress={this._onLinkToSign}>
+                        <Text  style={{ textAlign: 'center', fontSize: 14, fontFamily: 'Arial', color: '#3B5998', fontWeight: 'bold', marginLeft: 2}}>
+                            Sign In.
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

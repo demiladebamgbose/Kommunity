@@ -17,6 +17,8 @@ class AllPost extends React.Component {
 
     };
 
+    _keyExtractor = (item, index) => index;
+
     render() {
         return (
             <View style={{flex: 1}}>
@@ -25,6 +27,7 @@ class AllPost extends React.Component {
                  renderItem={({item}) =>
                  <Grid obj={item} click={this.props.screenProps.click} width={this.props.screenProps.width} />
                  }
+                 keyExtractor={this._keyExtractor}
                  />
             </View>
         )
