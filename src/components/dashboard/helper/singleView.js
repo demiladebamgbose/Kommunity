@@ -28,6 +28,7 @@ class SingleView extends React.Component {
        let likeState = false;
        let userLiked = 0;
        if(liked.length) {
+           console.log(liked)
            likeState = true;
            this.props.action.previouslyLiked(this.props.files.viewFile._id, this.props.likedFiles).then(
                response => {

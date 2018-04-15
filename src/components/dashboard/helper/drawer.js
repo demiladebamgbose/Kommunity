@@ -12,8 +12,11 @@ const Drawer = DrawerNavigator({
     drawerWidth: (80/ 100) * width,
     drawerPosition: 'right',
     contentComponent: props => <CustomDrawerContentComponent/>,
-    drawerBackgroundColor: 'transparent',
-    header: null
+    drawerBackgroundColor: '#fff',
+    header: null,
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle'
 });
 
 

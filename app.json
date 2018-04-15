@@ -10,9 +10,9 @@
       "hideExponentText": true
     },
     "icon": "./src/logo.png",
-    "facebookScheme" : "810700055775747",
+    "facebookScheme" : "fb810700055775747",
     "infoPlist": {
-      "facebookScheme":  "810700055775747",
+      "facebookScheme":  "fb810700055775747",
       "preset": "sw64gmsy",
       "cloudinaryUrl": "https://api.cloudinary.com/v1_1/dd58mfinr/upload",
       "url": "https://kommunity-2-2-2.herokuapp.com/"
