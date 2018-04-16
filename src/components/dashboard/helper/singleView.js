@@ -28,7 +28,7 @@ class SingleView extends React.Component {
        let likeState = false;
        let userLiked = 0;
        if(liked.length) {
-           console.log(liked)
+           debugger;
            likeState = true;
            this.props.action.previouslyLiked(this.props.files.viewFile._id, this.props.likedFiles).then(
                response => {
@@ -36,6 +36,7 @@ class SingleView extends React.Component {
                }
            );
        }else{
+           debugger
           if(this.props.likedFiles.indexOf(this.props.files.viewFile._id) !== -1){
               likeState = true;
               userLiked = this.props.files.viewFile.likes.length + 1;
