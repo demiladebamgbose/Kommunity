@@ -83,9 +83,11 @@ User Dashboard/ Landing page
 ![alt text](http://res.cloudinary.com/dd58mfinr/image/upload/c_scale,w_329/v1528171411/Screen_Shot_2018-05-12_at_9.31.18_PM_zjqxjl.png)
 
 A View Post
+
 ![alt text](http://res.cloudinary.com/dd58mfinr/image/upload/c_scale,w_329/v1528171431/Screen_Shot_2018-05-12_at_9.32.45_PM_f3wcdx.png)
 
 User Chat
+
 ![alt text](http://res.cloudinary.com/dd58mfinr/image/upload/c_scale,w_329/v1528171420/Screen_Shot_2018-05-12_at_9.32.18_PM_jacvpg.png)
 
 
