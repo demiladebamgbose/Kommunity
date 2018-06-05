@@ -15,7 +15,8 @@
       "facebookScheme":  "fb810700055775747",
       "preset": "sw64gmsy",
       "cloudinaryUrl": "https://api.cloudinary.com/v1_1/dd58mfinr/upload",
-      "url": "https://kommunity-2-2-2.herokuapp.com/"
+      "url": "https://kommunity-2-2-2.herokuapp.com/",
+      "pusherId": "1dbaf5cd35a87b7793b5"
     },
     "ios": {
       "bundleIdentifier": "com.promoloverbrothers.kommunity"

@@ -171,7 +171,7 @@ class Land extends React.Component {
     };
 
     componentDidMount(){
-        var pusher = new Pusher('1dbaf5cd35a87b7793b5', {
+        var pusher = new Pusher(Constants.manifest.infoPlist.pusherId, {
             cluster: 'eu',
             encrypted: true
         });

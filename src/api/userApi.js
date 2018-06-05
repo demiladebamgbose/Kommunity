@@ -1,7 +1,7 @@
 /**
  * Created by jolaadeadewale on 23/07/2017.
  */
-import {Constants} from 'expo';
+import { Constants } from 'expo';
 let  url = Constants.manifest.infoPlist.url;
 
 
