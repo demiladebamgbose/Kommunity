@@ -1,5 +1,7 @@
-# Kommunity
+[![Contact me on Codementor](https://cdn.codementor.io/badges/contact_me_github.svg)](https://www.codementor.io/jolaadeadewale765?utm_source=github&utm_medium=button&utm_term=jolaadeadewale765&utm_campaign=github)
 
+
+# Kommunity
 
 Kommunity is a React native application, which helps users share, comment and like picture, send messages to each other. It deletes the images after a certain period of time.
 Development
