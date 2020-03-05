@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Kommunity",
+    "sdkVersion": "21.0.0",
+    "privacy": "public",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "loading": {
+      "icon": "./src/logo.png",
+      "hideExponentText": true
+    },
+    "icon": "./src/logo.png",
+    "facebookScheme" : "fb810700055775747",
+    "infoPlist": {
+      "facebookScheme":  "fb810700055775747",
+      "preset": "sw64gmsy",
+      "cloudinaryUrl": "https://api.cloudinary.com/v1_1/dd58mfinr/upload",
+      "url": "https://kommunity-2-2-2.herokuapp.com/",
+      "pusherId": "1dbaf5cd35a87b7793b5"
+    },
+    "ios": {
+      "bundleIdentifier": "com.promoloverbrothers.kommunity"
+    },
+    "android": {
+      "package": "com.promoloverbrothers.kommunity"
+    }
+  }
+}
+
