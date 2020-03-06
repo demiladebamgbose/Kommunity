@@ -22,7 +22,7 @@ const VerticalGrid = ({obj, click, like, uid, userLike, options}) => {
                     'space-between', paddingLeft: 10, paddingRight: 10, alignContent: 'center'}}
                  >
                     <Circle url="https://res.cloudinary.com/dd58mfinr/image/upload/v1481734664/default.png"
-                        label="jols" clicked={click}
+                        label="dems" clicked={click}
                     />
                     <TouchableOpacity onPress={()=> options()}>
                         <Ionicons name="ios-more-outline" size={20} />
